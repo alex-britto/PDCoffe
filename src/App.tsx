@@ -1,8 +1,16 @@
+import { ShoppingCart } from "phosphor-react";
+import { ThemeProvider } from "styled-components";
+import { Button } from "./components";
+import { defaultTheme } from "./styles/themes";
+
 function App() {
   return (
-    <h1 className="text-3xl bg-yellow-dark font-bold underline">
-      Hello world!
-    </h1>
+    <ThemeProvider theme={defaultTheme}>
+      <Button>
+        Click here{" "}
+        <ShoppingCart size={32} color={defaultTheme.colors.yellow.dark} />
+      </Button>
+    </ThemeProvider>
   );
 }
 
