@@ -25,6 +25,7 @@ module.exports = {
         background: "#FAFAFA",
       },
       white: "#FFFFFF",
+      transparent: "transparent",
     },
     extend: {},
   },
