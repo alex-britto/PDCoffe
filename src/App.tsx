@@ -7,7 +7,6 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Button>
-        Click here{" "}
         <ShoppingCart size={32} color={defaultTheme.colors.yellow.dark} />
       </Button>
     </ThemeProvider>

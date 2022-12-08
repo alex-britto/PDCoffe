@@ -1,17 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  height: 50px;
-
+export const Container = styled.button`
+  padding: 10px 25px;
   background-color: ${({ theme }) => theme.colors.purple.dark};
   color: white;
-
-  text-align: right;
-  font-weight: bold;
-  text-decoration: underline;
-
-  &:hover: {
-    background-color: ${({ theme }) => theme.colors.yellow.default};
-  }
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 `;
