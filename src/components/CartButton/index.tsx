@@ -4,21 +4,21 @@ import { Badge, Container } from "./styles";
 interface ButtonProps {
   children: ReactNode;
   variant?: "PRIMARY" | "SECONDARY";
-  isBadge?: boolean;
+  quantity?: number;
 }
 
 export function CartButton({
   children,
   variant = "PRIMARY",
-  isBadge = false,
+  quantity = 0,
 }: ButtonProps) {
   return (
     <Container variant={variant}>
       {children}
 
-      {isBadge && variant === "SECONDARY" && (
+      {quantity > 0 && variant === "SECONDARY" && (
         <Badge>
-          <span>3</span>
+          <span>{quantity}</span>
         </Badge>
       )}
     </Container>

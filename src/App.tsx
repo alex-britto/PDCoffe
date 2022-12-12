@@ -21,7 +21,7 @@ function App() {
           <ShoppingCart size={22} />
         </CartButton>
 
-        <CartButton variant="SECONDARY" isBadge={true}>
+        <CartButton variant="SECONDARY" quantity={3}>
           <ShoppingCart size={22} />
         </CartButton>
       </Container>
