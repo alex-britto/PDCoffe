@@ -7,11 +7,6 @@ import { defaultTheme } from "./styles/themes";
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-<<<<<<< Updated upstream
-      <Button>
-        <ShoppingCart size={32} color={defaultTheme.colors.yellow.dark} />
-      </Button>
-=======
       <Container>
         <Button title="LABEL" />
         <CartButton>
@@ -30,7 +25,6 @@ function App() {
           <ShoppingCart size={22} />
         </CartButton>
       </Container>
->>>>>>> Stashed changes
     </ThemeProvider>
   );
 }
