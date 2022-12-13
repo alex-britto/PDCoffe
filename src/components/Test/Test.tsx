@@ -1,0 +1,35 @@
+import { AirplaneTakeoff } from "phosphor-react"
+import styled, { css } from "styled-components"
+import { Item } from "./Item"
+import { defaultTheme } from "../../styles/themes/defaultTheme"
+
+interface TestProps {
+  title?: string
+}
+
+export const List = ({ title }: TestProps) => {
+  return (
+    <Container className="my-6 ml-auto items-center">
+      <Item />
+      <AirplaneTakeoff size={32} color={defaultTheme.colors.purple.dark} />
+    </Container>
+  )
+}
+
+const Container = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    height: 50px;
+
+    color: white;
+    background-color: ${theme.colors.yellow.dark};
+
+    text-align: right;
+    font-weight: bold;
+    text-decoration: underline;
+
+    &:hover {
+      background-color: #826551;
+    }
+  `}
+`
