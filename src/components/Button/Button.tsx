@@ -17,12 +17,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <StyledButton
-      className="py-3 px-4 bg-cyan-500 rounded font-semibold text-black text-sm w-full transition-colors hover:bg-cyan-300 focus:ring-2 ring-white"
-      type={type}
-      color={color}
-      {...props}
-    >
+    <StyledButton type={type} color={color} {...props}>
       {children}
 
       {quantity > 0 && color == "light" && (
@@ -34,14 +29,7 @@ export const Button = ({
   )
 }
 
-const StyledButton = styled.button<
-  Omit<ButtonProps, "color"> & {
-    color: "primary" | "secondary" | "base" | "light"
-    leftIcon?: string
-    childrenElementWidth?: number
-    iconSize?: string | number
-  }
->`
+const StyledButton = styled.button`
   ${({ theme }) => css`
     align-items: center;
     border: none;

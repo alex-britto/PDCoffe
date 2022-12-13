@@ -1,10 +1,14 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
+import { useState } from "react"
 import { ThemeProvider } from "styled-components"
 import { Button } from "./components/Button/Button"
 import { Test } from "./components/Test/Test"
+import { TextField } from "./components/TextField/Textfield"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
+  const [value, setValue] = useState<string>("")
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Test />
@@ -31,6 +35,16 @@ function App() {
           />
         </Button>
       </div>
+
+      <TextField
+        placeholder="Label"
+        endLabel="Opcional"
+        width="100%"
+        maxWidth={500}
+        className="mt-6"
+        value={value}
+        onChange={({ target }) => setValue(target.value)}
+      />
     </ThemeProvider>
   )
 }
