@@ -1,13 +1,16 @@
-import { ShoppingCartSimple, Trash } from "phosphor-react"
+import { CreditCard, ShoppingCartSimple, Trash } from "phosphor-react"
 import { useState } from "react"
 import { ThemeProvider } from "styled-components"
 import { Button } from "./components/Button/Button"
+import { NumberInput } from "./components/NumberInput/NumberInput"
+import { SelectInput } from "./components/SelectInput/SelectInput"
 import { Test } from "./components/Test/Test"
 import { TextField } from "./components/TextField/Textfield"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
   const [value, setValue] = useState<string>("")
+  const [number, setNumber] = useState<number>(1)
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -44,6 +47,19 @@ function App() {
         className="mt-6"
         value={value}
         onChange={({ target }) => setValue(target.value)}
+      />
+
+      <div className="flex w-full gap-10 items-center">
+        <SelectInput
+          title="Cartão de crédito"
+          icon={<CreditCard size={16} />}
+        />
+      </div>
+
+      <NumberInput
+        className="mt-6"
+        value={number}
+        onChange={({ target }) => setNumber(target.value)}
       />
     </ThemeProvider>
   )
