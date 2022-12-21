@@ -3,11 +3,11 @@ import styled, { css } from "styled-components"
 import { Item } from "./Item"
 import { defaultTheme } from "../../styles/themes/defaultTheme"
 
-interface TestProps {
+interface ExampleProps {
   title?: string
 }
 
-export const List = ({ title }: TestProps) => {
+export const Example = ({ title }: ExampleProps) => {
   return (
     <Container className="my-6 ml-auto items-center">
       <Item />
