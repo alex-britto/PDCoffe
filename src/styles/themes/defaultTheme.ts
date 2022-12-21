@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   yellow: {
     default: "#DBAC2C",
     dark: "#C47F17",
@@ -20,6 +20,6 @@ const colors = {
     card: "#F3F2F2",
     background: "#FAFAFA",
   },
-}
+} as const
 
 export const defaultTheme = { colors }
