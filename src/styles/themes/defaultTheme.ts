@@ -22,6 +22,6 @@ const colors = {
   },
   white: "#FFFFFF",
   transparent: "transparent",
-}
+} as const
 
 export const defaultTheme = { colors }

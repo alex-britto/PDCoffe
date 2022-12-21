@@ -20,7 +20,7 @@ export const Button = ({
     <StyledButton type={type} color={color} {...props}>
       {children}
 
-      {quantity > 0 && color == "light" && (
+      {quantity > 0 && (
         <Badge>
           <span>{quantity}</span>
         </Badge>
@@ -34,8 +34,13 @@ const StyledButton = styled.button`
     align-items: center;
     border: none;
     border-radius: 6px;
+    color: white;
     display: flex;
+    font-size: 14px;
+    font-weight: 700;
     justify-content: center;
+    padding: 8px;
+    position: relative;
     text-transform: uppercase;
     width: auto;
 
@@ -44,9 +49,6 @@ const StyledButton = styled.button`
       variants: {
         primary: {
           bg: theme.colors.yellow.default,
-          color: "white",
-          fontSize: "14px",
-          fontWeight: 700,
           minHeight: "46px",
           minWidth: "132px",
 
@@ -56,11 +58,8 @@ const StyledButton = styled.button`
         },
         secondary: {
           bg: theme.colors.purple.dark,
-          color: "white",
           fontSize: "12px",
-          fontWeight: 700,
           height: "38px",
-          padding: "8px",
           width: "38px",
 
           "&:hover": {
@@ -73,7 +72,6 @@ const StyledButton = styled.button`
           fontSize: "12px",
           fontWeight: 400,
           minHeight: "32px",
-          padding: "8px",
 
           "&:hover": {
             bg: theme.colors.base.hover,
@@ -83,10 +81,7 @@ const StyledButton = styled.button`
           bg: theme.colors.yellow.light,
           color: theme.colors.yellow.dark,
           fontSize: "12px",
-          fontWeight: 700,
           height: "38px",
-          padding: "8px",
-          position: "relative",
           width: "38px",
         },
       },
