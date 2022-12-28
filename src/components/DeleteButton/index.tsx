@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Container } from "./styles";
 
-interface ButtonProps {
-  title: string;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
   children: ReactNode;
 }
 
-export function DeleteButton({ children, title }: ButtonProps) {
+export function DeleteButton({ children, label, onClick }: ButtonProps) {
   return (
-    <Container>
-      {children} {title}
+    <Container onClick={onClick}>
+      {children} {label}
     </Container>
   );
 }

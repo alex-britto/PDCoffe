@@ -1,9 +1,10 @@
+import { ButtonHTMLAttributes } from "react";
 import { Container } from "./styles";
 
-interface ButtonProps {
-  title: string;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
 }
 
-export function Button({ title }: ButtonProps) {
-  return <Container>{title}</Container>;
+export function Button({ label, onClick }: ButtonProps) {
+  return <Container onClick={onClick}>{label}</Container>;
 }
