@@ -7,6 +7,7 @@ export const Container = styled.button`
   gap: 4px;
   background-color: ${({ theme }) => theme.colors.base.button};
   font-family: "Roboto";
+  text-transform: uppercase;
   color: ${({ theme }) => theme.colors.base.text};
   padding: 8px;
   border: none;

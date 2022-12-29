@@ -27,11 +27,11 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container>
-        <Button label="LABEL" onClick={handleClick} />
+        <Button label="Label" onClick={handleClick} />
         <CartButton onClick={handleAddToCart}>
           <ShoppingCart size={22} />
         </CartButton>
-        <DeleteButton label="REMOVER" onClick={handleDelete}>
+        <DeleteButton label="Remover" onClick={handleDelete}>
           <Trash size={22} color={defaultTheme.colors.purple.default} />
         </DeleteButton>
         <CartButton variant="SECONDARY" onClick={handleAddToCart}>
