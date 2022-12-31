@@ -1,5 +1,5 @@
 import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Container, EndLabel, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,8 +18,7 @@ export const TextInput = ({
 }: TextFieldProps) => {
   const [value, setValue] = useState<string>("");
 
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const { register } = useForm<IFormInput>();
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value);
@@ -27,15 +26,13 @@ export const TextInput = ({
 
   return (
     <Container {...props}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          placeholder={placeholder}
-          {...register("value")}
-          onChange={onChange}
-        />
+      <Input
+        placeholder={placeholder}
+        {...register("value")}
+        onChange={onChange}
+      />
 
-        {value.length === 0 && <EndLabel>{endLabel}</EndLabel>}
-      </form>
+      {value.length === 0 && <EndLabel>{endLabel}</EndLabel>}
     </Container>
   );
 };
