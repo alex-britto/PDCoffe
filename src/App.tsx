@@ -1,7 +1,7 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample } from "./components/Button"
+import { ButtonsExample, NumberInput, SelectInputExamples } from "./components"
 
 function App() {
   return (
@@ -9,6 +9,10 @@ function App() {
         <Container>
           <ButtonsExample />
         </Container>
+        <Container>
+          <NumberInput className="m-4"/>
+        </Container>
+          <SelectInputExamples />
      </ThemeProvider>
   )
 }

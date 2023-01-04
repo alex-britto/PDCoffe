@@ -86,7 +86,7 @@ const Badge = styled.div<{ badgeColor?: string }>`
       width: 20px;
       height: 20px;
 
-      font-family: "Rob
+      font-family: "Roboto";
       font-weight: 700;
       font-size: 12px;
 

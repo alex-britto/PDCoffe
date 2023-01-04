@@ -6,7 +6,8 @@ import Button from "./Button"
 
 const ButtonsExample = () => {
   return (
-    <Container>
+    <>
+      <div>
         <Button 
           label="Botão simples"
           bgColor={defaultTheme.colors.yellow.default}
@@ -14,15 +15,19 @@ const ButtonsExample = () => {
           textColor={defaultTheme.colors.white}
           onClick={() => console.log("click botão simples")}
           className="m-4"
-        />
+          />
+          </div>
+          <div>
         <Button 
           icon={<ShoppingCartSimple size={20} weight="fill" color="white" />}
-          bgColor={defaultTheme.colors.purple.default}
-          bgHoverColor={defaultTheme.colors.purple.dark}
+          bgColor={defaultTheme.colors.purple.dark}
+          bgHoverColor={defaultTheme.colors.purple.default}
           textColor={defaultTheme.colors.white}
           onClick={() => console.log("comprei")}
           className="m-4"
         />
+        </div>
+        <div>
           <Button
             variant="small"
             label="remover"
@@ -35,12 +40,38 @@ const ButtonsExample = () => {
             onClick={() => console.log("test")}
             className="m-4"
           />
-          </Container>
+          </div>
+          <div>
+          <Button
+            bgColor={defaultTheme.colors.yellow.light}
+            badgeColor={defaultTheme.colors.yellow.dark}
+            icon={
+              <ShoppingCartSimple
+                size={22}
+                color={defaultTheme.colors.yellow.dark}
+              />
+            }
+            onClick={() => console.log("test")}
+            className="m-4"
+          />
+          </div>
+          <div>
+          <Button
+            bgColor={defaultTheme.colors.yellow.light}
+            badgeColor={defaultTheme.colors.yellow.dark}
+            itemsQuantity={3}
+            icon={
+              <ShoppingCartSimple
+                size={22}
+                color={defaultTheme.colors.yellow.dark}
+              />
+            }
+            onClick={() => console.log("test")}
+            className="m-4"
+          />
+          </div>
+          </>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-`
 
 export default ButtonsExample
