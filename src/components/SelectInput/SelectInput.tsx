@@ -33,7 +33,7 @@ const SelectInput = ({
             return <Money size={16} color={iconColor} className="mr-3" />
         }
     }
-
+    
     return (
         <Container 
         selected={selected}

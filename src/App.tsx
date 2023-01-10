@@ -1,18 +1,23 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInput, SelectInputExamples } from "./components"
+import { ButtonsExample, NumberInput, SelectInputExamples, TextField } from "./components"
 
 function App() {
   return (
      <ThemeProvider theme={defaultTheme}>
-        <Container>
+        {/* <Container>
           <ButtonsExample />
         </Container>
         <Container>
           <NumberInput className="m-4"/>
-        </Container>
+        </Container> */}
+        {/* <Container>
           <SelectInputExamples />
+          </Container> */}
+          <Container>
+            <TextField placeholder="placeholder" endLabel="label aqui"/>
+          </Container>
      </ThemeProvider>
   )
 }
