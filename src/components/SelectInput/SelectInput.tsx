@@ -33,14 +33,14 @@ const SelectInput = ({
             return <Money size={16} color={iconColor} className="mr-3" />
         }
     }
-    
+
     return (
         <Container 
         selected={selected}
         width={width} 
         maxWidth={maxWidth} 
         minWidth={minWidth} 
-        onClick={() => setSelected(true)}
+        onClick={() => setSelected(!selected)}
         {...props}
         >
             {icon && <IconDependsOnVariant />} {label}

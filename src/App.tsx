@@ -12,12 +12,12 @@ function App() {
         <Container>
           <NumberInput className="m-4"/>
         </Container> */}
-        {/* <Container>
+        <Container>
           <SelectInputExamples />
-          </Container> */}
-          <Container>
-            <TextField placeholder="placeholder" endLabel="label aqui"/>
           </Container>
+          {/* <Container>
+            <TextField placeholder="placeholder" endLabel="label aqui"/>
+          </Container> */}
      </ThemeProvider>
   )
 }
