@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from "react"
 import styled, { css } from "styled-components"
-import { variant } from "styled-system"
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
@@ -29,9 +28,12 @@ export const Button = ({
   )
 }
 
-const StyledButton = styled.button`
-  ${({ theme }) => css`
+const StyledButton = styled.button<{
+  color?: string
+}>`
+  ${({ theme, color }) => css`
     align-items: center;
+    background-color: ${theme.colors.base.button};
     border: none;
     border-radius: 6px;
     color: white;
@@ -44,48 +46,43 @@ const StyledButton = styled.button`
     text-transform: uppercase;
     width: auto;
 
-    ${variant({
-      prop: "color",
-      variants: {
-        primary: {
-          bg: theme.colors.yellow.default,
-          minHeight: "46px",
-          minWidth: "132px",
+    ${color === "primary" && {
+      backgroundColor: theme.colors.yellow.default,
+      minHeight: "46px",
+      minWidth: "132px",
 
-          "&:hover": {
-            bg: theme.colors.yellow.dark,
-          },
-        },
-        secondary: {
-          bg: theme.colors.purple.dark,
-          fontSize: "12px",
-          height: "38px",
-          width: "38px",
-
-          "&:hover": {
-            bg: theme.colors.purple.default,
-          },
-        },
-        base: {
-          bg: theme.colors.base.button,
-          color: theme.colors.base.text,
-          fontSize: "12px",
-          fontWeight: 400,
-          minHeight: "32px",
-
-          "&:hover": {
-            bg: theme.colors.base.hover,
-          },
-        },
-        light: {
-          bg: theme.colors.yellow.light,
-          color: theme.colors.yellow.dark,
-          fontSize: "12px",
-          height: "38px",
-          width: "38px",
-        },
+      "&:hover": {
+        backgroundColor: theme.colors.yellow.dark,
       },
-    })}
+    }}
+    ${color === "secondary" && {
+      backgroundColor: theme.colors.purple.dark,
+      fontSize: "12px",
+      height: "38px",
+      width: "38px",
+
+      "&:hover": {
+        backgroundColor: theme.colors.purple.default,
+      },
+    }}
+    ${color === "base" && {
+      backgroundColor: theme.colors.base.button,
+      color: theme.colors.base.text,
+      fontSize: "12px",
+      fontWeight: 400,
+      minHeight: "32px",
+
+      "&:hover": {
+        backgroundColor: theme.colors.base.hover,
+      },
+    }}
+    ${color === "light" && {
+      backgroundColor: theme.colors.yellow.light,
+      color: theme.colors.yellow.dark,
+      fontSize: "12px",
+      height: "38px",
+      width: "38px",
+    }}
   `}
 `
 

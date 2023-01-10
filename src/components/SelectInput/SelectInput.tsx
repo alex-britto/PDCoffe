@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, useState } from "react"
 import styled, { css } from "styled-components"
 
 interface SelectInputProps {
@@ -18,7 +18,7 @@ export const SelectInput = ({
   ...props
 }: SelectInputProps) => {
   return (
-    <Container {...props} selected={true} onClick={onClick}>
+    <Container {...props} selected={selected} onClick={onClick}>
       {icon && <span className="mr-3">{icon}</span>}
       <p>{title}</p>
     </Container>
