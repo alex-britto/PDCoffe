@@ -6,18 +6,18 @@ import { ButtonsExample, NumberInput, SelectInputExamples, TextField } from "./c
 function App() {
   return (
      <ThemeProvider theme={defaultTheme}>
-        {/* <Container>
+        <Container>
           <ButtonsExample />
         </Container>
         <Container>
           <NumberInput className="m-4"/>
-        </Container> */}
+        </Container>
         <Container>
           <SelectInputExamples />
           </Container>
-          {/* <Container>
-            <TextField placeholder="placeholder" endLabel="label aqui"/>
-          </Container> */}
+          <Container>
+            <TextField placeholder="placeholder" endLabel="label aqui" className="m-4"/>
+          </Container>
      </ThemeProvider>
   )
 }
