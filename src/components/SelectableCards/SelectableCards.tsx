@@ -7,7 +7,6 @@ interface SelectableCardsProps {
     id: string
     title: string
     icon?: ReactNode
-    iconColor?: string
   }[]
   selectedDefault?: number | string
   onClick?: (index: string) => void
@@ -33,7 +32,6 @@ export const SelectableCards = ({
           key={item.id}
           title={item.title}
           icon={item.icon}
-          iconColor={item.iconColor}
           onClick={() => handleOnClick(item.id)}
           selected={selectedInputId === item.id}
         />

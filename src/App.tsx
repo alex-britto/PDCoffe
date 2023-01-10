@@ -7,8 +7,13 @@ import {
 } from "phosphor-react"
 import { useState } from "react"
 import { ThemeProvider } from "styled-components"
-import { Button, NumberInput, SelectInput, TextField } from "./components"
-import { SelectableCards } from "./components/SelectableCards/SelectableCards"
+import {
+  Button,
+  CatalogItem,
+  NumberInput,
+  SelectableCards,
+  TextField,
+} from "./components"
 import { Test } from "./components/Test/Test"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
@@ -80,6 +85,10 @@ function App() {
         value={number}
         onChange={({ target }) => setNumber(target.value)}
       />
+
+      <div className="flex w-full gap-10 items-center mt-6">
+        <CatalogItem />
+      </div>
     </ThemeProvider>
   )
 }

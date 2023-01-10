@@ -4,7 +4,6 @@ import styled, { css } from "styled-components"
 interface SelectInputProps {
   title: string
   icon?: ReactNode
-  iconColor?: string
   selected?: boolean
   onClick?: () => void
 }
@@ -12,7 +11,6 @@ interface SelectInputProps {
 export const SelectInput = ({
   title,
   icon,
-  iconColor,
   selected = false,
   onClick,
   ...props
