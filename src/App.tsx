@@ -1,14 +1,28 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
 import { useState } from "react"
 import { ThemeProvider } from "styled-components"
-import { Button, NumberInput } from "./components"
+import { Button, NumberInput, SelectInputList } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
   const [numberInputValue, setNumberInputValue] = useState(0)
+  const selectInputItems = [
+    {
+      id: "item1",
+      title: "cartão de crédito",
+    },
+    {
+      id: "item2",
+      title: "cartão de débito",
+    },
+  ]
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className="m-4">
+        <SelectInputList
+          items={selectInputItems}
+          onClick={(item) => console.log("clicou no item", item)}
+        />
         <NumberInput
           value={numberInputValue}
           onIncreaseClick={() =>
