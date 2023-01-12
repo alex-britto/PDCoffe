@@ -38,6 +38,8 @@ function App() {
           onDecreaseClick={() =>
             setNumberInputValue((numberInputValue) => numberInputValue - 1)
           }
+          min={0}
+          max={99}
         />
       </div>
       <div className="flex ">

@@ -25,7 +25,7 @@ export function NumberInput({
         onClick={onDecreaseClick}
         cursor="pointer"
       />
-      <input {...rest} type="number" min={0} max={99} value={value} />
+      <input type="number" value={value} {...rest} />
       <Plus
         size={14}
         color={defaultTheme.colors.purple.default}
