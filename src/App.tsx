@@ -1,11 +1,24 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
+import { useState } from "react"
 import { ThemeProvider } from "styled-components"
-import { Button } from "./components"
+import { Button, NumberInput } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
+  const [numberInputValue, setNumberInputValue] = useState(0)
   return (
     <ThemeProvider theme={defaultTheme}>
+      <div className="m-4">
+        <NumberInput
+          value={numberInputValue}
+          onIncreaseClick={() =>
+            setNumberInputValue((numberInputValue) => numberInputValue + 1)
+          }
+          onDecreaseClick={() =>
+            setNumberInputValue((numberInputValue) => numberInputValue - 1)
+          }
+        />
+      </div>
       <div className="flex ">
         <div>
           <Button
