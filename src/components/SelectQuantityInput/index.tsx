@@ -2,7 +2,7 @@ import { Minus, Plus } from "phosphor-react";
 import { useState } from "react";
 import { Container } from "./styles";
 
-export function SelectInput() {
+export function SelectQuantityInput() {
   const [value, setValue] = useState(1);
 
   const handleDecrementQuantity = () => {

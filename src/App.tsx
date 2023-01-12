@@ -4,8 +4,8 @@ import {
   Button,
   CartButton,
   DeleteButton,
-  SelectInput,
   SelectPaymentInput,
+  SelectQuantityInput,
   TextInput,
 } from "./components";
 
@@ -47,7 +47,7 @@ function App() {
       </Container>
 
       <Container>
-        <SelectInput />
+        <SelectQuantityInput />
         <SelectPaymentInput label="Cartão de crédito" icon={<CreditCard />} />
         <SelectPaymentInput label="Cartão de débito" icon={<Bank />} />
         <SelectPaymentInput label="Dinheiro" icon={<Money />} />
