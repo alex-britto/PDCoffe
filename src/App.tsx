@@ -1,7 +1,7 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
 import { useState } from "react"
 import { ThemeProvider } from "styled-components"
-import { Button, NumberInput, SelectInputList } from "./components"
+import { Button, NumberInput, SelectInputList, TextField } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
@@ -18,6 +18,13 @@ function App() {
   ]
   return (
     <ThemeProvider theme={defaultTheme}>
+      <div className="m-4">
+        <TextField
+          placeholder="Label"
+          extraMessage="Opcional"
+          containerProps={{ className: "w-1/2" }}
+        />
+      </div>
       <div className="m-4">
         <SelectInputList
           items={selectInputItems}
