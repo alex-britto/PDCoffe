@@ -1,26 +1,36 @@
 import { Minus, Plus } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
 
-export function SelectQuantityInput() {
-  const [value, setValue] = useState(1);
+interface SelectQuantityInputProps {
+  value: number;
+  onChange: (value: number) => void;
+}
+
+export function SelectQuantityInput({
+  value,
+  onChange,
+}: SelectQuantityInputProps) {
+  const [inputValue, setInputValue] = useState(value);
 
   const handleDecrementQuantity = () => {
-    if (value === 1) return;
-
-    setValue(value - 1);
+    setInputValue(inputValue - 1);
   };
 
   const handleIncrementQuantity = () => {
-    setValue(value + 1);
+    setInputValue(inputValue + 1);
   };
+
+  useEffect(() => {
+    onChange(inputValue);
+  }, [inputValue]);
 
   return (
     <Container>
-      <button onClick={handleDecrementQuantity}>
+      <button onClick={handleDecrementQuantity} disabled={inputValue === 1}>
         <Minus size={14} weight="bold" />
       </button>
-      <span>{value}</span>
+      <span>{inputValue}</span>
       <button onClick={handleIncrementQuantity}>
         <Plus size={14} weight="bold" />
       </button>

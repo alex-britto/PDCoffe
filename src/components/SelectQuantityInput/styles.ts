@@ -26,5 +26,10 @@ export const Container = styled.div`
     &:hover {
       color: ${({ theme }) => theme.colors.purple.dark};
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `;

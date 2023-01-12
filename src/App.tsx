@@ -9,20 +9,32 @@ import {
   TextInput,
 } from "./components";
 
+import { useState } from "react";
 import { defaultTheme } from "./styles/themes";
 
 function App() {
+  const [quantity, setQuantity] = useState(1);
+  const [isDebitSelected, setDebitIsSelected] = useState(false);
+  const [isCreditSelected, setIsCreditSelected] = useState(false);
+  const [isMoneySelected, setIsMoneySelected] = useState(false);
+
   function handleDelete() {
-    console.log("delete");
+    console.log("Remover pedido");
   }
 
   function handleAddToCart() {
-    console.log("add to cart");
+    console.log("Adicionar ao carrinho");
   }
 
   function handleClick() {
-    console.log("click");
+    console.log("Confirmar pedido");
   }
+
+  console.log("Métodos de pagamentos: ", {
+    isDebitSelected,
+    isCreditSelected,
+    isMoneySelected,
+  });
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -58,16 +70,32 @@ function App() {
       </Container>
 
       <Container>
-        <SelectQuantityInput />
-        <SelectPaymentInput label="Cartão de crédito" icon={<CreditCard />} />
-        <SelectPaymentInput label="Cartão de débito" icon={<Bank />} />
-        <SelectPaymentInput label="Dinheiro" icon={<Money />} />
+        <SelectQuantityInput
+          value={quantity}
+          onChange={(e) => setQuantity(e)}
+        />
+        <SelectPaymentInput
+          id="credit"
+          label="Cartão de crédito"
+          icon={<CreditCard />}
+          onChange={setIsCreditSelected}
+        />
+        <SelectPaymentInput
+          id="debit"
+          label="Cartão de débito"
+          icon={<Bank />}
+          onChange={setDebitIsSelected}
+        />
+        <SelectPaymentInput
+          id="money"
+          label="Dinheiro"
+          icon={<Money />}
+          onChange={setIsMoneySelected}
+        />
       </Container>
     </ThemeProvider>
   );
 }
-
-export default App;
 
 const Container = styled.div`
   display: flex;
@@ -77,3 +105,5 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.base.background};
   padding: 30px;
 `;
+
+export default App;

@@ -1,20 +1,31 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Container } from "./styles";
 
 interface SelectPaymentInputProps {
+  id: string;
   label: string;
   icon: ReactNode;
+  onChange?: (isSelected: boolean) => void;
 }
 
-export function SelectPaymentInput({ label, icon }: SelectPaymentInputProps) {
-  const [isSelected, setIsSelected] = useState(false);
+export function SelectPaymentInput({
+  label,
+  icon,
+
+  onChange,
+}: SelectPaymentInputProps) {
+  const [isCardSelected, setIsCardSelected] = useState(false);
 
   function handleSelectCard() {
-    setIsSelected(!isSelected);
+    setIsCardSelected(!isCardSelected);
   }
 
+  useEffect(() => {
+    onChange && onChange(isCardSelected);
+  }, [isCardSelected]);
+
   return (
-    <Container isSelected={isSelected} onClick={handleSelectCard}>
+    <Container isSelected={isCardSelected} onClick={handleSelectCard}>
       <div>{icon}</div>
       <span>{label}</span>
     </Container>
