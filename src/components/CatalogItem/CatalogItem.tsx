@@ -54,7 +54,7 @@ export const CatalogItem = ({
           <QuantityBox>
             <NumberInput
               value={quantity}
-              onChange={({ target }) => setQuantity(target.value)}
+              onChange={(value) => setQuantity(value)}
             />
             <Button color="secondary">
               <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />

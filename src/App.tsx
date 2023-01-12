@@ -80,11 +80,8 @@ function App() {
         <SelectableCards items={selectableCardsItems} />
       </div>
 
-      <NumberInput
-        className="mt-6"
-        value={number}
-        onChange={({ target }) => setNumber(target.value)}
-      />
+      <NumberInput className="mt-6" value={number} onChange={setNumber} />
+      <h1>Valor: {number}</h1>
 
       <div className="flex w-full gap-10 items-center mt-6">
         <CatalogItem />
