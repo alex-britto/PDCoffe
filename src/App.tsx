@@ -1,11 +1,11 @@
-import { ShoppingCart, Trash } from "phosphor-react";
+import { Bank, CreditCard, Money, ShoppingCart, Trash } from "phosphor-react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Button,
   CartButton,
   DeleteButton,
-  SelectCardInput,
   SelectInput,
+  SelectPaymentInput,
   TextInput,
 } from "./components";
 
@@ -48,7 +48,9 @@ function App() {
 
       <Container>
         <SelectInput />
-        <SelectCardInput label="Cartão de crédito" />
+        <SelectPaymentInput label="Cartão de crédito" icon={<CreditCard />} />
+        <SelectPaymentInput label="Cartão de débito" icon={<Bank />} />
+        <SelectPaymentInput label="Dinheiro" icon={<Money />} />
       </Container>
     </ThemeProvider>
   );

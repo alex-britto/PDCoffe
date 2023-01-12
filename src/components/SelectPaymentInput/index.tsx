@@ -1,12 +1,12 @@
-import { CreditCard } from "phosphor-react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Container } from "./styles";
 
-interface SelectCardInputProps {
+interface SelectPaymentInputProps {
   label: string;
+  icon: ReactNode;
 }
 
-export function SelectCardInput({ label }: SelectCardInputProps) {
+export function SelectPaymentInput({ label, icon }: SelectPaymentInputProps) {
   const [isSelected, setIsSelected] = useState(false);
 
   function handleSelectCard() {
@@ -15,7 +15,7 @@ export function SelectCardInput({ label }: SelectCardInputProps) {
 
   return (
     <Container isSelected={isSelected} onClick={handleSelectCard}>
-      <CreditCard size={16} color="#3129a8" />
+      <div>{icon}</div>
       <span>{label}</span>
     </Container>
   );

@@ -7,11 +7,12 @@ interface ContainerProps {
 export const Container = styled.button<ContainerProps>`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   background-color: ${({ theme }) => theme.colors.base.button};
   color: ${({ theme }) => theme.colors.base.text};
   text-transform: uppercase;
   padding: 16px;
+  gap: 12px;
   width: 180px;
   border: none;
   border-radius: 6px;
@@ -19,6 +20,11 @@ export const Container = styled.button<ContainerProps>`
   font-size: 0.75rem;
   transition: 0.2s;
   cursor: pointer;
+
+  div {
+    color: ${({ theme }) => theme.colors.purple.default};
+    font-size: 16px;
+  }
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.base.hover};
