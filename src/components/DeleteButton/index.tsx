@@ -3,13 +3,13 @@ import { Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  children: ReactNode;
+  icon: ReactNode;
 }
 
-export function DeleteButton({ children, label, onClick }: ButtonProps) {
+export function DeleteButton({ icon, label, onClick }: ButtonProps) {
   return (
     <Container onClick={onClick}>
-      {children} {label}
+      {icon} {label}
     </Container>
   );
 }

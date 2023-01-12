@@ -2,20 +2,20 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import { Badge, Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
   variant?: "PRIMARY" | "SECONDARY";
   quantity?: number;
+  icon?: ReactNode;
 }
 
 export function CartButton({
-  children,
   variant = "PRIMARY",
   quantity = 0,
   onClick,
+  icon,
 }: ButtonProps) {
   return (
     <Container variant={variant} onClick={onClick}>
-      {children}
+      {icon}
 
       {quantity > 0 && variant === "SECONDARY" && (
         <Badge>

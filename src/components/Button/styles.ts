@@ -5,7 +5,8 @@ export const Container = styled.button`
   color: white;
   text-transform: uppercase;
   padding: 12px 8px;
-  width: 132px;
+  width: 100%;
+  max-width: 400px;
   border: none;
   border-radius: 6px;
   font-family: "Roboto";
