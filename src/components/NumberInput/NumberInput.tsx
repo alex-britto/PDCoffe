@@ -4,7 +4,6 @@ import { defaultTheme } from '../../styles/themes/defaultTheme';
 
 export interface NumberInputProps {
     value: number;
-    isDisabled?: boolean;
     onAddition: () => void;
     onSubtraction: () => void;
 }
@@ -13,12 +12,11 @@ const NumberInput = ({
     value = 0, 
     onAddition, 
     onSubtraction, 
-    isDisabled = false,
     ...rest 
 }: NumberInputProps ) => {
 
     return (
-        <Container className="m-4">
+        <Container {...rest}>
             <button
                 type="button"
                 onClick={onSubtraction}

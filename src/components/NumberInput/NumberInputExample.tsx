@@ -5,7 +5,7 @@ const NumberInputExample = () => {
     const [inputValue, setInputValue] = useState<number>(0)
 
     return (
-        <div>
+        <div className="m-4">
             <NumberInput 
                 value={inputValue} 
                 onSubtraction={() => setInputValue((inputValue) => inputValue > 0 ? inputValue - 1 : inputValue)} 
