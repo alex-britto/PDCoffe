@@ -80,7 +80,6 @@ const EndLabel = styled.p`
     display: flex;
     position: absolute;
     align-items: center;
-    overflow: hidden;
 
     top: 50%;
     right: 0;
