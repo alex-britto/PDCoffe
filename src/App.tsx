@@ -17,6 +17,7 @@ function App() {
   const [isDebitSelected, setDebitIsSelected] = useState(false);
   const [isCreditSelected, setIsCreditSelected] = useState(false);
   const [isMoneySelected, setIsMoneySelected] = useState(false);
+  const [textInputValue, setTextInputValue] = useState("");
 
   function handleDelete() {
     console.log("Remover pedido");
@@ -30,7 +31,9 @@ function App() {
     console.log("Confirmar pedido");
   }
 
-  console.log("Métodos de pagamentos: ", {
+  console.log("Texto do input:", textInputValue);
+
+  console.log("Métodos de pagamento selecionados:", {
     isDebitSelected,
     isCreditSelected,
     isMoneySelected,
@@ -66,7 +69,11 @@ function App() {
       </Container>
 
       <Container>
-        <TextInput placeholder="Label" endLabel="Opcional" />
+        <TextInput
+          placeholder="Label"
+          endLabel="Opcional"
+          onChange={(e) => setTextInputValue(e.target.value)}
+        />
       </Container>
 
       <Container>
