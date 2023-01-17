@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NumberInput from "./NumberInput";
+import NumberInput from "../NumberInput/NumberInput";
 
 const NumberInputExample = () => {
     const [inputValue, setInputValue] = useState(0)

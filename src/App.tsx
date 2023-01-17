@@ -1,7 +1,7 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInputExample, SelectInputExamples, TextField } from "./components"
+import { ButtonsExample, NumberInputExample, SelectInputExample, TextField } from "./components"
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           <NumberInputExample />
         </Container>
         <Container>
-          <SelectInputExamples />
+          <SelectInputExample />
           </Container>
           <Container>
             <TextField placeholder="placeholder" endLabel="label aqui" className="m-4"/>

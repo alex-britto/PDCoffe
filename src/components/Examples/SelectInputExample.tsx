@@ -1,8 +1,8 @@
 import { CreditCard, Bank, Money } from "phosphor-react"
 import { useTheme } from "styled-components"
-import SelectInputList from "./SelectInputList"
+import SelectInputList from "../SelectInput/SelectInputList"
 
-const SelectInputExamples = () => {
+const SelectInputExample = () => {
   const theme = useTheme()
 
   const selectItems = [{
@@ -33,4 +33,4 @@ const SelectInputExamples = () => {
   )
 }
 
-export default SelectInputExamples
+export default SelectInputExample
