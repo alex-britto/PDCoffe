@@ -2,14 +2,17 @@ import { Bank, CreditCard, Money, ShoppingCart, Trash } from "phosphor-react";
 import styled, { ThemeProvider } from "styled-components";
 import {
   Button,
+  CardCoffee,
   CartButton,
   DeleteButton,
   SelectPaymentInput,
-  SelectQuantityInput,
+  Spinner,
   TextInput,
 } from "./components";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Coffee } from "./@types/coffee";
+import { api } from "./services/api";
 import { defaultTheme } from "./styles/themes";
 
 function App() {
@@ -18,26 +21,26 @@ function App() {
   const [isCreditSelected, setIsCreditSelected] = useState(false);
   const [isMoneySelected, setIsMoneySelected] = useState(false);
   const [textInputValue, setTextInputValue] = useState("");
+  const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleDelete() {
-    console.log("Remover pedido");
-  }
+  function handleDelete() {}
 
-  function handleAddToCart() {
-    console.log("Adicionar ao carrinho");
-  }
+  function handleAddToCart() {}
 
-  function handleClick() {
-    console.log("Confirmar pedido");
-  }
+  function handleClick() {}
 
-  console.log("Texto do input:", textInputValue);
+  const handleGetCoffeesFromApi = async () => {
+    setIsLoading(true);
+    const response = await api.get("/coffees");
+    const data = response.data;
+    setCoffeeList(data);
+    setIsLoading(false);
+  };
 
-  console.log("Métodos de pagamento selecionados:", {
-    isDebitSelected,
-    isCreditSelected,
-    isMoneySelected,
-  });
+  useEffect(() => {
+    handleGetCoffeesFromApi();
+  }, []);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -77,10 +80,6 @@ function App() {
       </Container>
 
       <Container>
-        <SelectQuantityInput
-          value={quantity}
-          onChange={(e) => setQuantity(e)}
-        />
         <SelectPaymentInput
           id="credit"
           label="Cartão de crédito"
@@ -100,6 +99,16 @@ function App() {
           onChange={setIsMoneySelected}
         />
       </Container>
+
+      <CoffeesContainer>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          coffeeList.map((coffee) => (
+            <CardCoffee key={coffee.id} coffee={coffee} />
+          ))
+        )}
+      </CoffeesContainer>
     </ThemeProvider>
   );
 }
@@ -111,6 +120,25 @@ const Container = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.base.background};
   padding: 30px;
+`;
+
+const CoffeesContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 32px;
+  width: 100%;
+  max-width: 1120px;
+  padding: 30px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 425px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
 `;
 
 export default App;
