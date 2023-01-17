@@ -16,7 +16,7 @@ export const Container = styled.button<ContainerProps>`
   width: 180px;
   border: none;
   border-radius: 6px;
-  font-family: "Roboto";
+  font-family: ${({ theme }) => theme.fonts.roboto};
   font-size: 0.75rem;
   transition: 0.2s;
   cursor: pointer;

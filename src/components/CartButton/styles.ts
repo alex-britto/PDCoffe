@@ -44,6 +44,6 @@ export const Badge = styled.div`
     border-radius: 50%;
     font-size: 12px;
     font-weight: 700;
-    font-family: "Roboto";
+    font-family: ${({ theme }) => theme.fonts.roboto};
   }
 `;

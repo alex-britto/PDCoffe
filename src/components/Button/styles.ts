@@ -9,7 +9,7 @@ export const Container = styled.button`
   max-width: 400px;
   border: none;
   border-radius: 6px;
-  font-family: "Roboto";
+  font-family: ${({ theme }) => theme.fonts.roboto};
   transition: 0.2s;
 
   &:hover {

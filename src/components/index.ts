@@ -1,6 +1,9 @@
 export { Button } from "./Button";
+export { CardCoffee } from "./CardCoffee";
 export { CartButton } from "./CartButton";
 export { DeleteButton } from "./DeleteButton";
 export { SelectPaymentInput } from "./SelectPaymentInput";
 export { SelectQuantityInput } from "./SelectQuantityInput";
+export { Spinner } from "./Spinner";
 export { TextInput } from "./TextInput";
+export { Typography } from "./Typography";

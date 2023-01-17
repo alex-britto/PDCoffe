@@ -34,9 +34,7 @@ export const EndLabel = styled.p`
   ${({ theme }) => css`
     align-items: center;
     background: ${theme.colors.base.input};
-    color: ${theme.colors.base.label};
     display: flex;
-    font-size: 12px;
     font-style: italic;
     height: auto;
     padding-right: 12px;
