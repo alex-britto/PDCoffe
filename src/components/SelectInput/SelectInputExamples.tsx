@@ -1,28 +1,32 @@
+import { CreditCard, Bank, Money } from "phosphor-react"
 import { defaultTheme } from "../../styles/themes/defaultTheme"
-import SelectInput from "./SelectInput"
+import SelectInputList from "./SelectInputList"
 
 const SelectInputExamples = () => {
+  const selectItems = [{
+    id: "1",
+    title: "Crédito",
+    icon: <CreditCard color={defaultTheme.colors.purple.dark} size={16} className="mr-3"/>,
+  },
+  {
+    id: "2",
+    title: "Débito",
+    icon: <Bank color={defaultTheme.colors.purple.dark} size={16} className="mr-3" />,
+  }, 
+  {
+    id: "3",
+    title: "Dinheiro",
+    icon: <Money color={defaultTheme.colors.purple.dark} size={16} className="mr-3" />,
+  }
+]
+  
   return (
-    <>
-    <SelectInput 
-      variant="credit"
-      label="Crédito"
-      maxWidth={178}
-      icon
-      iconColor={defaultTheme.colors.purple.default} className="m-4" />
-       <SelectInput 
-      variant="debt"
-      label="Débito"
-      maxWidth={178}
-      icon
-      iconColor={defaultTheme.colors.purple.default} className="m-4" />
-      <SelectInput 
-     variant="cash"
-     label="Dinheiro"
-     maxWidth={178}
-     icon
-     iconColor={defaultTheme.colors.purple.default} className="m-4" />
-    </>
+    <div className="flex m-4">
+      <SelectInputList 
+      items={selectItems} 
+      onClick={(item) => console.log("clicou no item", item)}
+      />
+    </div>
   )
 }
 
