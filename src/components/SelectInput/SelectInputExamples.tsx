@@ -1,22 +1,24 @@
 import { CreditCard, Bank, Money } from "phosphor-react"
-import { defaultTheme } from "../../styles/themes/defaultTheme"
+import { useTheme } from "styled-components"
 import SelectInputList from "./SelectInputList"
 
 const SelectInputExamples = () => {
+  const theme = useTheme()
+
   const selectItems = [{
     id: "1",
     title: "Crédito",
-    icon: <CreditCard color={defaultTheme.colors.purple.dark} size={16} className="mr-3"/>,
+    icon: <CreditCard color={theme.colors.purple.dark} size={16} className="mr-3"/>,
   },
   {
     id: "2",
     title: "Débito",
-    icon: <Bank color={defaultTheme.colors.purple.dark} size={16} className="mr-3" />,
+    icon: <Bank color={theme.colors.purple.dark} size={16} className="mr-3" />,
   }, 
   {
     id: "3",
     title: "Dinheiro",
-    icon: <Money color={defaultTheme.colors.purple.dark} size={16} className="mr-3" />,
+    icon: <Money color={theme.colors.purple.dark} size={16} className="mr-3" />,
   }
 ]
   

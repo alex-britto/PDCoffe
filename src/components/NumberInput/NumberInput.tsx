@@ -31,6 +31,7 @@ const NumberInput = ({
                 <button
                 type="button"
                 onClick={onAddition}
+                disabled={value >= 99}
             >
                 <Plus 
                 size={14} 

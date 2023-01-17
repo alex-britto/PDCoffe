@@ -2,7 +2,7 @@ import { useState } from "react";
 import NumberInput from "./NumberInput";
 
 const NumberInputExample = () => {
-    const [inputValue, setInputValue] = useState<number>(0)
+    const [inputValue, setInputValue] = useState(0)
 
     return (
         <div className="m-4">

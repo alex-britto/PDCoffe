@@ -37,7 +37,7 @@ const Container = styled.div<{ isSelected?: boolean }>`
            color: ${theme.colors.base.text};
            border: 1px solid ${theme.colors.base.button};
            border-radius: 6px;
-           padding: 5px 8px;
+           padding: 16px;
            
            width: fit-content;
 
