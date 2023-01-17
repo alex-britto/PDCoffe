@@ -8,30 +8,28 @@ export interface SelectInputListProps {
         icon: ReactNode;
     }[],
     selectedInputItemDefault?: string;
-    onClick?: (e: string) => void;
+    onClick?: (value: string) => void;
 }
 
 const SelectInputList = ({ items, selectedInputItemDefault, onClick }: SelectInputListProps) => {
     const [selectedInputItemId, setSelectedInputItemId] = useState(selectedInputItemDefault)
 
     const handleOnClick = (index: string) => {
-        setSelectedInputItemId(index)
+      setSelectedInputItemId(index)
       !!onClick && onClick(index)
     }
 
     return (
-        <div>
-            {items.map((item) => {
-                return (
-                    <SelectInputItem 
-                        icon={item.icon}
-                        title={item.title}
-                        onClick={() => handleOnClick(item.id)}
-                        isSelected={item.id === selectedInputItemId}
-                        key={item.id}
-                    />
-                )
-                })}
+    <div className="flex gap-3">
+      {items.map((item) => (
+        <SelectInputItem
+          key={item.id}
+          icon={item.icon}
+          title={item.title}
+          isSelected={item.id === selectedInputItemId}
+          onClick={() => handleOnClick(item.id)}
+        />
+      ))}
     </div>
     )
 }

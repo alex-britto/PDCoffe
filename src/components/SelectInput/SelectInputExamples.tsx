@@ -21,10 +21,11 @@ const SelectInputExamples = () => {
 ]
   
   return (
-    <div className="flex m-4">
+    <div className="m-4">
       <SelectInputList 
       items={selectItems} 
       onClick={(item) => console.log("clicou no item", item)}
+      selectedInputItemDefault="1"
       />
     </div>
   )
