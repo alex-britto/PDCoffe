@@ -17,7 +17,7 @@ export const SelectInput = ({
 }: SelectInputProps) => {
   return (
     <Container {...props} selected={selected} onClick={onClick}>
-      {icon && <span className="mr-3">{icon}</span>}
+      {!!icon && <span className="mr-3">{icon}</span>}
       <p>{title}</p>
     </Container>
   )

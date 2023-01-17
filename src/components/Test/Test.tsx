@@ -1,21 +1,24 @@
 import { AirplaneTakeoff } from "phosphor-react"
-import styled, { css } from "styled-components"
-import { defaultTheme } from "../../styles/themes/defaultTheme"
-
-interface TestProps {
+import { HTMLAttributes } from "react"
+import styled, { css, useTheme } from "styled-components"
+interface TestProps extends HTMLAttributes<HTMLDivElement> {
   title?: string
 }
 
 export const Test = ({ title }: TestProps) => {
+  const theme = useTheme()
+
   return (
-    <Container className="my-6 ml-auto items-center">
+    <Container>
       Test component
-      <AirplaneTakeoff size={32} color={defaultTheme.colors.purple.dark} />
+      <AirplaneTakeoff size={32} color={theme.colors.purple.dark} />
     </Container>
   )
 }
 
-const Container = styled.div`
+const Container = styled.div.attrs({
+  className: "my-6 ml-auto items-center rounded",
+})`
   ${({ theme }) => css`
     display: flex;
     height: 50px;

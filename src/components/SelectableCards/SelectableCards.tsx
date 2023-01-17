@@ -9,20 +9,20 @@ interface SelectableCardsProps {
     icon?: ReactNode
   }[]
   selectedDefault?: number | string
-  onClick?: (index: string) => void
+  onChange?: (index: string) => void
 }
 
 export const SelectableCards = ({
   items,
   selectedDefault,
-  onClick,
+  onChange,
   ...props
 }: SelectableCardsProps) => {
   const [selectedInputId, setSelectedInputId] = useState(selectedDefault)
 
-  const handleOnClick = (index: string) => {
+  const handleOnChange = (index: string) => {
     setSelectedInputId(index)
-    !!onClick && onClick(index)
+    !!onChange && onChange(index)
   }
 
   return (
@@ -32,7 +32,7 @@ export const SelectableCards = ({
           key={item.id}
           title={item.title}
           icon={item.icon}
-          onClick={() => handleOnClick(item.id)}
+          onClick={() => handleOnChange(item.id)}
           selected={selectedInputId === item.id}
         />
       ))}

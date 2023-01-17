@@ -1,7 +1,6 @@
 import { Minus, Plus } from "phosphor-react"
 import { HTMLAttributes, InputHTMLAttributes, useEffect, useState } from "react"
-import styled, { css } from "styled-components"
-import { defaultTheme } from "../../styles/themes/defaultTheme"
+import styled, { css, useTheme } from "styled-components"
 
 export interface NumberInputProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "value" | "onChange"> {
@@ -28,6 +27,8 @@ export const NumberInput = ({
 }: NumberInputProps) => {
   const [inputValue, setInputValue] = useState<number>(value)
 
+  const theme = useTheme()
+
   useEffect(() => {
     onChange(inputValue)
   }, [inputValue])
@@ -41,13 +42,15 @@ export const NumberInput = ({
         }
         disabled={inputValue <= min}
       >
-        <Minus size={14} color={defaultTheme.colors.purple.default} />
+        <Minus size={14} color={theme.colors.purple.default} />
       </button>
 
       <Input
         value={inputValue}
         onChange={({ target }) => setInputValue(+target.value)}
         type="number"
+        min={min}
+        max={max}
         {...inputProps}
       />
 
@@ -58,7 +61,7 @@ export const NumberInput = ({
         }
         disabled={max && inputValue >= max ? true : false}
       >
-        <Plus color={defaultTheme.colors.purple.default} />
+        <Plus color={theme.colors.purple.default} />
       </button>
     </Container>
   )

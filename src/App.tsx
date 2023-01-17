@@ -6,7 +6,7 @@ import {
   Trash,
 } from "phosphor-react"
 import { useState } from "react"
-import { ThemeProvider } from "styled-components"
+import { ThemeProvider, useTheme } from "styled-components"
 import {
   Button,
   CatalogItem,
@@ -20,71 +20,82 @@ import { defaultTheme } from "./styles/themes/defaultTheme"
 function App() {
   const [value, setValue] = useState<string>("")
   const [number, setNumber] = useState<number>(1)
+  const [selectedValue, setSelectedValue] = useState("Credito")
 
   const selectableCardsItems = [
     {
-      id: "Card 1",
+      id: "Credito",
       icon: <CreditCard size={16} />,
       title: "Cartão de crédito",
     },
     {
-      id: "Card 2",
+      id: "Debito",
       icon: <Bank size={16} />,
-      title: "Boleto bancário",
+      title: "Cartão de débito",
     },
     {
-      id: "Card 3",
+      id: "Boleto",
       icon: <Money size={16} />,
-      title: "Pix",
+      title: "Boleto",
     },
   ]
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Test />
+      <div className="m-4">
+        <Test />
 
-      <div className="flex w-full gap-10 items-center">
-        <Button color="primary">Label</Button>
-        <Button color="secondary">
-          <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />
-        </Button>
+        <div className="flex w-full gap-10 items-center">
+          <Button color="primary">Label</Button>
+          <Button color="secondary">
+            <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />
+          </Button>
 
-        <Button color="base">
-          <Trash
-            size={16}
-            color={defaultTheme.colors.purple.dark}
-            className="mr-1"
+          <Button color="base">
+            <Trash
+              size={16}
+              color={defaultTheme.colors.purple.dark}
+              className="mr-1"
+            />
+            Remover
+          </Button>
+
+          <Button color="light" quantity={2}>
+            <ShoppingCartSimple
+              size={22}
+              color={defaultTheme.colors.yellow.dark}
+            />
+          </Button>
+        </div>
+
+        <TextField
+          placeholder="Label"
+          endLabel="Opcional"
+          width="100%"
+          maxWidth={500}
+          className="mt-6"
+          value={value}
+          onChange={setValue}
+        />
+
+        <h1>Texto: {value}</h1>
+
+        <div className="flex w-full gap-10 items-center mt-6">
+          <SelectableCards
+            items={selectableCardsItems}
+            selectedDefault={selectedValue}
+            onChange={setSelectedValue}
           />
-          Remover
-        </Button>
 
-        <Button color="light" quantity={2}>
-          <ShoppingCartSimple
-            size={22}
-            color={defaultTheme.colors.yellow.dark}
-          />
-        </Button>
-      </div>
+          <p>Opção selecionada: {selectedValue}</p>
+        </div>
 
-      <TextField
-        placeholder="Label"
-        endLabel="Opcional"
-        width="100%"
-        maxWidth={500}
-        className="mt-6"
-        value={value}
-        onChange={({ target }) => setValue(target.value)}
-      />
+        <NumberInput className="mt-6" value={number} onChange={setNumber} />
+        <h1>Valor: {number}</h1>
 
-      <div className="flex w-full gap-10 items-center mt-6">
-        <SelectableCards items={selectableCardsItems} />
-      </div>
-
-      <NumberInput className="mt-6" value={number} onChange={setNumber} />
-      <h1>Valor: {number}</h1>
-
-      <div className="flex w-full gap-10 items-center mt-6">
-        <CatalogItem />
+        <div className="flex w-full gap-10 items-center mt-6">
+          <CatalogItem />
+        </div>
       </div>
     </ThemeProvider>
   )

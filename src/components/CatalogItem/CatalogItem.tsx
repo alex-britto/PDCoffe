@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react"
-import styled, { css } from "styled-components"
+import styled, { css, useTheme } from "styled-components"
 
 interface CatalogItemProps {
   title?: string
@@ -11,7 +11,6 @@ interface CatalogItemProps {
 import ProductImg from "../../assets/expresso.png"
 import { Status } from "../Status/Status"
 import { Typography } from "../Typography/Typography"
-import { defaultTheme } from "../../styles/themes/defaultTheme"
 import { NumberInput } from "../NumberInput/NumberInput"
 import { Button } from "../Button/Button"
 import { ShoppingCartSimple } from "phosphor-react"
@@ -25,6 +24,8 @@ export const CatalogItem = ({
 }: CatalogItemProps) => {
   const [quantity, setQuantity] = useState<number>(1)
 
+  const theme = useTheme()
+
   return (
     <Container {...props} onClick={onClick}>
       <Content>
@@ -34,19 +35,19 @@ export const CatalogItem = ({
         <Typography variant="h2" className="mb-2">
           Expresso Tradicional
         </Typography>
-        <Typography variant="body" color={defaultTheme.colors.base.label}>
+        <Typography variant="body" color={theme.colors.base.label}>
           O tradicional café feito com água quente e grãos moídos
         </Typography>
         <PriceContainer>
           <PriceBox>
             <Typography
-              color={defaultTheme.colors.base.text}
+              color={theme.colors.base.text}
               variant="body"
               className="mr-1 mt-1"
             >
               R$
             </Typography>
-            <Typography color={defaultTheme.colors.base.text} variant="h1">
+            <Typography color={theme.colors.base.text} variant="h1">
               9,90
             </Typography>
           </PriceBox>
@@ -57,7 +58,7 @@ export const CatalogItem = ({
               onChange={(value) => setQuantity(value)}
             />
             <Button color="secondary">
-              <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />
+              <ShoppingCartSimple size={22} color={theme.colors.white} />
             </Button>
           </QuantityBox>
         </PriceContainer>
