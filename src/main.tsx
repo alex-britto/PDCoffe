@@ -3,12 +3,12 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 import App from "./App";
 import "./styles/index.css";
-import { defaultTheme } from "./styles/themes/defaultTheme";
+import defaultTheme from "./styles/themes/defaultTheme";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-	<ThemeProvider theme={defaultTheme}>
-		<React.StrictMode>
+	<React.StrictMode>
+		<ThemeProvider theme={defaultTheme}>
 			<App />
-		</React.StrictMode>
-	</ThemeProvider>
+		</ThemeProvider>
+	</React.StrictMode>
 );
