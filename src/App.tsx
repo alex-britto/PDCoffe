@@ -1,12 +1,9 @@
-import styled, { ThemeProvider, useTheme } from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample } from "./components"
-import { Status } from "./components/Status"
+import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample } from "./components"
 
 function App() {
-  const theme = useTheme()
-
   return (
      <ThemeProvider theme={defaultTheme}>
         <Container>
@@ -23,6 +20,9 @@ function App() {
           </Container>
           <Container>
             <StatusExample />
+          </Container>
+          <Container>
+            <TypographyExample />
           </Container>
      </ThemeProvider>
   )
