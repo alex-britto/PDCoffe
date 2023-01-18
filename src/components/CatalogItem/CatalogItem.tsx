@@ -78,6 +78,9 @@ const Container = styled.div`
 const Fragment = styled.div`
     display: flex;
     flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
 `
 
 const Content = styled.div`
