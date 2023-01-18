@@ -1,8 +1,9 @@
 import {Minus, Plus} from 'phosphor-react'
+import { InputHTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { defaultTheme } from '../../styles/themes/defaultTheme';
 
-export interface NumberInputProps {
+export interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
     value: number;
     onAddition: () => void;
     onSubtraction: () => void;
@@ -63,7 +64,9 @@ const Container = styled.div`
 
            input {
             width: 20px;
+
             text-align: center;
+
             border: none;
             background-color: ${theme.colors.transparent};
           }

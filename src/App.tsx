@@ -1,7 +1,7 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample } from "./components"
+import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample, CatalogItemExample } from "./components"
 
 function App() {
   return (
@@ -23,6 +23,9 @@ function App() {
           </Container>
           <Container>
             <TypographyExample />
+          </Container>
+          <Container>
+            <CatalogItemExample />
           </Container>
      </ThemeProvider>
   )

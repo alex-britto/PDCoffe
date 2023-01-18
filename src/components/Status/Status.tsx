@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-export interface StatusProps {
+export interface StatusProps extends HTMLAttributes<HTMLDivElement> {
     color: string;
     bgColor: string;
     text: string;

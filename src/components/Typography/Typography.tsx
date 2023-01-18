@@ -6,25 +6,25 @@ type Variant = "h1" | "h2" | "h3" | "h4" | "title" | "subtitle" | "body" | "capt
 export interface TypographyProps extends HTMLAttributes<HTMLParagraphElement>{
     variant: Variant;
     children: ReactNode;
-    color?: string;
+    fontColor?: string;
     fontFamily?: string;
     fontWeight?: string;
 }
 
-const Typography = ({ variant, children, color, fontFamily, fontWeight, ...rest }: TypographyProps) => {
+const Typography = ({ variant, children, fontColor, fontFamily, fontWeight, ...rest }: TypographyProps) => {
     return (
-        <TypographyStyled variant={variant} fontFamily={fontFamily} fontWeight={fontWeight} {...rest}>
+        <TypographyStyled variant={variant} fontFamily={fontFamily} fontWeight={fontWeight} fontColor={fontColor} {...rest}>
             {children}
         </TypographyStyled>
     )
 }
 
 const TypographyStyled = styled.p<TypographyProps>`
-    ${({ theme, color, variant, fontFamily, fontWeight }) => css`
+    ${({ theme, fontColor, variant, fontFamily, fontWeight }) => css`
         display: flex;
         align-items: center;
 
-        color: ${color ? color : theme.colors.base.subtitle};
+        color: ${fontColor ? fontColor : theme.colors.base.subtitle};
 
         font-family: "Roboto";
         font-size: 14px;
