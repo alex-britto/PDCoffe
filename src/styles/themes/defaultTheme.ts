@@ -6,7 +6,7 @@ const colors = {
   },
   purple: {
     default: "#8047F8",
-    dark: "#4B2995",
+    dark: "#4b2995",
     light: "#EBE5F9",
   },
   base: {
@@ -20,6 +20,12 @@ const colors = {
     card: "#F3F2F2",
     background: "#FAFAFA",
   },
-}
+  white: "#FFFFFF",
+};
 
-export const defaultTheme = { colors }
+const fonts = {
+  roboto: "Roboto",
+  baloo: "Baloo 2",
+};
+
+export const defaultTheme = { colors, fonts };
