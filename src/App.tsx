@@ -11,6 +11,7 @@ import {
 } from "./components";
 
 import { useEffect, useState } from "react";
+
 import { Coffee } from "./@types/coffee";
 import { api } from "./services/api";
 import { defaultTheme } from "./styles/themes";
@@ -129,6 +130,7 @@ const CoffeesContainer = styled.div`
   width: 100%;
   max-width: 1120px;
   padding: 30px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);

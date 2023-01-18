@@ -4,7 +4,7 @@ export const CardContainer = styled.div`
   width: 256px;
   background: ${({ theme }) => theme.colors.base.card};
   border-radius: 6px 36px;
-  padding: 8px;
+  padding: 4px;
 `;
 
 export const CardCoffeeImage = styled.div`

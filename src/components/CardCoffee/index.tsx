@@ -19,12 +19,12 @@ interface CardCoffeeProps {
 }
 
 export function CardCoffee({
-  coffee: { title, description, price, typeTags, imageUrl },
+  coffee: { title, description, price, imageUrl, typeTags },
 }: CardCoffeeProps) {
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
-    console.log("Adicionado ao carrinho!");
+    alert(`Você adicionou ${quantity}x o ${title} ao carrinho!`);
   }
 
   return (
