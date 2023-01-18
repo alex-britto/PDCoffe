@@ -7,6 +7,7 @@ import {
   DeleteButton,
   SelectPaymentInput,
   Spinner,
+  Status,
   TextInput,
 } from "./components";
 
@@ -72,14 +73,6 @@ function App() {
       </Container>
 
       <Container>
-        <TextInput
-          placeholder="Label"
-          endLabel="Opcional"
-          onChange={(e) => setTextInputValue(e.target.value)}
-        />
-      </Container>
-
-      <Container>
         <SelectPaymentInput
           id="credit"
           label="Cartão de crédito"
@@ -100,15 +93,20 @@ function App() {
         />
       </Container>
 
-      <CoffeesContainer>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          coffeeList.map((coffee) => (
-            <CardCoffee key={coffee.id} coffee={coffee} />
-          ))
-        )}
-      </CoffeesContainer>
+      <Container>
+        <TextInput
+          maxWidth="100%"
+          placeholder="Label"
+          optional={true}
+          onChange={(e) => setTextInputValue(e.target.value)}
+        />
+      </Container>
+
+      <Container>
+        <Status name="alcoólico" />
+        <Status name="especial" />
+        <Status name="gelado" />
+      </Container>
     </ThemeProvider>
   );
 }
@@ -116,29 +114,10 @@ function App() {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.base.background};
   padding: 30px;
-`;
-
-const CoffeesContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 32px;
-  width: 100%;
-  max-width: 1120px;
-  padding: 30px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  @media (max-width: 425px) {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 16px;
-  }
+  gap: 5px;
 `;
 
 export default App;

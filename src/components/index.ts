@@ -7,3 +7,4 @@ export { SelectQuantityInput } from "./SelectQuantityInput";
 export { Spinner } from "./Spinner";
 export { TextInput } from "./TextInput";
 export { Typography } from "./Typography";
+export { Status } from "./Status";

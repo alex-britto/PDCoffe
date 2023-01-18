@@ -1,5 +1,38 @@
 import styled, { css } from "styled-components";
 
+interface ContainerProps {
+  maxWidth?: string;
+}
+
+export const Container = styled.div<ContainerProps>`
+  ${({ theme, maxWidth }) => css`
+    background: ${theme.colors.base.input};
+    border: 1px solid ${theme.colors.base.button};
+    font-family: ${theme.fonts.roboto};
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: ${maxWidth};
+    &:focus-within,
+    &:focus {
+      border-color: ${theme.colors.yellow.dark};
+    }
+
+    p {
+      font-family: ${theme.fonts.roboto};
+      font-weight: 400;
+      font-size: 12px;
+      color: ${theme.colors.base.label};
+      position: absolute;
+      right: 12px;
+      top: 13px;
+      font-style: italic;
+    }
+  `}
+`;
+
+
 export const Input = styled.input`
   ${({ theme }) => css`
     background: ${theme.colors.base.input};
@@ -15,32 +48,5 @@ export const Input = styled.input`
   `}
 `;
 
-export const Container = styled.div`
-  ${({ theme }) => css`
-    background: ${theme.colors.base.input};
-    border: 1px solid ${theme.colors.base.button};
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    &:focus-within,
-    &:focus {
-      border-color: ${theme.colors.yellow.dark};
-    }
-  `}
-`;
 
-export const EndLabel = styled.p`
-  ${({ theme }) => css`
-    align-items: center;
-    background: ${theme.colors.base.input};
-    display: flex;
-    font-style: italic;
-    height: auto;
-    padding-right: 12px;
-    position: absolute;
-    right: 0;
-    transform: translateY(-50%);
-    top: 50%;
-  `}
-`;
+
