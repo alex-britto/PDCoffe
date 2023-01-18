@@ -1,8 +1,7 @@
-import styled from "styled-components"
 import { ShoppingCartSimple, Trash } from "phosphor-react"
 
 import { defaultTheme } from "../../styles/themes/defaultTheme"
-import Button from "./Button"
+import Button from "../Button/Button"
 
 const ButtonsExample = () => {
   return (

@@ -1,99 +1,67 @@
-import { InputHTMLAttributes } from "react";
+import { HTMLAttributes, InputHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-    value?: any;
-    label?: string;
+    containerProps?: HTMLAttributes<HTMLDivElement>;
     endLabel?: string;
-    placeholder?: string;
-    onChange?: (value: any) => void;
-    width?: string | number;
-    maxWidth?: string | number;
-    minWidth?: string | number
 }
 
 const TextField = ({ 
-    value, 
-    label, 
     endLabel, 
-    placeholder,
-    onChange, 
-    width = "auto", 
-    maxWidth = "100%", 
-    minWidth = 200, 
-    ...props 
+    containerProps, 
+    ...rest 
 }: TextFieldProps) => {
 
     return (
-        <Container width={width} maxWidth={maxWidth} minWidth={minWidth} {...props}>
-            <Input placeholder={placeholder} value={value} onChange={onChange} />
-                {endLabel && <EndLabel>{endLabel}</EndLabel>}
+        <Container {...containerProps}>
+            <input type="text" {...rest} />
+                <span>{endLabel}</span>
         </Container>
     )
 
 }
 
-const Container = styled.div<{ 
-    width?: string | number, 
-    maxWidth?: string | number, 
-    minWidth?: string | number
-}>` 
-    ${({ theme, width, maxWidth, minWidth }) => css`
-        position: relative;
-        overflow: hidden;
+const Container = styled.div` 
+    ${({ theme }) => css`
+        display: flex;
 
         background-color: ${theme.colors.base.input};
         border: 1px solid ${theme.colors.base.button};
+
+        gap: 4px;
+        padding: 12px;
         border-radius: 4px;
+        line-height: 130%;
 
-        width: ${typeof width === "number" ? width + "px" : width};
-        max-width: ${typeof maxWidth === "number" ? maxWidth + "px" : maxWidth};
-        min-width: ${typeof minWidth === "number" ? minWidth + "px" : minWidth};
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
 
-        &:focus-within,
-           &:focus {
-             border-color: ${theme.colors.yellow.dark};
-           }
+        :focus-within {
+            border: 1px solid ${theme.colors.yellow.dark};
+        }
+
+        input {
+            width: 100%;
+            background-color: transparent;
+            ::placeholder {
+              color: ${theme.colors.base.label};
+            }
+            &:focus-visible {
+              outline: none;
+            }
+          }
+
+          span {
+            width: fit-content;
+            color: ${theme.colors.base.label};
+
+            font-style: italic;
+            font-size: 12px;
+          }
 `}
 
-`
-
-const Input = styled.input`
-    ${({theme}) => css`
-        background-color: ${theme.colors.transparent};
-        color: ${theme.colors.base.text};
-        border: none;
-
-        width: 100%;
-
-        font-size: 14px;
-        padding: 12px 63px 12px 12px;
-
-        &:focus-visible {
-            outline: 0;
-        }
-    `}
-`
-
-const EndLabel = styled.p`
-  ${({ theme }) => css`
-    display: flex;
-    position: absolute;
-    align-items: center;
-
-    top: 50%;
-    right: 0;
-    height: auto;
-
-    background-color: ${theme.colors.base.input};
-    color: ${theme.colors.base.label};
-
-    font-size: 12px;
-    font-style: italic;
-
-    padding-right: 12px;
-    transform: translateY(-50%);
-  `}
 `
 
 export default TextField
