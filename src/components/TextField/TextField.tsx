@@ -9,6 +9,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const TextField = ({ 
     endLabel, 
     containerProps, 
+    value,
     onChange,
     ...rest 
 }: TextFieldProps) => {
@@ -41,6 +42,10 @@ const Container = styled.div`
 
         :focus-within {
             border: 1px solid ${theme.colors.yellow.dark};
+            
+            span {
+                display: none;
+            }
         }
 
         input {
@@ -56,11 +61,13 @@ const Container = styled.div`
 
           span {
             width: fit-content;
+            white-space: nowrap;
             color: ${theme.colors.base.label};
 
             font-style: italic;
             font-size: 12px;
           }
+        }
 `}
 
 `

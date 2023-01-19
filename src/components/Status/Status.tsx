@@ -2,8 +2,8 @@ import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 export interface StatusProps extends HTMLAttributes<HTMLDivElement> {
-    color: string;
-    bgColor: string;
+    color?: string;
+    bgColor?: string;
     text: string;
     containerProps?: HTMLAttributes<HTMLDivElement>;
 }
@@ -16,8 +16,8 @@ const Status = ({ color, bgColor, text, containerProps }: StatusProps) => {
     )
 }
 
-const Container = styled.div<{ color: string, bgColor: string }>`
-    ${({ bgColor, color }) => css`
+const Container = styled.div<{ color?: string, bgColor?: string }>`
+    ${({ bgColor, color, theme }) => css`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -35,8 +35,8 @@ const Container = styled.div<{ color: string, bgColor: string }>`
         line-height: 130%;
         text-transform: uppercase;
 
-        background-color: ${bgColor};
-        color: ${color};
+        background-color: ${bgColor ?? theme.colors.yellow.light};
+        color: ${color ?? theme.colors.yellow.dark};
     `}
 `
 

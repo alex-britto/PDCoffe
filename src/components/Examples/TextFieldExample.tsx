@@ -4,7 +4,6 @@ import { useState } from "react"
 const TextFieldExample = () => {
     const [inputValue, setInputValue] = useState("")
 
-    console.log(inputValue)
     return (
         <TextField 
             placeholder="placeholder" 

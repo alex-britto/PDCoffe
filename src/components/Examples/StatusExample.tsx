@@ -4,7 +4,7 @@ import { Status } from "../Status"
 const StatusExample = () => {
     const theme = useTheme()
     return (
-        <Status bgColor={theme.colors.yellow.light} color={theme.colors.yellow.dark} text="Tradicional" containerProps={{ className: "m-4" }} />
+        <Status text="Tradicional" containerProps={{ className: "m-4" }} />
     )
 }
 

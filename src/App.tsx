@@ -16,7 +16,7 @@ import {
 function App() {
   return (
      <ThemeProvider theme={defaultTheme}>
-        {/* <Container>
+        <Container>
           <ButtonsExample />
         </Container>
         <Container>
@@ -24,11 +24,11 @@ function App() {
         </Container>
         <Container>
           <SelectInputExample />
-          </Container> */}
+          </Container>
           <Container>
             <TextFieldExample />
           </Container>
-          {/* <Container>
+          <Container>
             <StatusExample />
           </Container>
           <Container>
@@ -39,7 +39,7 @@ function App() {
           </Container>
           <Container>
             <CartItemExample />
-          </Container> */}
+          </Container>
      </ThemeProvider>
   )
 }
