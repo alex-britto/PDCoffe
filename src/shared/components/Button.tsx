@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import styled, { css, useTheme } from "styled-components";
-import Icons from "./Icons";
+import CustomIcon from "./CustomIcon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
@@ -14,7 +14,7 @@ const Button = ({ children, variant, leftIcon, ...rest }: ButtonProps) => {
 	return (
 		<StyledButton variant={variant} {...rest}>
 			{leftIcon && (
-				<Icons
+				<CustomIcon
 					name="Trash"
 					size={16}
 					className="mr-1"
