@@ -3,6 +3,7 @@ import Button from "./shared/components/Button";
 import CartButton from "./shared/components/CartButton";
 import NumberInput from "./shared/components/NumberInput";
 import SelectInput, { SelectOptionType } from "./shared/components/SelectInput";
+import TextField from "./shared/components/TextField";
 
 function App() {
 	const [numberInputValue, setNumberInputValue] = useState<number>();
@@ -57,6 +58,7 @@ function App() {
 					/>
 					<div>Valor: {selectInputValue}</div>
 				</div>
+				<TextField />
 			</div>
 		</div>
 	);
