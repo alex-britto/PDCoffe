@@ -3,14 +3,15 @@ import { useState } from "react"
 
 const TextFieldExample = () => {
     const [inputValue, setInputValue] = useState("")
-    console.log("inputValue", inputValue)
+
+    console.log(inputValue)
     return (
         <TextField 
-              placeholder="placeholder" 
-              endLabel="endlabel aqui" 
-              onChange={(e) => setInputValue(e.target.value)}
-              containerProps={{ className: "m-4 w-1/2" }}
-            />
+            placeholder="placeholder" 
+            endLabel="endlabel aqui" 
+            onChange={(e) => setInputValue(e.target.value)}
+            containerProps={{ className: "m-4 w-1/2" }}
+        />
     )
 }
 

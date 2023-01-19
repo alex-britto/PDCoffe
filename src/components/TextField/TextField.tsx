@@ -1,4 +1,4 @@
-import { ChangeEventHandler, HTMLAttributes, InputHTMLAttributes } from "react";
+import { HTMLAttributes, InputHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
