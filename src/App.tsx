@@ -7,7 +7,8 @@ import TextField from "./shared/components/TextField";
 
 function App() {
 	const [numberInputValue, setNumberInputValue] = useState<number>();
-	const [selectInputValue, setSelectInputValue] = useState<string>();
+	const [selectInputValue, setSelectInputValue] = useState<string>("0");
+	const [textFieldInputValue, setTextFieldInputValue] = useState<string>();
 
 	const selectInputOptions: SelectOptionType[] = [
 		{
@@ -31,7 +32,7 @@ function App() {
 	];
 
 	return (
-		<div className="flex flex-col justify-center items-center w-full h-screen mb-5">
+		<div className="flex flex-col justify-center items-center w-full h-screen">
 			<div className="flex flex-col gap-5">
 				<Button className="w-32" variant="large">
 					LABEL
@@ -55,10 +56,17 @@ function App() {
 						onChange={setSelectInputValue}
 						options={selectInputOptions}
 						className="mr-10"
+						defaultValue="1"
 					/>
 					<div>Valor: {selectInputValue}</div>
 				</div>
-				<TextField />
+				<div className="flex items-center gap-10">
+					<div className="flex flex-col gap-5 w-96">
+						<TextField onChange={setTextFieldInputValue} optional />
+						<TextField onChange={setTextFieldInputValue} />
+					</div>
+					<div>Valor: {textFieldInputValue}</div>
+				</div>
 			</div>
 		</div>
 	);

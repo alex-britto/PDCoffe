@@ -13,10 +13,16 @@ interface SelectInputProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
 	options: SelectOptionType[];
 	onChange: (value: string) => void;
+	defaultValue?: string;
 }
 
-const SelectInput = ({ options, onChange, ...rest }: SelectInputProps) => {
-	const [value, setValue] = useState<string>();
+const SelectInput = ({
+	options,
+	onChange,
+	defaultValue,
+	...rest
+}: SelectInputProps) => {
+	const [value, setValue] = useState<string>(defaultValue as string);
 
 	const theme = useTheme();
 
