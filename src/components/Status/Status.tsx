@@ -37,5 +37,6 @@ const Container = styled.div<{
     font-weight: 700;
     padding: 4px 8px;
     text-transform: uppercase;
+    width: fit-content;
   `}
 `

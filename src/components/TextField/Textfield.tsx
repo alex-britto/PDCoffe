@@ -2,13 +2,13 @@ import { InputHTMLAttributes } from "react"
 import styled, { css } from "styled-components"
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  value?: any
-  onChange?: (value: any) => void
+  value?: string
   endLabel?: string
   maxWidth?: string | number
   minWidth?: string | number
   placeholder?: string
   width?: string | number
+  inputProps?: InputHTMLAttributes<HTMLInputElement>
 }
 
 export const TextField = ({
@@ -19,13 +19,19 @@ export const TextField = ({
   maxWidth = "100%",
   minWidth = 200,
   width = "auto",
+  inputProps,
   ...props
 }: TextFieldProps) => {
   return (
     <Container {...props} width={width} maxWidth={maxWidth} minWidth={minWidth}>
-      <Input placeholder={placeholder} value={value} onChange={onChange} />
+      <Input
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        {...inputProps}
+      />
 
-      {endLabel && <EndLabel>{endLabel}</EndLabel>}
+      {endLabel && value?.length === 0 && <EndLabel>{endLabel}</EndLabel>}
     </Container>
   )
 }
@@ -64,6 +70,14 @@ const Container = styled.div<{
     &:focus-within,
     &:focus {
       border-color: ${theme.colors.yellow.dark};
+
+      ${EndLabel} {
+        display: none;
+      }
+
+      ${Input} {
+        padding-right: 12px;
+      }
     }
   `}
 `

@@ -12,6 +12,7 @@ import {
   CatalogItem,
   NumberInput,
   SelectableCards,
+  Status,
   TextField,
 } from "./components"
 import { Test } from "./components/Test/Test"
@@ -75,10 +76,15 @@ function App() {
           maxWidth={500}
           className="mt-6"
           value={value}
-          onChange={setValue}
+          onChange={({ target }) => setValue(target.value)}
         />
-
         <h1>Texto: {value}</h1>
+
+        <div className="w-auto flex gap-3">
+          <Status label="Tradicional" />
+          <Status label="Com leite" />
+          <Status label="Gelado" />
+        </div>
 
         <div className="flex w-full gap-10 items-center mt-6">
           <SelectableCards
