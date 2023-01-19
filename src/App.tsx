@@ -25,6 +25,8 @@ function App() {
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(textInputValue);
+
   function handleDelete() {}
 
   function handleAddToCart() {}
@@ -97,6 +99,19 @@ function App() {
         <TextInput
           placeholder="Label"
           optional={true}
+          onChange={(e) => setTextInputValue(e.target.value)}
+        />
+        <TextInput
+          maxWidth="200px"
+          placeholder="Label"
+          optional={true}
+          onChange={(e) => setTextInputValue(e.target.value)}
+        />
+        <TextInput
+          maxWidth="200px"
+          placeholder="Label"
+          optional={true}
+          disabled={true}
           onChange={(e) => setTextInputValue(e.target.value)}
         />
       </Container>
