@@ -95,7 +95,6 @@ function App() {
 
       <Container>
         <TextInput
-          maxWidth="100%"
           placeholder="Label"
           optional={true}
           onChange={(e) => setTextInputValue(e.target.value)}

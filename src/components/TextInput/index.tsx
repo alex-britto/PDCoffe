@@ -11,7 +11,12 @@ interface IForm {
   value: string;
 }
 
-export const TextInput = ({ optional = false, ...props }: TextFieldProps) => {
+export const TextInput = ({
+  optional = false,
+  disabled,
+  placeholder,
+  ...props
+}: TextFieldProps) => {
   const [value, setValue] = useState("");
 
   const { register } = useForm<IForm>();
@@ -23,12 +28,13 @@ export const TextInput = ({ optional = false, ...props }: TextFieldProps) => {
   return (
     <Container {...props}>
       <Input
-        placeholder={props.placeholder}
+        placeholder={placeholder}
         {...register("value")}
         onChange={onChange}
+        disabled={disabled}
       />
 
-      {optional && value.length === 0 && <p>Opcional</p>}
+      {optional && value.length === 0 && !disabled && <p>Opcional</p>}
     </Container>
   );
 };

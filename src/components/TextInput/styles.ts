@@ -17,6 +17,10 @@ export const Container = styled.div<ContainerProps>`
     &:focus-within,
     &:focus {
       border-color: ${theme.colors.yellow.dark};
+      
+      p {
+        display: none;
+      }
     }
 
     p {
@@ -44,6 +48,10 @@ export const Input = styled.input`
     width: 100%;
     &:focus-visible {
       outline: 0;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   `}
 `;
