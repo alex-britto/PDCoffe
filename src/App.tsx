@@ -1,12 +1,12 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample, CatalogItemExample } from "./components"
+import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample, CatalogItemExample, CartItemExample } from "./components"
 
 function App() {
   return (
      <ThemeProvider theme={defaultTheme}>
-        <Container>
+        {/* <Container>
           <ButtonsExample />
         </Container>
         <Container>
@@ -26,6 +26,9 @@ function App() {
           </Container>
           <Container>
             <CatalogItemExample />
+          </Container> */}
+          <Container>
+            <CartItemExample />
           </Container>
      </ThemeProvider>
   )
