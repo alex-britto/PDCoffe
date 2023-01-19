@@ -1,4 +1,4 @@
-import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
+import { InputHTMLAttributes } from "react";
 import { Container, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,13 +10,9 @@ export const TextInput = ({
   optional = false,
   disabled,
   placeholder,
+  onChange,
   ...props
 }: TextFieldProps) => {
-  const [value, setValue] = useState("");
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.target.value);
-  };
-
   return (
     <Container {...props}>
       <Input
@@ -24,8 +20,7 @@ export const TextInput = ({
         onChange={onChange}
         disabled={disabled}
       />
-
-      {optional && value.length === 0 && !disabled && <p>Opcional</p>}
+      {optional && !disabled && <p>Opcional</p>}
     </Container>
   );
 };

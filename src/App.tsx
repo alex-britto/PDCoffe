@@ -18,69 +18,13 @@ function App() {
   const [isMoneySelected, setIsMoneySelected] = useState(false);
 
   const [inputValue, setInputValue] = useState("");
-  console.log(inputValue);
-
-  function handleDelete() {}
-
-  function handleAddToCart() {}
-
-  function handleClick() {}
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container>
-        <Button label="Confirmar pedido" onClick={handleClick} />
-        <CartButton
-          onClick={handleAddToCart}
-          icon={<ShoppingCart size={22} />}
-        />
-
-        <DeleteButton
-          label="Remover"
-          onClick={handleDelete}
-          icon={<Trash size={22} color={defaultTheme.colors.purple.default} />}
-        />
-
-        <CartButton
-          variant="SECONDARY"
-          onClick={handleAddToCart}
-          icon={<ShoppingCart size={22} />}
-        />
-
-        <CartButton
-          variant="SECONDARY"
-          quantity={3}
-          onClick={handleAddToCart}
-          icon={<ShoppingCart size={22} />}
-        />
-      </Container>
-
-      <Container>
-        <SelectPaymentInput
-          id="credit"
-          label="Cartão de crédito"
-          icon={<CreditCard />}
-          onChange={setIsCreditSelected}
-        />
-        <SelectPaymentInput
-          id="debit"
-          label="Cartão de débito"
-          icon={<Bank />}
-          onChange={setDebitIsSelected}
-        />
-        <SelectPaymentInput
-          id="money"
-          label="Dinheiro"
-          icon={<Money />}
-          onChange={setIsMoneySelected}
-        />
-      </Container>
-
-      <Container>
         <TextInput
           placeholder="Label"
           optional={true}
-          value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
         <TextInput
@@ -99,7 +43,7 @@ function App() {
       </Container>
 
       <Container>
-        <Status name="alcoólico" />
+        <Status className="p-4" name="alcoólico" />
         <Status name="especial" />
         <Status name="gelado" />
       </Container>

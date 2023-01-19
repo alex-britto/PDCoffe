@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 
 
-
-export const StyledStatus = styled.p`
+export const StyledStatus = styled.p.attrs<HTMLParagraphElement>({
+  className: "m-6"
+})`
   ${({ theme }) => css`
     background: ${theme.colors.yellow.light};
     border-radius: 100px;
