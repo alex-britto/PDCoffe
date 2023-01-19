@@ -6,3 +6,7 @@ export interface Coffee {
   title: string;
   typeTags: string[];
 }
+
+export interface IForm {
+  value: string;
+}

@@ -6,44 +6,25 @@ import {
   CartButton,
   DeleteButton,
   SelectPaymentInput,
-  Spinner,
   Status,
   TextInput,
 } from "./components";
-
-import { useEffect, useState } from "react";
-import { Coffee } from "./@types/coffee";
-import { api } from "./services/api";
+import { useState } from "react";
 import { defaultTheme } from "./styles/themes";
 
 function App() {
-  const [quantity, setQuantity] = useState(1);
   const [isDebitSelected, setDebitIsSelected] = useState(false);
   const [isCreditSelected, setIsCreditSelected] = useState(false);
   const [isMoneySelected, setIsMoneySelected] = useState(false);
-  const [textInputValue, setTextInputValue] = useState("");
-  const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  console.log(textInputValue);
+  const [inputValue, setInputValue] = useState("");
+  console.log(inputValue);
 
   function handleDelete() {}
 
   function handleAddToCart() {}
 
   function handleClick() {}
-
-  const handleGetCoffeesFromApi = async () => {
-    setIsLoading(true);
-    const response = await api.get("/coffees");
-    const data = response.data;
-    setCoffeeList(data);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    handleGetCoffeesFromApi();
-  }, []);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -99,20 +80,21 @@ function App() {
         <TextInput
           placeholder="Label"
           optional={true}
-          onChange={(e) => setTextInputValue(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <TextInput
           maxWidth="200px"
           placeholder="Label"
           optional={true}
-          onChange={(e) => setTextInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
         />
         <TextInput
           maxWidth="200px"
           placeholder="Label"
           optional={true}
           disabled={true}
-          onChange={(e) => setTextInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
         />
       </Container>
 

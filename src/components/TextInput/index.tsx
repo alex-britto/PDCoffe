@@ -1,14 +1,9 @@
 import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Container, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   optional?: boolean;
   maxWidth?: string;
-}
-
-interface IForm {
-  value: string;
 }
 
 export const TextInput = ({
@@ -18,9 +13,6 @@ export const TextInput = ({
   ...props
 }: TextFieldProps) => {
   const [value, setValue] = useState("");
-
-  const { register } = useForm<IForm>();
-
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value);
   };
@@ -29,7 +21,6 @@ export const TextInput = ({
     <Container {...props}>
       <Input
         placeholder={placeholder}
-        {...register("value")}
         onChange={onChange}
         disabled={disabled}
       />
