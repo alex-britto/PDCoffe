@@ -1,4 +1,4 @@
-import { HTMLAttributes, InputHTMLAttributes } from "react";
+import { ChangeEventHandler, HTMLAttributes, InputHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,12 +9,13 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const TextField = ({ 
     endLabel, 
     containerProps, 
+    onChange,
     ...rest 
 }: TextFieldProps) => {
 
     return (
         <Container {...containerProps}>
-            <input type="text" {...rest} />
+            <input type="text" onChange={onChange} {...rest} />
                 <span>{endLabel}</span>
         </Container>
     )

@@ -1,7 +1,17 @@
 import styled, { ThemeProvider } from "styled-components"
 
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { ButtonsExample, NumberInputExample, SelectInputExample, TextField, StatusExample, TypographyExample, CatalogItemExample, CartItemExample } from "./components"
+import { 
+  ButtonsExample, 
+  NumberInputExample, 
+  SelectInputExample, 
+  TextField, 
+  StatusExample, 
+  TypographyExample, 
+  CatalogItemExample, 
+  CartItemExample, 
+  TextFieldExample 
+} from "./components"
 
 function App() {
   return (
@@ -14,11 +24,11 @@ function App() {
         </Container>
         <Container>
           <SelectInputExample />
-          </Container>
+          </Container> */}
           <Container>
-            <TextField placeholder="placeholder" endLabel="endlabel aqui" containerProps={{ className: "m-4 w-1/2" }}/>
+            <TextFieldExample />
           </Container>
-          <Container>
+          {/* <Container>
             <StatusExample />
           </Container>
           <Container>
@@ -26,10 +36,10 @@ function App() {
           </Container>
           <Container>
             <CatalogItemExample />
-          </Container> */}
+          </Container>
           <Container>
             <CartItemExample />
-          </Container>
+          </Container> */}
      </ThemeProvider>
   )
 }
