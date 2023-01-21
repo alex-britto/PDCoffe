@@ -19,7 +19,7 @@ interface CardCoffeeProps {
 }
 
 export function CardCoffee({
-  coffee: { title, description, price, imageUrl, typeTags },
+  coffee: { title, description, price, imageUrl, tags },
 }: CardCoffeeProps) {
   const [quantity, setQuantity] = useState(1);
 
@@ -35,7 +35,7 @@ export function CardCoffee({
 
       <CardContent>
         <TagsContainer>
-          {typeTags?.map((tag, index) => (
+          {tags?.map((tag, index) => (
             <span key={index}>
               <Typography
                 size={12}

@@ -4,5 +4,5 @@ export interface Coffee {
   imageUrl: string;
   price: number;
   title: string;
-  typeTags: string[];
+  tags: string[];
 }
