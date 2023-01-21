@@ -23,6 +23,32 @@ const defaultTheme = {
 		},
 		white: "#FFFFFF",
 	},
+	font: {
+		family: {
+			Roboto: "Roboto",
+			Baloo2: "Baloo 2",
+		},
+		size: {
+			10: "10px",
+			12: "12px",
+			14: "14px",
+			16: "16px",
+			18: "18px",
+			20: "20px",
+			24: "24px",
+			32: "32px",
+			48: "48px",
+		},
+		height: {
+			18: "18px",
+			19: "19px",
+		},
+		weight: {
+			Regular: 400,
+			Bold: 700,
+			ExtraBold: 800,
+		},
+	},
 };
 
 export default defaultTheme;

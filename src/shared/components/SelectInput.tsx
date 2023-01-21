@@ -1,6 +1,7 @@
 import { HTMLAttributes, useEffect, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import CustomIcon, { Icons } from "./CustomIcon";
+import Typography from "./Typography";
 
 export type SelectOptionType = {
 	id: string;
@@ -47,7 +48,7 @@ const SelectInput = ({
 						name={option.iconName}
 						color={theme.colors.purple.default}
 					/>
-					{option.label}
+					<Typography>{option.label}</Typography>
 				</CustomOption>
 			))}
 		</StyledSelectInput>
@@ -93,7 +94,7 @@ const CustomOption = styled.div<CustomOptionProps>`
 const StyledSelectInput = styled.div`
 	${({ theme }) => css`
 		display: flex;
-		gap: 5px;
+		gap: 24px;
 		cursor: pointer;
 	`}
 `;

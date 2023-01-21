@@ -5,9 +5,10 @@ interface TextFieldProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
 	optional?: boolean;
 	onChange: (value: string) => void;
+	value?: string;
 }
 
-const TextField = ({ optional, onChange, ...rest }: TextFieldProps) => {
+const TextField = ({ optional, onChange, value, ...rest }: TextFieldProps) => {
 	const onTextFieldChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		onChange(e.currentTarget.value);
 	};
@@ -19,7 +20,7 @@ const TextField = ({ optional, onChange, ...rest }: TextFieldProps) => {
 				placeholder="Label"
 				type="text"
 			/>
-			{optional && <i>Opcional</i>}
+			{optional && !value && <i>Opcional</i>}
 		</TextFieldWrapper>
 	);
 };

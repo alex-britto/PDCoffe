@@ -1,6 +1,8 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Button from "./shared/components/Button";
 import CartButton from "./shared/components/CartButton";
+import CatalogItem, { CatalogItemInfo } from "./shared/components/CatalogItem";
 import NumberInput from "./shared/components/NumberInput";
 import SelectInput, { SelectOptionType } from "./shared/components/SelectInput";
 import TextField from "./shared/components/TextField";
@@ -9,6 +11,8 @@ function App() {
 	const [numberInputValue, setNumberInputValue] = useState<number>();
 	const [selectInputValue, setSelectInputValue] = useState<string>("0");
 	const [textFieldInputValue, setTextFieldInputValue] = useState<string>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [itemData, setItemData] = useState<CatalogItemInfo[]>();
 
 	const selectInputOptions: SelectOptionType[] = [
 		{
@@ -31,8 +35,16 @@ function App() {
 		},
 	];
 
+	useEffect(() => {
+		setIsLoading(true);
+		axios.get("http://localhost:3000/coffees").then((response) => {
+			setItemData(response.data);
+			setIsLoading(false);
+		});
+	}, []);
+
 	return (
-		<div className="flex flex-col justify-center items-center w-full h-screen">
+		<div className="flex flex-col justify-center items-center w-full p-10">
 			<div className="flex flex-col gap-5">
 				<Button className="w-32" variant="large">
 					LABEL
@@ -62,10 +74,27 @@ function App() {
 				</div>
 				<div className="flex items-center gap-10">
 					<div className="flex flex-col gap-5 w-96">
-						<TextField onChange={setTextFieldInputValue} optional />
+						<TextField
+							onChange={setTextFieldInputValue}
+							value={textFieldInputValue}
+							optional
+						/>
 						<TextField onChange={setTextFieldInputValue} />
 					</div>
 					<div>Valor: {textFieldInputValue}</div>
+				</div>
+				<div className="mt-5">
+					{!isLoading && (
+						<ul className="flex flex-row w-full flex-wrap gap-10">
+							{itemData?.map((item) => {
+								return (
+									<li key={item.id}>
+										<CatalogItem catalogItemInfo={item} />
+									</li>
+								);
+							})}
+						</ul>
+					)}
 				</div>
 			</div>
 		</div>

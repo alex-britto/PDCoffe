@@ -1,9 +1,10 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes } from "react";
 import styled, { css, useTheme } from "styled-components";
 import CustomIcon from "./CustomIcon";
+import Typography from "./Typography";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	children: ReactNode;
+	children: string;
 	variant?: "large" | "small";
 	leftIcon?: "Trash";
 }
@@ -21,7 +22,7 @@ const Button = ({ children, variant, leftIcon, ...rest }: ButtonProps) => {
 					color={theme.colors.purple.default}
 				/>
 			)}
-			{children}
+			<Typography>{children}</Typography>
 		</StyledButton>
 	);
 };

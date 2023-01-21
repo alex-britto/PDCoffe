@@ -1,11 +1,16 @@
 import styled, { css } from "styled-components";
+import Typography from "./Typography";
 
 interface BadgeProps {
 	amount?: number;
 }
 
 const Badge = ({ amount }: BadgeProps) => {
-	return <StyledBadge amount={amount}>{amount}</StyledBadge>;
+	return (
+		<StyledBadge amount={amount}>
+			{amount && <Typography>{amount}</Typography>}
+		</StyledBadge>
+	);
 };
 
 export default Badge;

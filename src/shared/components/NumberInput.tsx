@@ -43,8 +43,8 @@ const NumberInput = ({
 				className="hover:cursor-pointer"
 			/>
 			<StyledNumberInput
-				defaultValue={defaultValue}
-				value={value}
+				value={value || defaultValue}
+				onChange={() => null}
 				min={0}
 				max={10}
 				ref={numberInputRef}
@@ -72,7 +72,7 @@ const NumberInputWrapper = styled.div`
 		width: fit-content;
 		border-radius: 6px;
 		padding: 8px;
-		height: 32px;
+		min-height: 32px;
 	`}
 `;
 const StyledNumberInput = styled.input`
