@@ -1,0 +1,6 @@
+{
+  "bracketSameLine": true,
+  "arrowParens": "always",
+  "trailingComma": "es5",
+  "printWidth": 70
+}
