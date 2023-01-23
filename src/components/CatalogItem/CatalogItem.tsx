@@ -1,23 +1,32 @@
 import { ReactNode, useState } from "react"
 import styled, { css, useTheme } from "styled-components"
 
-interface CatalogItemProps {
-  title?: string
-  icon?: ReactNode
-  selected?: boolean
-  onClick?: () => void
-}
-
-import ProductImg from "../../assets/expresso.png"
+import ProductImg from "../../assets/Expresso.png"
 import { Status } from "../Status/Status"
 import { Typography } from "../Typography/Typography"
 import { NumberInput } from "../NumberInput/NumberInput"
 import { Button } from "../Button/Button"
 import { ShoppingCartSimple } from "phosphor-react"
+import { handleConvertPriceNumberToString } from "../../utils/formatCurrency"
+
+interface CoffeeTypes {
+  id: number
+  title: string
+  description: string
+  imageUrl: string
+  price: number
+  tags: string[]
+  icon?: ReactNode
+}
+
+interface CatalogItemProps {
+  coffee: CoffeeTypes
+  selected?: boolean
+  onClick?: () => void
+}
 
 export const CatalogItem = ({
-  title,
-  icon,
+  coffee: { title, id, description, imageUrl, price, tags, icon },
   selected = false,
   onClick,
   ...props
@@ -30,14 +39,23 @@ export const CatalogItem = ({
     <Container {...props} onClick={onClick}>
       <Content>
         {icon && <span className="mr-3">{icon}</span>}
-        <Image src={ProductImg} />
-        <Status label="Tradicional" className="mt-3 mb-4" />
+
+        <Image src={imageUrl} alt={title} />
+
+        {tags?.map((tag, index) => (
+          <StatusContainer>
+            <Status label={tag} />
+          </StatusContainer>
+        ))}
+
         <Typography variant="h2" className="mb-2">
-          Expresso Tradicional
+          {title}
         </Typography>
+
         <Typography variant="body" color={theme.colors.base.label}>
-          O tradicional café feito com água quente e grãos moídos
+          {description}
         </Typography>
+
         <PriceContainer>
           <PriceBox>
             <Typography
@@ -48,15 +66,12 @@ export const CatalogItem = ({
               R$
             </Typography>
             <Typography color={theme.colors.base.text} variant="h1">
-              9,90
+              {handleConvertPriceNumberToString(price)}
             </Typography>
           </PriceBox>
 
           <QuantityBox>
-            <NumberInput
-              value={quantity}
-              onChange={(value) => setQuantity(value)}
-            />
+            <NumberInput value={quantity} onChange={setQuantity} />
             <Button color="secondary">
               <ShoppingCartSimple size={22} color={theme.colors.white} />
             </Button>
@@ -74,12 +89,6 @@ const Container = styled.div`
   `}
 `
 
-const Image = styled.img`
-  ${() => css`
-    margin-top: -40px;
-  `}
-`
-
 const Content = styled.div`
   ${({ theme }) => css`
     align-items: center;
@@ -92,6 +101,24 @@ const Content = styled.div`
     padding: 20px;
     position: relative;
     width: auto;
+  `}
+`
+
+const Image = styled.img`
+  ${() => css`
+    margin-top: -40px;
+  `}
+`
+
+const StatusContainer = styled.div`
+  ${() => css`
+    align-items: center;
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 16px;
+    margin-top: 12px;
+    width: 100%;
   `}
 `
 
