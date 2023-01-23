@@ -1,4 +1,9 @@
-import { NumberInput, Status } from "./components";
+import {
+  NumberInput,
+  Status,
+  Typography,
+  TypographyV2,
+} from "./components";
 import { useState } from "react";
 import { useTheme } from "styled-components";
 
@@ -20,6 +25,21 @@ function App() {
           text="Tradicional"
           backgroundColor={theme.colors.purple.light}
         />
+      </div>
+      <div className="m-4">
+        <Typography variant="h1">
+          h1
+        </Typography>
+        <Typography variant="h1" fontSize="32px">
+          h1 com tamanho alterado
+        </Typography>
+        <Typography variant="h2">h2</Typography>
+        <Typography variant="h3">h3</Typography>
+        <Typography variant="h4">h4</Typography>
+        <Typography variant="h5">h5</Typography>
+        <Typography variant="h6">h6</Typography>
+        {/* <Typography variant="body">body</Typography> */}
+        <Typography variant="text">text</Typography>
       </div>
     </div>
   );
