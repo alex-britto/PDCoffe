@@ -1,5 +1,6 @@
 import { Minus, Plus } from "phosphor-react";
 import styled from "styled-components";
+import { TypographyV2 } from "../TypographyV2";
 
 const StyledNumberInput = styled.div`
   min-width: 72px;
@@ -33,6 +34,11 @@ const StyledNumberInput = styled.div`
   span {
     font-size: 16px;
     font-weight: 400;
+    color: ${({ theme }) => theme.colors.base.title};
+    &::selection {
+      background: unset;
+      color: ${({ theme }) => theme.colors.base.title};
+    }
   }
 `;
 
@@ -60,7 +66,9 @@ export default function NumberInput({
   return (
     <StyledNumberInput>
       <Minus onClick={() => onChange(onMinusClick)} />
-      <span>{value}</span>
+      <TypographyV2 variant="subTitle" as="span">
+        {value}
+      </TypographyV2>
       <Plus onClick={() => onChange(onPlusClick)} />
     </StyledNumberInput>
   );
