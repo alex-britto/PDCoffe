@@ -9,7 +9,7 @@ import { Button } from "../Button/Button"
 import { ShoppingCartSimple } from "phosphor-react"
 import { handleConvertPriceNumberToString } from "../../utils/formatCurrency"
 
-interface CoffeeTypes {
+export interface CoffeeTypes {
   id: number
   title: string
   description: string
@@ -42,17 +42,21 @@ export const CatalogItem = ({
 
         <Image src={imageUrl} alt={title} />
 
-        {tags?.map((tag, index) => (
-          <StatusContainer>
+        <StatusContainer>
+          {tags?.map((tag, index) => (
             <Status label={tag} />
-          </StatusContainer>
-        ))}
+          ))}
+        </StatusContainer>
 
-        <Typography variant="h2" className="mb-2">
+        <Typography variant="h2" className="mb-2 mt-4 text-center">
           {title}
         </Typography>
 
-        <Typography variant="body" color={theme.colors.base.label}>
+        <Typography
+          variant="body"
+          color={theme.colors.base.label}
+          className="text-center"
+        >
           {description}
         </Typography>
 
@@ -114,9 +118,9 @@ const StatusContainer = styled.div`
   ${() => css`
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 4px;
     justify-content: center;
-    margin-bottom: 16px;
     margin-top: 12px;
     width: 100%;
   `}
@@ -126,6 +130,7 @@ const PriceContainer = styled.div`
   ${() => css`
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 23px;
     justify-content: center;
     margin-top: 33px;
