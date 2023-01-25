@@ -1,6 +1,6 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
 import { useState } from "react"
-import { ThemeProvider } from "styled-components"
+import { ThemeProvider, useTheme } from "styled-components"
 import {
   Button,
   NumberInput,
@@ -8,9 +8,11 @@ import {
   Status,
   TextField,
 } from "./components"
+import { Typography } from "./components/Typography/Typography"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
+  const theme = useTheme() //TENTAR ENTENDER PQ NAO CONSEGUI USAR O THEME NA COLOR DO TYPOGRAPHY
   const [numberInputValue, setNumberInputValue] = useState(0)
   const selectInputItems = [
     {
@@ -24,6 +26,18 @@ function App() {
   ]
   return (
     <ThemeProvider theme={defaultTheme}>
+      <div className="m-4">
+        <Typography
+          family="header"
+          variant="h1"
+          color={defaultTheme.colors.base.title}
+        >
+          Teste Header
+        </Typography>
+        <Typography family="text" variant="p" as={"h1"}>
+          Teste Text
+        </Typography>
+      </div>
       <div className="m-4">
         <Status title="Tradicional" />
       </div>
