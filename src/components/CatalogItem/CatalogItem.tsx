@@ -53,7 +53,7 @@ export const CatalogItem = ({
         </Typography>
 
         <Typography
-          variant="body"
+          variant="h5"
           color={theme.colors.base.label}
           className="text-center"
         >
@@ -64,7 +64,7 @@ export const CatalogItem = ({
           <PriceBox>
             <Typography
               color={theme.colors.base.text}
-              variant="body"
+              variant="h5"
               className="mr-1 mt-1"
             >
               R$
@@ -130,11 +130,15 @@ const PriceContainer = styled.div`
   ${() => css`
     align-items: center;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 23px;
     justify-content: center;
     margin-top: 33px;
     width: 100%;
+
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
   `}
 `
 

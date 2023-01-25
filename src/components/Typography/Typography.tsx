@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import styled, { css } from "styled-components"
 
-type Variant = "h1" | "h2" | "h3" | "subtitle" | "body" | "caption"
+type Variant = "h1" | "h2" | "h3" | "h4" | "h5" | "span"
 
 interface TypographyProps extends React.HTMLAttributes<HTMLParagraphElement> {
   variant: Variant
@@ -57,17 +57,17 @@ const TypographyStyled = styled.p<TypographyProps>`
       fontWeight: fontWeight ? fontWeight : 700,
     }}
 
-    ${variant === "subtitle" && {
+    ${variant === "h4" && {
       fontSize: fontSize ? fontSize : "14px",
       fontWeight: fontWeight ? fontWeight : 700,
     }}
 
-    ${variant === "body" && {
+    ${variant === "h5" && {
       fontSize: fontSize ? fontSize : "14px",
       fontWeight: fontWeight ? fontWeight : 400,
     }}
 
-    ${variant === "caption" && {
+    ${variant === "span" && {
       fontSize: fontSize ? fontSize : "12px",
       fontWeight: fontWeight ? fontWeight : 400,
     }}

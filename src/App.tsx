@@ -14,6 +14,7 @@ import {
   SelectableCards,
   Status,
   TextField,
+  Typography,
 } from "./components"
 import { CoffeeTypes } from "./components/CatalogItem/CatalogItem"
 import { Test } from "./components/Test/Test"
@@ -115,6 +116,25 @@ function App() {
 
         <NumberInput className="mt-6" value={number} onChange={setNumber} />
         <h1>Valor: {number}</h1>
+
+        <Typography color={defaultTheme.colors.base.text} variant="h1">
+          h1
+        </Typography>
+        <Typography color={defaultTheme.colors.base.text} variant="h2">
+          h2
+        </Typography>
+        <Typography color={defaultTheme.colors.base.text} variant="h3">
+          h3
+        </Typography>
+        <Typography color={defaultTheme.colors.base.text} variant="h4">
+          h4
+        </Typography>
+        <Typography color={defaultTheme.colors.base.text} variant="h5">
+          h5
+        </Typography>
+        <Typography color={defaultTheme.colors.base.text} variant="span">
+          span
+        </Typography>
 
         <CoffeesContainer>
           {isLoading ? (
