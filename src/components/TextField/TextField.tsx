@@ -1,15 +1,12 @@
 import { HTMLAttributes, InputHTMLAttributes } from "react"
 import styled, { css } from "styled-components"
 
-import { defaultTheme } from "../../styles/themes/defaultTheme"
-
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   extraMessage?: string
   containerProps?: HTMLAttributes<HTMLDivElement>
 }
 
 export function TextField({
-  value,
   extraMessage,
   containerProps,
   ...rest
@@ -17,7 +14,7 @@ export function TextField({
   return (
     <Container {...containerProps}>
       <input type="text" {...rest} />
-      <span>{extraMessage}</span>
+      {!!extraMessage && <span>{extraMessage}</span>}
     </Container>
   )
 }

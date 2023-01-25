@@ -1,5 +1,4 @@
-import styled, { css } from "styled-components"
-import { defaultTheme } from "../../styles/themes/defaultTheme"
+import styled, { css, useTheme } from "styled-components"
 import { CreditCard } from "phosphor-react"
 import { HTMLAttributes } from "react"
 
@@ -13,9 +12,10 @@ export function SelectItem({
   isSelected = false,
   ...rest
 }: SelectItemProps) {
+  const theme = useTheme()
   return (
     <Container isSelected={isSelected} {...rest}>
-      <CreditCard size={16} color={defaultTheme.colors.purple.default} />
+      <CreditCard size={16} color={theme.colors.purple.default} />
       {title}
     </Container>
   )
