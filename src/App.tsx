@@ -9,6 +9,7 @@ import {
   Status,
   TextField,
   Typography,
+  TypographyV2,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
@@ -38,16 +39,16 @@ function App() {
         />
       </div>
       <div className="m-4">
-        <Typography
+        <TypographyV2
           family="header"
           variant="h1"
           color={defaultTheme.colors.base.title}
         >
           Teste Header
-        </Typography>
-        <Typography family="text" variant="p" as={"h1"}>
+        </TypographyV2>
+        <TypographyV2 family="text" variant="p" as={"h1"}>
           Teste Text
-        </Typography>
+        </TypographyV2>
       </div>
       <div className="m-4">
         <Status title="Tradicional" />
