@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import CartButton from "./CartButton";
 import NumberInput from "./NumberInput";
@@ -6,7 +6,7 @@ import Status from "./Status";
 import Typography from "./Typography";
 
 export interface CatalogItemInfo {
-	id: number;
+	id: string;
 	imageUrl: string;
 	typeTags: string[];
 	title: string;
@@ -16,9 +16,15 @@ export interface CatalogItemInfo {
 
 interface CatalogItemProps extends HTMLAttributes<HTMLDivElement> {
 	catalogItemInfo: CatalogItemInfo;
+	onAddCartProduct: (qty: number, productId: string) => void;
 }
 
-const CatalogItem = ({ catalogItemInfo, ...rest }: CatalogItemProps) => {
+const CatalogItem = ({
+	catalogItemInfo,
+	onAddCartProduct,
+	...rest
+}: CatalogItemProps) => {
+	const [qty, setQty] = useState(0);
 	const theme = useTheme();
 
 	return (
@@ -71,8 +77,10 @@ const CatalogItem = ({ catalogItemInfo, ...rest }: CatalogItemProps) => {
 					</Typography>
 				</div>
 				<div className="flex flex-row gap-2">
-					<NumberInput onChange={(value) => console.log({ value })} />
-					<CartButton />
+					<NumberInput min={0} onChange={(value) => setQty(value)} />
+					<CartButton
+						onClick={() => onAddCartProduct(qty, catalogItemInfo.id)}
+					/>
 				</div>
 			</div>
 		</StyledCatalogItem>
