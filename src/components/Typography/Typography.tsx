@@ -79,9 +79,16 @@ export const Typography = ({
   family = "text",
   as,
   color,
+  className,
 }: TypographyProps) => {
   return (
-    <Text variant={variant} family={family} as={as ?? variant} color={color}>
+    <Text
+      variant={variant}
+      family={family}
+      as={as ?? variant}
+      color={color}
+      className={className}
+    >
       {children}
     </Text>
   )
@@ -101,5 +108,6 @@ const Text = styled.p<TypographyProps>`
           font-weight: ${textStyles[variant].fontWeight};
         `};
     color: ${color ?? theme.colors.base.text};
+    line-height: 130%;
   `}
 `

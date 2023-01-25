@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react"
+import { HTMLAttributes, InputHTMLAttributes } from "react"
 import styled, { css } from "styled-components"
 
 import { defaultTheme } from "../../styles/themes/defaultTheme"
@@ -9,16 +9,18 @@ interface NumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: number
   onIncreaseClick: () => void
   onDecreaseClick: () => void
+  containerProps?: HTMLAttributes<HTMLDivElement>
 }
 
 export function NumberInput({
   value,
   onIncreaseClick,
   onDecreaseClick,
+  containerProps,
   ...rest
 }: NumberInputProps) {
   return (
-    <Container>
+    <Container {...containerProps}>
       <Minus
         size={14}
         color={defaultTheme.colors.purple.default}

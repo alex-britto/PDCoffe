@@ -3,12 +3,13 @@ import { useState } from "react"
 import { ThemeProvider, useTheme } from "styled-components"
 import {
   Button,
+  CatalogItem,
   NumberInput,
   SelectInputList,
   Status,
   TextField,
+  Typography,
 } from "./components"
-import { Typography } from "./components/Typography/Typography"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
@@ -26,6 +27,16 @@ function App() {
   ]
   return (
     <ThemeProvider theme={defaultTheme}>
+      <div className="m-8">
+        <CatalogItem
+          imageSrc="https://source.unsplash.com/random/100x100"
+          tags={["Tradicional"]}
+          title="Expresso Tradicional"
+          description="O tradicional café feito com água quente e grãos moídos"
+          price={10}
+          onCartClick={(e) => console.log("Itens adicionados:", e)}
+        />
+      </div>
       <div className="m-4">
         <Typography
           family="header"
