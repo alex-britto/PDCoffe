@@ -1,6 +1,6 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
 import { useState } from "react"
-import { ThemeProvider, useTheme } from "styled-components"
+import { ThemeProvider } from "styled-components"
 import {
   Button,
   CatalogItem,
@@ -8,13 +8,12 @@ import {
   SelectInputList,
   Status,
   TextField,
-  Typography,
   TypographyV2,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
+import * as coffes from "./images/coffes"
 
 function App() {
-  const theme = useTheme() //TENTAR ENTENDER PQ NAO CONSEGUI USAR O THEME NA COLOR DO TYPOGRAPHY
   const [numberInputValue, setNumberInputValue] = useState(0)
   const selectInputItems = [
     {
@@ -30,8 +29,8 @@ function App() {
     <ThemeProvider theme={defaultTheme}>
       <div className="m-8">
         <CatalogItem
-          imageSrc="https://source.unsplash.com/random/100x100"
-          tags={["Tradicional"]}
+          imageSrc={coffes["Arabe"]}
+          tags={["Tradicional", "outra tag"]}
           title="Expresso Tradicional"
           description="O tradicional café feito com água quente e grãos moídos"
           price={10}
@@ -42,7 +41,7 @@ function App() {
         <TypographyV2
           family="header"
           variant="h1"
-          color={defaultTheme.colors.base.title}
+          color={defaultTheme.colors.yellow.default}
         >
           Teste Header
         </TypographyV2>

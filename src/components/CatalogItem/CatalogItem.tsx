@@ -31,11 +31,13 @@ export const CatalogItem = ({
   return (
     <Container {...rest}>
       <img src={imageSrc} alt={title} />
-      <div className="mt-3">
+      <ul className="flex gap-2 mt-3">
         {tags.map((tag) => (
-          <Status title={tag} key={tag} />
+          <li key={tag}>
+            <Status title={tag} />
+          </li>
         ))}
-      </div>
+      </ul>
       <Typography family="header" variant="h4" className="mt-4">
         {title}
       </Typography>
@@ -47,22 +49,21 @@ export const CatalogItem = ({
         {description}
       </Typography>
       <div className="flex items-center mt-8">
-        <div className="flex ">
-          {/* <Typography
+        <div className="flex items-center">
+          <Typography
             variant="p"
             color={theme.colors.base.text}
             className="mr-1"
           >
             R$
-          </Typography> */}
+          </Typography>
           <Typography
             family="header"
             variant="h3"
             color={theme.colors.base.text}
           >
             {new Intl.NumberFormat("pt-Br", {
-              style: "currency",
-              currency: "BRL",
+              minimumFractionDigits: 2,
             }).format(price)}
           </Typography>
         </div>
