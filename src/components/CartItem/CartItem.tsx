@@ -1,4 +1,5 @@
 import { Trash } from "phosphor-react";
+import { useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { Button } from "../Button";
 import { NumberInput } from "../NumberInput";
@@ -8,14 +9,14 @@ export interface CartItemProps {
     imageSrc: string;
     title: string;
     priceTag: string;
-    inputValue: number;
-    onSubtraction: () => void;
-    onAddition: () => void;
-    onClickButton: () => void;
+    onRemoveClick: (value: number) => void;
 }
 
-const CartItem = ({ imageSrc, title, priceTag, inputValue, onSubtraction, onAddition, onClickButton, ...rest }: CartItemProps) => {
+const CartItem = ({ imageSrc, title, priceTag, onRemoveClick, ...rest }: CartItemProps) => {
     const theme = useTheme()
+
+    const [inputValue, setInputValue] = useState(0)
+
     return (
         <Container {...rest}>
                 {imageSrc && <img src={imageSrc} className="w-16 h-16 mt-2" />} 
@@ -24,7 +25,12 @@ const CartItem = ({ imageSrc, title, priceTag, inputValue, onSubtraction, onAddi
                 {title && <Typography family="roboto" variant="h4" className="mt-2">{title}</Typography>} 
                 </div>
                 <div className="flex flex-row mt-2">
-                <NumberInput value={inputValue} onSubtraction={onSubtraction} onAddition={onAddition} className="mr-2" />
+                <NumberInput 
+                    value={inputValue} 
+                    onSubtraction={() => setInputValue((inputValue) => inputValue > 0 ? inputValue - 1 : inputValue)} 
+                    onAddition={() => setInputValue((inputValue) => inputValue + 1)} 
+                    className="mr-2" 
+                />
                 <Button
                 variant="small"
                 label="remover"
@@ -34,7 +40,7 @@ const CartItem = ({ imageSrc, title, priceTag, inputValue, onSubtraction, onAddi
                 icon={
                     <Trash size={16} color={theme.colors.purple.default} />
                 }
-                onClick={onClickButton}
+                onClick={() => onRemoveClick(inputValue)}
                 />
                 </div>
                 </Fragment>
