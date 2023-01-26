@@ -16,7 +16,7 @@ import {
   TextField,
   Typography,
 } from "./components"
-import { CoffeeTypes } from "./components/CatalogItem/CatalogItem"
+import { CoffeeProps } from "./components/CatalogItem/CatalogItem"
 import { Test } from "./components/Test/Test"
 import { api } from "./services/api"
 import { defaultTheme } from "./styles/themes/defaultTheme"
@@ -26,7 +26,7 @@ function App() {
   const [number, setNumber] = useState<number>(1)
   const [selectedValue, setSelectedValue] = useState("Credito")
 
-  const [coffeeList, setCoffeeList] = useState<CoffeeTypes[]>([])
+  const [coffeeList, setCoffeeList] = useState<CoffeeProps[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
   const selectableCardsItems = [
@@ -48,16 +48,27 @@ function App() {
   ]
 
   const handleGetCoffeesFromApi = async () => {
-    setIsLoading(true)
-    const response = await api.get("/coffees")
-    const data = response.data
-    setCoffeeList(data)
-    setIsLoading(false)
+    try {
+      setIsLoading(true)
+
+      const response = await api.get("/coffees")
+      setCoffeeList(response.data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
     handleGetCoffeesFromApi()
   }, [])
+
+  function handleAddToCart(coffee: CoffeeProps, quantity: number) {
+    alert(
+      `Produto ${coffee.title} adicionado ao carrinho \nQuantidade: ${quantity}`
+    )
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -141,7 +152,11 @@ function App() {
             <p>Carregando...</p>
           ) : (
             coffeeList.map((coffee) => (
-              <CatalogItem key={coffee.id} coffee={coffee} />
+              <CatalogItem
+                key={coffee.id}
+                coffee={coffee}
+                onAddToCart={handleAddToCart}
+              />
             ))
           )}
         </CoffeesContainer>

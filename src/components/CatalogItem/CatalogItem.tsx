@@ -9,53 +9,54 @@ import { Button } from "../Button/Button"
 import { ShoppingCartSimple } from "phosphor-react"
 import { handleConvertPriceNumberToString } from "../../utils/formatCurrency"
 
-export interface CoffeeTypes {
+export interface CoffeeProps {
   id: number
   title: string
   description: string
   imageUrl: string
   price: number
   tags: string[]
-  icon?: ReactNode
 }
 
 interface CatalogItemProps {
-  coffee: CoffeeTypes
-  selected?: boolean
-  onClick?: () => void
+  coffee: CoffeeProps
+  onAddToCart: (coffee: CoffeeProps, quantity: number) => void
 }
 
 export const CatalogItem = ({
-  coffee: { title, id, description, imageUrl, price, tags, icon },
-  selected = false,
-  onClick,
+  coffee,
+  onAddToCart,
   ...props
 }: CatalogItemProps) => {
   const [quantity, setQuantity] = useState<number>(1)
 
   const theme = useTheme()
 
-  return (
-    <Container {...props} onClick={onClick}>
-      <Content>
-        {icon && <span className="mr-3">{icon}</span>}
+  const { title, id, description, imageUrl, price, tags } = coffee
 
-        <Image src={imageUrl} alt={title} />
+  const handleCartClick = () => {
+    onAddToCart(coffee, quantity)
+  }
+
+  return (
+    <Container {...props}>
+      <Content>
+        <img src={imageUrl} alt={title} />
 
         <StatusContainer>
           {tags?.map((tag, index) => (
-            <Status label={tag} />
+            <Status label={tag} key={index} />
           ))}
         </StatusContainer>
 
-        <Typography variant="h2" className="mb-2 mt-4 text-center">
+        <Typography variant="h2" className="mt-4 text-center">
           {title}
         </Typography>
 
         <Typography
           variant="h5"
           color={theme.colors.base.label}
-          className="text-center"
+          className="mt-2 text-center"
         >
           {description}
         </Typography>
@@ -76,7 +77,7 @@ export const CatalogItem = ({
 
           <QuantityBox>
             <NumberInput value={quantity} onChange={setQuantity} />
-            <Button color="secondary">
+            <Button color="secondary" onClick={handleCartClick}>
               <ShoppingCartSimple size={22} color={theme.colors.white} />
             </Button>
           </QuantityBox>
@@ -105,12 +106,10 @@ const Content = styled.div`
     padding: 20px;
     position: relative;
     width: auto;
-  `}
-`
 
-const Image = styled.img`
-  ${() => css`
-    margin-top: -40px;
+    img {
+      margin-top: -40px;
+    }
   `}
 `
 
