@@ -1,44 +1,42 @@
 import { ShoppingCartSimple } from "phosphor-react";
-import { HTMLAttributes, ReactNode } from "react"
+import { HTMLAttributes, useState } from "react"
 import styled, { css, useTheme } from "styled-components";
 import { NumberInput, Status, Typography, Button } from '../../components'
 
 export interface CatalogItemProps extends HTMLAttributes<HTMLDivElement> {
-    icon: ReactNode;
+    imageSrc: string;
     title: string;
     subtitle: string;
-    priceTag: string;
-    onClick?: () => void
-    statusColor: string;
-    statusBgColor: string;
-    statusText: string;
+    priceTag: number; 
+    onCartAdd: (value: number) => void
     typographyColor?: string;
-    numberInputValue: number;
-    onSubtraction: () => void;
-    onAddition: () => void;
+    tags: string[];
 }
 
 const CatologItem = ({ 
-    icon, 
+    imageSrc, 
     title, 
     subtitle, 
     priceTag, 
-    onClick, 
-    statusColor, 
-    statusBgColor, 
-    statusText, 
+    onCartAdd, 
+    tags,
     typographyColor, 
-    numberInputValue,
-    onSubtraction,
-    onAddition, 
     ...rest }: CatalogItemProps) => { 
         const theme = useTheme()
 
+        const [inputValue, setInputValue] = useState(0)
+
     return (
-        <Container onClick={onClick} {...rest}>
+        <Container {...rest}>
             <Content>
-            {icon && <span className="mr-3 -mt-10">{icon}</span>}
-            <Status color={statusColor} bgColor={statusBgColor} text={statusText} containerProps={{ className: "mt-3" }} />
+            {imageSrc && <img src={imageSrc} className="mr-3 -mt-10" />}
+                <ul className="flex gap-2 mt-3">
+                {tags.map((tag) => (
+                    <li key={tag}>
+                    <Status text={tag} containerProps={{ className: "mt-3" }} />
+                  </li>
+                ))}
+              </ul>
             {title && <Typography family="baloo" variant="h3" className="mt-4">{title}</Typography>}
             {subtitle && 
             <Typography family="roboto" variant="caption" fontColor={typographyColor} className="text-center mt-3 mb-8 subtitle">
@@ -48,20 +46,25 @@ const CatologItem = ({
             {priceTag && (
                 <Fragment>
                     <Typography family="roboto" variant="caption" className="mt-1 mr-1">R$</Typography>
-                    <Typography family="baloo" variant="h3" className="mr-6">{priceTag}</Typography>
+                    <Typography family="baloo" variant="h3" className="mr-6"> 
+                        {new Intl.NumberFormat("pt-Br", {
+                            minimumFractionDigits: 2,
+                            currency: "BRL",
+                            }).format(priceTag)}
+                    </Typography>
                 </Fragment>
             )}
             <NumberInput 
-                value={numberInputValue} 
-                onSubtraction={onSubtraction}
-                onAddition={onAddition}
+                value={inputValue} 
+                onSubtraction={() => setInputValue((inputValue) => inputValue > 0 ? inputValue - 1 : inputValue)}
+                onAddition={() => setInputValue((inputValue) => inputValue + 1)}
             />
             <Button 
                 icon={<ShoppingCartSimple size={20} weight="fill" color="white" />}
                 bgColor={theme.colors.purple.dark}
                 bgHoverColor={theme.colors.purple.default}
                 textColor={theme.colors.white}
-                onClick={() => console.log("comprei")}
+                onClick={() => onCartAdd(inputValue)}
                 className="ml-2"
         />
             </Fragment>

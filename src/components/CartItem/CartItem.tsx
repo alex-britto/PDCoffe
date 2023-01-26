@@ -1,12 +1,11 @@
 import { Trash } from "phosphor-react";
-import { ReactNode } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { Button } from "../Button";
 import { NumberInput } from "../NumberInput";
 import { Typography } from "../Typography";
 
 export interface CartItemProps {
-    icon: ReactNode;
+    imageSrc: string;
     title: string;
     priceTag: string;
     inputValue: number;
@@ -15,11 +14,11 @@ export interface CartItemProps {
     onClickButton: () => void;
 }
 
-const CartItem = ({ icon, title, priceTag, inputValue, onSubtraction, onAddition, onClickButton, ...rest }: CartItemProps) => {
+const CartItem = ({ imageSrc, title, priceTag, inputValue, onSubtraction, onAddition, onClickButton, ...rest }: CartItemProps) => {
     const theme = useTheme()
     return (
         <Container {...rest}>
-                {icon && <span className="w-16 h-16 mt-2">{icon}</span>} 
+                {imageSrc && <img src={imageSrc} className="w-16 h-16 mt-2" />} 
             <Fragment>
                 <div>
                 {title && <Typography family="roboto" variant="h4" className="mt-2">{title}</Typography>} 

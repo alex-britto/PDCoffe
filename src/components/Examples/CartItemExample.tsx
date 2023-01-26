@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import Expresso from '../../assets/icons/expresso.png'
 import { CartItem } from "../../components";
+
+import * as coffees from './../../assets/images'
 
 const CartItemExample = () => {
     const [inputValue, setInputValue] = useState(0)
-    const expressoIcon = <img src={Expresso} />
 
     return (
         <div className="m-4">
         <CartItem
-            icon={expressoIcon}
+            imageSrc={coffees['Espresso']}
             title="Expresso Tradicional"
             priceTag="R$ 9,90"
             inputValue={inputValue}
