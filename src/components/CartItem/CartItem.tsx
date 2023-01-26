@@ -8,7 +8,7 @@ import { Typography } from "../Typography";
 export interface CartItemProps {
     icon: ReactNode;
     title: string;
-    priceTag: string | number;
+    priceTag: string;
     inputValue: number;
     onSubtraction: () => void;
     onAddition: () => void;
@@ -22,7 +22,7 @@ const CartItem = ({ icon, title, priceTag, inputValue, onSubtraction, onAddition
                 {icon && <span className="w-16 h-16 mt-2">{icon}</span>} 
             <Fragment>
                 <div>
-                {title && <Typography variant="subtitle" className="mt-2">{title}</Typography>} 
+                {title && <Typography family="roboto" variant="h4" className="mt-2">{title}</Typography>} 
                 </div>
                 <div className="flex flex-row mt-2">
                 <NumberInput value={inputValue} onSubtraction={onSubtraction} onAddition={onAddition} className="mr-2" />
@@ -39,7 +39,7 @@ const CartItem = ({ icon, title, priceTag, inputValue, onSubtraction, onAddition
                 />
                 </div>
                 </Fragment>
-                {priceTag && <Typography variant="subtitle" fontWeight="700" className="mt-2 mr-0.5">{priceTag}</Typography>}
+                {priceTag && <Typography family="roboto" variant="h4Bold" className="mt-2 mr-0.5">{priceTag}</Typography>}
         </Container>
     )
 }

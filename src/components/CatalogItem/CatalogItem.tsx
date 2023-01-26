@@ -7,7 +7,7 @@ export interface CatalogItemProps extends HTMLAttributes<HTMLDivElement> {
     icon: ReactNode;
     title: string;
     subtitle: string;
-    priceTag: string | number;
+    priceTag: string;
     onClick?: () => void
     statusColor: string;
     statusBgColor: string;
@@ -39,16 +39,16 @@ const CatologItem = ({
             <Content>
             {icon && <span className="mr-3 -mt-10">{icon}</span>}
             <Status color={statusColor} bgColor={statusBgColor} text={statusText} containerProps={{ className: "mt-3" }} />
-            {title && <Typography variant="h3" className="mt-4">{title}</Typography>}
+            {title && <Typography family="baloo" variant="h3" className="mt-4">{title}</Typography>}
             {subtitle && 
-            <Typography variant="body" fontColor={typographyColor} className="text-center mt-3 mb-8 subtitle">
+            <Typography family="roboto" variant="caption" fontColor={typographyColor} className="text-center mt-3 mb-8 subtitle">
                     {subtitle}
             </Typography>}
             <Fragment>
             {priceTag && (
                 <Fragment>
-                    <Typography variant="subtitle" className="mt-2 mr-1">R$</Typography>
-                    <Typography variant="title" className="mr-6">{priceTag}</Typography>
+                    <Typography family="roboto" variant="caption" className="mt-1 mr-1">R$</Typography>
+                    <Typography family="baloo" variant="h3" className="mr-6">{priceTag}</Typography>
                 </Fragment>
             )}
             <NumberInput 

@@ -1,81 +1,148 @@
-import { HTMLAttributes, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-type Variant = "h1" | "h2" | "h3" | "h4" | "title" | "subtitle" | "body" | "caption" | "subcaption";
-
-export interface TypographyProps extends HTMLAttributes<HTMLParagraphElement>{
-    variant: Variant;
-    children: ReactNode;
-    fontColor?: string;
-    fontFamily?: string;
-    fontWeight?: string;
+// 48 32 20 18 - bold & extrabold
+const BALLOO_VARIANTS = {
+    h1: {
+        fontWeight: "700",
+        fontSize: "48px",
+    },
+    h1Bold: {
+        fontWeight: "800",
+        fontSize: "48px",
+    },
+    h2: {
+        fontWeight: "700", 
+        fontSize: "32px",
+    },
+    h2Bold: {
+        fontWeight: "800", 
+        fontSize: "32px",
+    },
+    h3: {
+        fontWeight: "700",
+        fontSize: "20px",
+    },
+    h3Bold: {
+        fontWeight: "800",
+        fontSize: "20px",
+    },
+    h4: {
+        fontWeight: "700",
+        fontSize: "18px",
+    },
+    h4Bold: {
+        fontWeight: "800",
+        fontSize: "18px",
+    },
 }
 
-const Typography = ({ variant, children, fontColor, fontFamily, fontWeight, ...rest }: TypographyProps) => {
+// 24, 20, 18, 16, 14, 12, 10 - regular & bold
+const ROBOTO_VARIANTS = {
+    h1: {
+        fontWeight: "400",
+        fontSize: "24px",
+    },
+    h1Bold: {
+        fontWeight: "700",
+        fontSize: "24px",
+    },
+    h2: {
+        fontWeight: "400",
+        fontSize: "20px",
+    },
+    h2Bold: {
+        fontWeight: "700",
+        fontSize: "20px",
+    },
+    h3: {
+        fontWeight: "400",
+        fontSize: "18px",
+    },
+    h3Bold: {
+        fontWeight: "700",
+        fontSize: "18px",
+    },
+    h4: {
+        fontWeight: "400",
+        fontSize: "16px",
+    },
+    h4Bold: {
+        fontWeight: "700",
+        fontSize: "16px",
+    },
+    caption: {
+        fontWeight: "400",
+        fontSize: "14px",
+    },
+    captionBold: {
+        fontWeight: "700",
+        fontSize: "14px",
+    },
+    p: {
+        fontWeight: "400",
+        fontSize: "12px",
+    },
+    pBold: {
+        fontWeight: "700",
+        fontSize: "12px",
+    },
+    span: {
+        fontWeight: "400",
+        fontSize: "10px",
+    },
+    spanBold: {
+        fontWeight: "700",
+        fontSize: "10px",
+    },
+}
+
+export interface TypographyProps {
+    children: string
+    as?: any
+    fontColor?: string
+    className?: string
+  }
+  
+  interface BalooProps {
+    family?: "baloo"
+    variant: "h1" | "h1Bold" | "h2" | "h2Bold" | "h3" | "h3Bold" | "h4" | "h4Bold" 
+  }
+  
+  interface RobotoProps {
+    family?: "roboto"
+    variant: "h1" | "h1Bold" | "h2" | "h2Bold" | "h3" | "h3Bold" | "h4" | "h4Bold" | "caption" | "captionBold" | "p" | "pBold" | "span" | "spanBold" 
+  }
+
+  type Variant = TypographyProps & (BalooProps | RobotoProps)
+
+const Typography = ({ variant, as, family, children, fontColor, className }: Variant) => {
     return (
-        <TypographyStyled variant={variant} fontFamily={fontFamily} fontWeight={fontWeight} fontColor={fontColor} {...rest}>
+        <TypographyStyled variant={variant} as={as ?? variant} family={family} fontColor={fontColor} className={className}>
             {children}
         </TypographyStyled>
     )
 }
 
-const TypographyStyled = styled.p<TypographyProps>`
-    ${({ theme, fontColor, variant, fontFamily, fontWeight }) => css`
+const TypographyStyled = styled.p<Variant>`
+    ${({ theme, fontColor, variant, family }) => css`
         display: flex;
         align-items: center;
 
+        ${family === "baloo"
+        ? css`
+            font-family: "Baloo 2", cursive;
+            font-size: ${BALLOO_VARIANTS[variant].fontSize};
+            font-weight: ${BALLOO_VARIANTS[variant].fontWeight};
+          `
+        : css`
+            font-family: Roboto, sans-serif;
+            font-size: ${ROBOTO_VARIANTS[variant].fontSize};
+            font-weight: ${ROBOTO_VARIANTS[variant].fontWeight};
+          `};
+
         color: ${fontColor ? fontColor : theme.colors.base.subtitle};
 
-        font-family: "Roboto";
-        font-size: 14px;
-        font-weight: 400;
         line-height: 130%;
-
-        ${variant === "h1" && {
-            fontFamily: "Baloo 2",
-            fontSize: "48px",
-            fontWeight: 700,
-        }}
-        ${variant === "h2" && {
-            fontFamily: "Baloo 2",
-            fontSize: "32px",
-            fontWeight: 700,
-        }}
-        ${variant === "h3" && {
-            fontFamily: `${fontFamily ? fontFamily : "Baloo 2"}`,
-            fontSize: "20px",
-            fontWeight: "700",
-        }}
-        ${variant === "h4" && {
-            fontFamily: `${fontFamily ? fontFamily : "Baloo 2"}`,
-            fontSize: "18px",
-            fontWeight:"700",
-        }}
-        ${variant === "title" && {
-            fontFamily: "Roboto",
-            fontSize: "24px",
-            fontWeight: `${fontWeight ? fontWeight : 700}`,
-        }}
-        ${variant === "subtitle" && {
-            fontFamily: "Roboto",
-            fontSize: "16px",
-            fontWeight: `${fontWeight ? fontWeight : 400}`,
-        }}
-        ${variant === "body" && {
-            fontFamily: "Roboto",
-            fontSize: "14px",
-            fontWeight: `${fontWeight ? fontWeight : 400}`,
-        }}
-        ${variant === "caption" && {
-            fontFamily: "Roboto",
-            fontSize: "12px",
-            fontWeight: `${fontWeight ? fontWeight : 400}`,
-        }}
-        ${variant === "subcaption" && {
-            fontFamily: "Roboto",
-            fontSize: "10px",
-            fontWeight: `${fontWeight ? fontWeight : 400}`,
-        }}
     `}
 `
 

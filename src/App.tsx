@@ -30,7 +30,7 @@ function App() {
           </Container>
           <Container>
             <StatusExample />
-          </Container>
+          </Container> 
           <Container>
             <TypographyExample />
           </Container>
