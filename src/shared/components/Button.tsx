@@ -13,7 +13,7 @@ const Button = ({ children, variant, leftIcon, ...rest }: ButtonProps) => {
 	const theme = useTheme();
 
 	return (
-		<StyledButton variant={variant} {...rest}>
+		<StyledButton variant={variant || "small"} {...rest}>
 			{leftIcon && (
 				<CustomIcon
 					name="Trash"

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "./shared/components/Button";
 import CartButton from "./shared/components/CartButton";
 import CatalogItem, { CatalogItemInfo } from "./shared/components/CatalogItem";
+import { Loader } from "./shared/components/Loader";
 import NumberInput from "./shared/components/NumberInput";
 import SelectInput, { SelectOptionType } from "./shared/components/SelectInput";
 import TextField from "./shared/components/TextField";
@@ -13,12 +14,12 @@ interface CartProduct {
 }
 
 function App() {
-	const [numberInputValue, setNumberInputValue] = useState<number>();
+	const [numberInputValue, setNumberInputValue] = useState<number>(1);
 	const [selectInputValue, setSelectInputValue] = useState<string>("0");
 	const [textFieldInputValue, setTextFieldInputValue] = useState<string>();
 	const [isLoading, setIsLoading] = useState(true);
-	const [itemData, setItemData] = useState<CatalogItemInfo[]>();
-	const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
+	const [products, setProducts] = useState<CatalogItemInfo[]>();
+	const [cartProductsList, setCartProductsList] = useState<CartProduct[]>([]);
 
 	const selectInputOptions: SelectOptionType[] = [
 		{
@@ -43,19 +44,26 @@ function App() {
 
 	useEffect(() => {
 		setIsLoading(true);
-		axios.get("http://localhost:3000/coffees").then((response) => {
-			setItemData(response.data);
-			setIsLoading(false);
-		});
+		const timeout = setTimeout(() => {
+			axios
+				.get("http://localhost:3000/coffees")
+				.then((response) => {
+					setProducts(response.data);
+				})
+				.catch((error) => console.log(error))
+				.finally(() => setIsLoading(false));
+		}, 2000);
+
+		return () => clearTimeout(timeout);
 	}, []);
 
 	const handleAddCartProduct = (qty: number, productId: string) => {
-		const foundProductIndex = cartProducts.findIndex(
+		const foundProductIndex = cartProductsList.findIndex(
 			(product) => product.id === productId
 		);
 
 		if (foundProductIndex === -1) {
-			setCartProducts((products) => [
+			setCartProductsList((products) => [
 				...products,
 				{
 					id: productId,
@@ -63,15 +71,12 @@ function App() {
 				},
 			]);
 		} else {
-			const newCartProducts = cartProducts.filter(
-				(product) => product.id !== productId
-			);
-			setCartProducts(newCartProducts);
+			window.alert("Produto já adicionado ao carrinho");
 		}
 	};
 
 	return (
-		<div className="flex flex-col justify-center items-center w-full p-10">
+		<div className="flex flex-col w-full p-10">
 			<div className="flex flex-col gap-5">
 				<Button className="w-32" variant="large">
 					LABEL
@@ -80,11 +85,12 @@ function App() {
 					REMOVER
 				</Button>
 				<CartButton />
-				<CartButton cartItemsQty={cartProducts.length} />
+				<CartButton cartItemsQty={5} />
 				<div className="flex flex-row items-center">
 					<NumberInput
+						value={numberInputValue}
 						onChange={setNumberInputValue}
-						min={0}
+						min={1}
 						max={10}
 						className="mr-10"
 					/>
@@ -111,9 +117,22 @@ function App() {
 					<div>Valor: {textFieldInputValue}</div>
 				</div>
 				<div className="mt-5">
-					{!isLoading && (
+					<div className="h-20 flex gap-5">
+						<CartButton
+							cartItemsQty={cartProductsList.length}
+							onClick={() => console.log({ cartProductsList })}
+						/>
+						<Button onClick={() => setCartProductsList([])}>
+							Limpar Carrinho
+						</Button>
+					</div>
+					{isLoading ? (
+						<div className="w-full flex justify-center items-center">
+							<Loader />
+						</div>
+					) : (
 						<ul className="flex flex-row w-full flex-wrap gap-10">
-							{itemData?.map((item) => {
+							{products?.map((item) => {
 								return (
 									<li key={item.id}>
 										<CatalogItem

@@ -1,47 +1,46 @@
-import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { Dispatch, InputHTMLAttributes, SetStateAction, useRef } from "react";
 import styled, { css, useTheme } from "styled-components";
 import CustomIcon from "./CustomIcon";
 
 interface NumberInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
 	defaultValue?: number;
-	onChange: (value: number) => void;
+	value: number;
+	onChange: Dispatch<SetStateAction<number>>;
 }
 
 const NumberInput = ({
 	min,
 	max,
+	value,
 	onChange,
 	defaultValue = 1,
 	className,
 }: NumberInputProps) => {
-	const [value, setValue] = useState<number>(defaultValue);
-
 	const numberInputRef = useRef(null);
 	const theme = useTheme();
 
 	const onInputChangeHandler = (operation: "plus" | "minus") => {
 		if (operation === "plus") {
-			setValue((prevState) => (prevState === max ? prevState : prevState + 1));
+			onChange((prevState) => (prevState === max ? prevState : prevState + 1));
 		}
 		if (operation === "minus") {
-			setValue((prevState) => (prevState === min ? prevState : prevState - 1));
+			onChange((prevState) => (prevState === min ? prevState : prevState - 1));
 		}
 	};
 
-	useEffect(() => {
-		onChange(value);
-	}, [value]);
-
 	return (
 		<NumberInputWrapper className={className}>
-			<CustomIcon
-				name="Minus"
-				color={theme.colors.purple.default}
-				size={14}
-				onClick={() => onInputChangeHandler("minus")}
+			<ButtonWrapper
 				className="hover:cursor-pointer"
-			/>
+				onClick={() => onInputChangeHandler("minus")}
+			>
+				<CustomIcon
+					name="Minus"
+					color={theme.colors.purple.default}
+					size={14}
+				/>
+			</ButtonWrapper>
 			<StyledNumberInput
 				value={value || defaultValue}
 				onChange={() => null}
@@ -50,18 +49,31 @@ const NumberInput = ({
 				ref={numberInputRef}
 				type="number"
 			/>
-			<CustomIcon
-				name="Plus"
-				color={theme.colors.purple.default}
-				size={14}
-				onClick={() => onInputChangeHandler("plus")}
+			<ButtonWrapper
 				className="hover:cursor-pointer"
-			/>
+				onClick={() => onInputChangeHandler("plus")}
+			>
+				<CustomIcon name="Plus" color={theme.colors.purple.default} size={14} />
+			</ButtonWrapper>
 		</NumberInputWrapper>
 	);
 };
 
 export default NumberInput;
+
+const ButtonWrapper = styled.button`
+	${({ theme }) => css`
+		padding: 8px;
+		height: 100%;
+		border-radius: 6px;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			background-color: ${theme.colors.base.hover};
+		}
+	`}
+`;
 
 const NumberInputWrapper = styled.div`
 	${({ theme }) => css`
@@ -71,8 +83,6 @@ const NumberInputWrapper = styled.div`
 		background-color: ${theme.colors.base.button};
 		width: fit-content;
 		border-radius: 6px;
-		padding: 8px;
-		min-height: 32px;
 	`}
 `;
 const StyledNumberInput = styled.input`
@@ -80,6 +90,9 @@ const StyledNumberInput = styled.input`
 		width: 20px;
 		text-align: center;
 		background-color: inherit;
-		margin: 0px 4px;
+
+		&:focus-visible {
+			outline: none;
+		}
 	`}
 `;

@@ -24,8 +24,13 @@ const CatalogItem = ({
 	onAddCartProduct,
 	...rest
 }: CatalogItemProps) => {
-	const [qty, setQty] = useState(0);
+	const [qty, setQty] = useState(1);
 	const theme = useTheme();
+
+	const handleCartClick = () => {
+		onAddCartProduct(qty, catalogItemInfo.id);
+		setQty(1);
+	};
 
 	return (
 		<StyledCatalogItem {...rest}>
@@ -34,23 +39,23 @@ const CatalogItem = ({
 			</div>
 			<ul className="flex flex-row justify-center gap-1 w-full">
 				{catalogItemInfo.typeTags.map((tag, index) => {
-					return <Status key={`${tag}-${index}`} label={tag} />;
+					return (
+						<li key={`${tag}-${index}`}>
+							<Status label={tag} />
+						</li>
+					);
 				})}
 			</ul>
 			<Typography
-				fontFamily="Baloo2"
-				fontSize={20}
-				fontWeight="Bold"
+				variant="h3"
 				color={theme.colors.base.subtitle}
 				className="mt-4 mb-2"
 			>
 				{catalogItemInfo.title}
 			</Typography>
 			<Typography
-				fontFamily="Roboto"
-				fontSize={14}
+				variant="textSmall"
 				lineHeight={18}
-				fontWeight="Regular"
 				color={theme.colors.base.label}
 				className="mb-8"
 			>
@@ -59,28 +64,19 @@ const CatalogItem = ({
 			<div className="flex flex-row justify-between items-center w-full">
 				<div className="flex flex-row gap-1 items-center">
 					<Typography
-						fontFamily="Roboto"
-						fontSize={14}
+						variant="textSmall"
 						lineHeight={18}
-						fontWeight="Regular"
 						color={theme.colors.base.text}
 					>
 						R$
 					</Typography>
-					<Typography
-						fontFamily="Baloo2"
-						fontSize={24}
-						fontWeight="ExtraBold"
-						color={theme.colors.base.text}
-					>
+					<Typography variant="h2" color={theme.colors.base.text}>
 						{catalogItemInfo.price.toFixed(2)}
 					</Typography>
 				</div>
 				<div className="flex flex-row gap-2">
-					<NumberInput min={0} onChange={(value) => setQty(value)} />
-					<CartButton
-						onClick={() => onAddCartProduct(qty, catalogItemInfo.id)}
-					/>
+					<NumberInput min={1} value={qty} onChange={setQty} />
+					<CartButton onClick={handleCartClick} />
 				</div>
 			</div>
 		</StyledCatalogItem>

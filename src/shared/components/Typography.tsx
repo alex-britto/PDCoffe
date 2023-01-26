@@ -1,6 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import styled, { css } from "styled-components";
 import { DefaultTheme } from "styled-components";
+import defaultTheme from "../../styles/themes/defaultTheme";
 
 interface TypographyProps extends HTMLAttributes<HTMLParagraphElement> {
 	children: ReactNode;
@@ -9,7 +10,26 @@ interface TypographyProps extends HTMLAttributes<HTMLParagraphElement> {
 	fontSize?: keyof DefaultTheme["font"]["size"];
 	lineHeight?: keyof DefaultTheme["font"]["height"];
 	fontWeight?: keyof DefaultTheme["font"]["weight"];
+	variant?: keyof typeof variants;
 }
+
+const variants = {
+	h2: {
+		fontFamily: `"${defaultTheme.font.family.Baloo2}"`,
+		fontSize: defaultTheme.font.size[24],
+		fontWeight: defaultTheme.font.weight.ExtraBold,
+	},
+	h3: {
+		fontFamily: `"${defaultTheme.font.family.Baloo2}"`,
+		fontSize: defaultTheme.font.size[20],
+		fontWeight: defaultTheme.font.weight.Bold,
+	},
+	textSmall: {
+		fontFamily: `"${defaultTheme.font.family.Roboto}"`,
+		fontSize: defaultTheme.font.size[14],
+		fontWeight: defaultTheme.font.weight.Regular,
+	},
+};
 
 const Typography = ({
 	children,
@@ -18,6 +38,7 @@ const Typography = ({
 	fontSize,
 	lineHeight,
 	fontWeight,
+	variant,
 	...rest
 }: TypographyProps) => {
 	return (
@@ -27,6 +48,7 @@ const Typography = ({
 			fontSize={fontSize}
 			lineHeight={lineHeight}
 			fontWeight={fontWeight}
+			variant={variant}
 			{...rest}
 		>
 			{children}
@@ -37,8 +59,19 @@ const Typography = ({
 export default Typography;
 
 const StyledTypography = styled.p<TypographyProps>`
-	${({ theme, color, fontFamily, fontSize, lineHeight, fontWeight }) => css`
+	${({
+		theme,
+		color,
+		fontFamily,
+		fontSize,
+		lineHeight,
+		fontWeight,
+		variant,
+	}) => css`
 		color: ${color || "inherit"};
+
+		${variant && variants[variant]}
+
 		${fontFamily &&
 		css`
 			font-family: "${theme.font.family[fontFamily]}";
