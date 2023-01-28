@@ -16,16 +16,14 @@ import {
 
 interface CardCoffeeProps {
   coffee: Coffee;
+  onAddToCart: (coffee: Coffee, quantity: number) => void;
 }
 
-export function CardCoffee({
+export function CatalogItem({
   coffee: { title, description, price, imageUrl, tags },
+  onAddToCart,
 }: CardCoffeeProps) {
   const [quantity, setQuantity] = useState(1);
-
-  function handleAddToCart() {
-    alert(`Você adicionou ${quantity}x o ${title} ao carrinho!`);
-  }
 
   return (
     <CardContainer>
@@ -82,7 +80,12 @@ export function CardCoffee({
         />
 
         <CartButton
-          onClick={handleAddToCart}
+          onClick={
+            quantity > 0
+              ? () =>
+                  onAddToCart({ title, description, price, imageUrl }, quantity)
+              : () => {}
+          }
           icon={<ShoppingCart size={22} weight="fill" />}
         />
       </CardFooter>

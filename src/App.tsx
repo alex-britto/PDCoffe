@@ -1,14 +1,13 @@
-import { Bank, CreditCard, Money, ShoppingCart, Trash } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 import styled, { ThemeProvider } from "styled-components";
 import {
-  Button,
-  CardCoffee,
   CartButton,
-  DeleteButton,
-  SelectPaymentInput,
+  CartItem,
+  CatalogItem,
   Spinner,
-  TextInput,
+  Typography,
 } from "./components";
+import { handleConvertPriceNumberToString } from "./utils/formatCurrency";
 
 import { useEffect, useState } from "react";
 
@@ -17,19 +16,28 @@ import { api } from "./services/api";
 import { defaultTheme } from "./styles/themes";
 
 function App() {
-  const [quantity, setQuantity] = useState(1);
-  const [isDebitSelected, setDebitIsSelected] = useState(false);
-  const [isCreditSelected, setIsCreditSelected] = useState(false);
-  const [isMoneySelected, setIsMoneySelected] = useState(false);
-  const [textInputValue, setTextInputValue] = useState("");
   const [coffeeList, setCoffeeList] = useState<Coffee[]>([]);
+  const [cartItems, setCartItems] = useState<Coffee[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCartItems, setIsCartItems] = useState(false);
 
-  function handleDelete() {}
+  const handleAddToCart = async (coffee: Coffee, quantity: number) => {
+    const response = await api.post("/cart", {
+      id: coffee.id,
+      title: coffee.title,
+      price: coffee.price,
+      imageUrl: coffee.imageUrl,
+      quantity,
+    });
+    const data = response.data;
+    setCartItems(data);
+  };
 
-  function handleAddToCart() {}
-
-  function handleClick() {}
+  const handleGetCoffeesFromCart = async () => {
+    const response = await api.get("/cart");
+    const data = response.data;
+    setCartItems(data);
+  };
 
   const handleGetCoffeesFromApi = async () => {
     setIsLoading(true);
@@ -39,74 +47,91 @@ function App() {
     setIsLoading(false);
   };
 
+  const calculateTotalPrice = () => {
+    const prices = cartItems.map((item) => item.price * item.quantity);
+    const totalPrice = prices.reduce((acc, curr) => acc + curr, 0);
+
+    const totalPriceString = handleConvertPriceNumberToString(totalPrice);
+    return totalPriceString;
+  };
+
+  const showCartItems = () => {
+    setIsCartItems(!isCartItems);
+  };
+
+  const handleRemoveItemFromCart = async (id: number) => {
+    const response = await api.delete(`/cart/${id}`);
+    const data = response.data;
+    setCartItems(data);
+  };
+
   useEffect(() => {
     handleGetCoffeesFromApi();
+    handleGetCoffeesFromCart();
   }, []);
+
+  useEffect(() => {
+    handleGetCoffeesFromCart();
+  }, [cartItems]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container>
-        <Button label="Confirmar pedido" onClick={handleClick} />
         <CartButton
-          onClick={handleAddToCart}
-          icon={<ShoppingCart size={22} />}
-        />
-
-        <DeleteButton
-          label="Remover"
-          onClick={handleDelete}
-          icon={<Trash size={22} color={defaultTheme.colors.purple.default} />}
-        />
-
-        <CartButton
+          style={{
+            alignSelf: "flex-end",
+          }}
           variant="SECONDARY"
-          onClick={handleAddToCart}
-          icon={<ShoppingCart size={22} />}
-        />
-
-        <CartButton
-          variant="SECONDARY"
-          quantity={3}
-          onClick={handleAddToCart}
+          quantity={cartItems.length}
+          onClick={showCartItems}
           icon={<ShoppingCart size={22} />}
         />
       </Container>
 
-      <Container>
-        <TextInput
-          placeholder="Label"
-          endLabel="Opcional"
-          onChange={(e) => setTextInputValue(e.target.value)}
-        />
-      </Container>
+      {isCartItems && (
+        <CartContainer>
+          {cartItems.length === 0 ? (
+            <Typography
+              size={16}
+              weight={400}
+              color={defaultTheme.colors.base.title}
+              family={defaultTheme.fonts.baloo}
+            >
+              Nenhum item no carrinho
+            </Typography>
+          ) : (
+            cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                coffee={item}
+                onRemove={() => handleRemoveItemFromCart(item.id)}
+              />
+            ))
+          )}
 
-      <Container>
-        <SelectPaymentInput
-          id="credit"
-          label="Cartão de crédito"
-          icon={<CreditCard />}
-          onChange={setIsCreditSelected}
-        />
-        <SelectPaymentInput
-          id="debit"
-          label="Cartão de débito"
-          icon={<Bank />}
-          onChange={setDebitIsSelected}
-        />
-        <SelectPaymentInput
-          id="money"
-          label="Dinheiro"
-          icon={<Money />}
-          onChange={setIsMoneySelected}
-        />
-      </Container>
+          <Typography
+            size={16}
+            weight={400}
+            color={defaultTheme.colors.base.title}
+            family={defaultTheme.fonts.baloo}
+          >
+            Total: {calculateTotalPrice()}
+          </Typography>
+        </CartContainer>
+      )}
 
       <CoffeesContainer>
         {isLoading ? (
           <Spinner />
         ) : (
           coffeeList.map((coffee) => (
-            <CardCoffee key={coffee.id} coffee={coffee} />
+            <CatalogItem
+              key={coffee.id}
+              coffee={coffee}
+              onAddToCart={(coffee: Coffee, quantity: number) =>
+                handleAddToCart(coffee, quantity)
+              }
+            />
           ))
         )}
       </CoffeesContainer>
@@ -141,6 +166,21 @@ const CoffeesContainer = styled.div`
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
   }
+`;
+
+const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 448px;
+  padding: 40px;
+  margin: 20px auto;
+  background-color: ${({ theme }) => theme.colors.base.card};
+  border-radius: 6px 44px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  gap: 16px;
 `;
 
 export default App;

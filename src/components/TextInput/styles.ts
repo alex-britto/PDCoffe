@@ -30,7 +30,7 @@ export const Container = styled.div`
   `}
 `;
 
-export const EndLabel = styled.p`
+export const EndLabel = styled.div`
   ${({ theme }) => css`
     align-items: center;
     background: ${theme.colors.base.input};

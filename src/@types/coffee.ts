@@ -1,4 +1,5 @@
 export interface Coffee {
+  quantity: number;
   id: number;
   description: string;
   imageUrl: string;
