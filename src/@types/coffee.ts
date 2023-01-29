@@ -1,4 +1,4 @@
-export interface Coffee {
+export interface ICoffee {
   quantity: number;
   id: number;
   description: string;
@@ -6,4 +6,12 @@ export interface Coffee {
   price: number;
   title: string;
   tags: string[];
+}
+
+export interface ICartItem {
+  quantity: number;
+  id: number;
+  title: string;
+  price: number;
+  imageUrl: string;
 }

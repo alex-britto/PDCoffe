@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "imageUrl": "./src/assets/Café com Leite.png",
+      "imageUrl": "./src/assets/CafécomLeite.png",
       "tags": [
         "Tradicional",
         "Com Leite"
@@ -33,7 +33,7 @@
     },
     {
       "id": 4,
-      "imageUrl": "./src/assets/Café Gelado.png",
+      "imageUrl": "./src/assets/CaféGelado.png",
       "tags": [
         "Tradicional",
         "Gelado"
@@ -55,7 +55,7 @@
     },
     {
       "id": 6,
-      "imageUrl": "./src/assets/Chocolate Quente.png",
+      "imageUrl": "./src/assets/ChocolateQuente.png",
       "tags": [
         "Especial",
         "Com Leite"
@@ -78,7 +78,7 @@
     },
     {
       "id": 8,
-      "imageUrl": "./src/assets/Expresso Cremoso.png",
+      "imageUrl": "./src/assets/ExpressoCremoso.png",
       "tags": [
         "Tradicional"
       ],
@@ -153,25 +153,18 @@
   ],
   "cart": [
     {
-      "title": "Expresso Americano",
-      "price": 9.9,
-      "imageUrl": "./src/assets/Americano.png",
-      "quantity": 2,
-      "id": 1
+      "id": 3,
+      "title": "Café com Leite",
+      "price": 5.9,
+      "imageUrl": "./src/assets/CafécomLeite.png",
+      "quantity": 3
     },
     {
-      "title": "Chocolate Quente",
-      "price": 10.9,
-      "imageUrl": "./src/assets/Chocolate Quente.png",
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "title": "Chocolate Quente",
-      "price": 10.9,
-      "imageUrl": "./src/assets/Chocolate Quente.png",
-      "quantity": 1,
-      "id": 7
+      "id": 13,
+      "title": "Macchiato",
+      "price": 7.9,
+      "imageUrl": "./src/assets/Macchiato.png",
+      "quantity": 4
     }
   ]
 }

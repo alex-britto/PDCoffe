@@ -1,8 +1,8 @@
 import { ShoppingCart } from "phosphor-react";
 import { useState } from "react";
-import { Coffee } from "../../@types/coffee";
+import { ICartItem, ICoffee } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
-import { handleConvertPriceNumberToString } from "../../utils/formatCurrency";
+import { handleConvertPriceNumberToString } from "../../utils";
 import { CartButton } from "../CartButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
 import { Typography } from "../Typography";
@@ -15,12 +15,12 @@ import {
 } from "./styles";
 
 interface CardCoffeeProps {
-  coffee: Coffee;
-  onAddToCart: (coffee: Coffee, quantity: number) => void;
+  coffee: ICoffee;
+  onAddToCart: (coffee: ICartItem) => void;
 }
 
 export function CatalogItem({
-  coffee: { title, description, price, imageUrl, tags },
+  coffee: { id, title, description, price, imageUrl, tags },
   onAddToCart,
 }: CardCoffeeProps) {
   const [quantity, setQuantity] = useState(1);
@@ -80,12 +80,7 @@ export function CatalogItem({
         />
 
         <CartButton
-          onClick={
-            quantity > 0
-              ? () =>
-                  onAddToCart({ title, description, price, imageUrl }, quantity)
-              : () => {}
-          }
+          onClick={() => onAddToCart({ title, price, quantity, imageUrl, id })}
           icon={<ShoppingCart size={22} weight="fill" />}
         />
       </CardFooter>

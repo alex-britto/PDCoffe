@@ -1,8 +1,8 @@
 import { Trash } from "phosphor-react";
 import { useState } from "react";
-import { Coffee } from "../../@types/coffee";
+import { ICartItem } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
-import { handleConvertPriceToBRL } from "../../utils/formatCurrency";
+import { handleConvertPriceToBRL } from "../../utils/";
 import { DeleteButton } from "../DeleteButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
 import { Typography } from "../Typography";
@@ -15,7 +15,7 @@ import {
 } from "./styles";
 
 interface CardCoffeeProps {
-  coffee: Coffee;
+  coffee: ICartItem;
   onRemove: (id: number) => void;
 }
 
