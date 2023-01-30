@@ -1,20 +1,12 @@
-import { ShoppingCart } from "phosphor-react";
 import { ThemeProvider } from "styled-components";
-import {
-  CartButton,
-  CartItem,
-  CatalogItem,
-  Spinner,
-  Typography,
-} from "../../components";
-import { handleConvertPriceNumberToString } from "../../utils";
+import { CartCatalog, Header, Menu } from "../../components";
 
 import { useEffect, useState } from "react";
 
 import { ICartItem, ICoffee } from "../../@types/coffee";
+
 import { api } from "../../services";
 import { defaultTheme } from "../../styles/themes";
-import { CartContainer, CoffeesContainer, Container } from "./styles";
 
 export function Home() {
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
@@ -48,14 +40,6 @@ export function Home() {
     setIsLoading(false);
   };
 
-  const calculateTotalPrice = () => {
-    const prices = cartItems.map((item) => item.price * item.quantity);
-    const totalPrice = prices.reduce((acc, curr) => acc + curr, 0);
-
-    const totalPriceString = handleConvertPriceNumberToString(totalPrice);
-    return totalPriceString;
-  };
-
   const showCartItems = () => {
     setIsCartItems(!isCartItems);
   };
@@ -77,63 +61,20 @@ export function Home() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container>
-        <CartButton
-          style={{
-            alignSelf: "flex-end",
-          }}
-          variant="SECONDARY"
-          quantity={cartItems.length}
-          onClick={showCartItems}
-          icon={<ShoppingCart size={22} />}
+      <Header cartItems={cartItems} showCartItems={showCartItems} />
+
+      {isCartItems ? (
+        <CartCatalog
+          cartItems={cartItems}
+          handleRemoveItemFromCart={handleRemoveItemFromCart}
         />
-      </Container>
+      ) : null}
 
-      {isCartItems && (
-        <CartContainer>
-          {cartItems.length === 0 ? (
-            <Typography
-              size={16}
-              weight={400}
-              color={defaultTheme.colors.base.title}
-              family={defaultTheme.fonts.baloo}
-            >
-              Nenhum item no carrinho
-            </Typography>
-          ) : (
-            cartItems.map((item) => (
-              <CartItem
-                key={item.id}
-                coffee={item}
-                onRemove={() => handleRemoveItemFromCart(item.id)}
-              />
-            ))
-          )}
-
-          <Typography
-            size={16}
-            weight={400}
-            color={defaultTheme.colors.base.title}
-            family={defaultTheme.fonts.baloo}
-          >
-            Total: {calculateTotalPrice()}
-          </Typography>
-        </CartContainer>
-      )}
-
-      <CoffeesContainer>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          coffeeList.map((coffee) => (
-            <CatalogItem
-              key={coffee.id}
-              coffee={coffee}
-              onAddToCart={(coffee: ICartItem) => handleAddToCart(coffee)}
-            />
-          ))
-        )}
-      </CoffeesContainer>
+      <Menu
+        coffeeList={coffeeList}
+        isLoading={isLoading}
+        handleAddToCart={handleAddToCart}
+      />
     </ThemeProvider>
   );
 }

@@ -1,8 +1,11 @@
 export { Button } from "./Button";
 export { CartButton } from "./CartButton";
+export { CartCatalog } from "./CartCatalog";
 export { CartItem } from "./CartItem";
 export { CatalogItem } from "./CatalogItem";
 export { DeleteButton } from "./DeleteButton";
+export { Header } from "./Header";
+export { Menu } from "./Menu";
 export { SelectPaymentInput } from "./SelectPaymentInput";
 export { SelectQuantityInput } from "./SelectQuantityInput";
 export { Spinner } from "./Spinner";

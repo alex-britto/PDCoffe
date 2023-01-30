@@ -25,9 +25,7 @@ export function CartItem({
 }: CardCoffeeProps) {
   const [quantityValue, setQuantityValue] = useState(quantity);
 
-  const handleChangeQuantity = () => {
-    console.log("handleChangeQuantity");
-  };
+  const handleChangeQuantity = () => {};
 
   return (
     <>
