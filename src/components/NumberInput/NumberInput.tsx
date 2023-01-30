@@ -27,9 +27,15 @@ export const NumberInput = ({
 }: NumberInputProps) => {
   const [inputValue, setInputValue] = useState<number>(value)
 
+  const handleChangeQuantity = (quantity: number) => {
+    const value = Math.max(min, Math.min(max, Number(quantity)))
+    setInputValue(value)
+  }
+
   const theme = useTheme()
 
   useEffect(() => {
+    handleChangeQuantity(inputValue)
     onChange(inputValue)
   }, [inputValue])
 
@@ -74,7 +80,7 @@ const Input = styled.input`
     color: ${theme.colors.base.text};
     font-size: 16px;
     margin: 0 2px;
-    min-width: 30px;
+    min-width: min-content;
     text-align: center;
     width: 100%;
 

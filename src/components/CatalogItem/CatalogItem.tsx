@@ -1,7 +1,6 @@
-import { ReactNode, useState } from "react"
+import { useState } from "react"
 import styled, { css, useTheme } from "styled-components"
 
-import ProductImg from "../../assets/Expresso.png"
 import { Status } from "../Status/Status"
 import { Typography } from "../Typography/Typography"
 import { NumberInput } from "../NumberInput/NumberInput"
@@ -20,12 +19,16 @@ export interface CoffeeProps {
 
 interface CatalogItemProps {
   coffee: CoffeeProps
+  minQuantity?: number
+  maxQuantity?: number
   onAddToCart: (coffee: CoffeeProps, quantity: number) => void
 }
 
 export const CatalogItem = ({
   coffee,
   onAddToCart,
+  minQuantity,
+  maxQuantity,
   ...props
 }: CatalogItemProps) => {
   const [quantity, setQuantity] = useState<number>(1)
@@ -76,7 +79,12 @@ export const CatalogItem = ({
           </PriceBox>
 
           <QuantityBox>
-            <NumberInput value={quantity} onChange={setQuantity} />
+            <NumberInput
+              value={quantity}
+              onChange={setQuantity}
+              min={minQuantity}
+              max={maxQuantity}
+            />
             <Button color="secondary" onClick={handleCartClick}>
               <ShoppingCartSimple size={22} color={theme.colors.white} />
             </Button>

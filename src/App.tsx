@@ -6,9 +6,10 @@ import {
   Trash,
 } from "phosphor-react"
 import { useEffect, useState } from "react"
-import styled, { ThemeProvider, useTheme } from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 import {
   Button,
+  CartItem,
   CatalogItem,
   NumberInput,
   SelectableCards,
@@ -128,24 +129,34 @@ function App() {
         <NumberInput className="mt-6" value={number} onChange={setNumber} />
         <h1>Valor: {number}</h1>
 
-        <Typography color={defaultTheme.colors.base.text} variant="h1">
-          h1
-        </Typography>
-        <Typography color={defaultTheme.colors.base.text} variant="h2">
-          h2
-        </Typography>
-        <Typography color={defaultTheme.colors.base.text} variant="h3">
-          h3
-        </Typography>
-        <Typography color={defaultTheme.colors.base.text} variant="h4">
-          h4
-        </Typography>
-        <Typography color={defaultTheme.colors.base.text} variant="h5">
-          h5
-        </Typography>
-        <Typography color={defaultTheme.colors.base.text} variant="span">
-          span
-        </Typography>
+        <div className="flex w-full gap-10 items-center mt-6">
+          <Typography color={defaultTheme.colors.base.text} variant="h1">
+            h1
+          </Typography>
+          <Typography color={defaultTheme.colors.base.text} variant="h2">
+            h2
+          </Typography>
+          <Typography color={defaultTheme.colors.base.text} variant="h3">
+            h3
+          </Typography>
+          <Typography color={defaultTheme.colors.base.text} variant="h4">
+            h4
+          </Typography>
+          <Typography color={defaultTheme.colors.base.text} variant="h5">
+            h5
+          </Typography>
+          <Typography color={defaultTheme.colors.base.text} variant="span">
+            span
+          </Typography>
+        </div>
+
+        {coffeeList && (
+          <div className="flex flex-col items-start w-full gap-8 mt-6">
+            <CartItem coffee={coffeeList[0]} minQuantity={5} maxQuantity={10} />
+            <CartItem coffee={coffeeList[1]} minQuantity={5} maxQuantity={10} />
+            <CartItem coffee={coffeeList[2]} minQuantity={5} maxQuantity={10} />
+          </div>
+        )}
 
         <CoffeesContainer>
           {isLoading ? (
@@ -156,6 +167,8 @@ function App() {
                 key={coffee.id}
                 coffee={coffee}
                 onAddToCart={handleAddToCart}
+                minQuantity={5}
+                maxQuantity={10}
               />
             ))
           )}
