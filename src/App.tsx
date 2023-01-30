@@ -130,23 +130,68 @@ function App() {
         <h1>Valor: {number}</h1>
 
         <div className="flex w-full gap-10 items-center mt-6">
-          <Typography color={defaultTheme.colors.base.text} variant="h1">
-            h1
+          <Typography family="header" variant="h1" className="mr-4">
+            h1 Baloo
           </Typography>
-          <Typography color={defaultTheme.colors.base.text} variant="h2">
-            h2
+          <Typography family="header" variant="h1Bold" className="mr-4">
+            h1Bold Baloo
           </Typography>
-          <Typography color={defaultTheme.colors.base.text} variant="h3">
-            h3
+          <Typography family="header" variant="h2" className="mr-4">
+            h2 Baloo
           </Typography>
-          <Typography color={defaultTheme.colors.base.text} variant="h4">
-            h4
+          <Typography family="header" variant="h2Bold" className="mr-4">
+            h2Bold Baloo
           </Typography>
-          <Typography color={defaultTheme.colors.base.text} variant="h5">
-            h5
+          <Typography family="header" variant="h3" className="mr-4">
+            h3 Baloo
           </Typography>
-          <Typography color={defaultTheme.colors.base.text} variant="span">
-            span
+          <Typography family="header" variant="h3Bold" className="mr-4">
+            h3Bold Baloo
+          </Typography>
+          <Typography family="header" variant="h4" className="mr-4">
+            h4 Baloo
+          </Typography>
+          <Typography family="header" variant="h4Bold" className="mr-4">
+            h4Bold Baloo
+          </Typography>
+          <Typography family="header" variant="h5" className="mr-4">
+            h5 Baloo
+          </Typography>
+          <Typography family="header" variant="h5Bold" className="mr-4">
+            h5Bold Baloo
+          </Typography>
+        </div>
+
+        <div className="flex w-full gap-10 items-center mt-6">
+          <Typography family="text" variant="h1" className="mr-4">
+            h1 Roboto
+          </Typography>
+          <Typography family="text" variant="h1Bold" className="mr-4">
+            h1Bold Roboto
+          </Typography>
+          <Typography family="text" variant="h2" className="mr-4">
+            h2 Roboto
+          </Typography>
+          <Typography family="text" variant="h2Bold" className="mr-4">
+            h2Bold Roboto
+          </Typography>
+          <Typography family="text" variant="h3" className="mr-4">
+            h3 Roboto
+          </Typography>
+          <Typography family="text" variant="h3Bold" className="mr-4">
+            h3Bold Roboto
+          </Typography>
+          <Typography family="text" variant="h4" className="mr-4">
+            h4 Roboto
+          </Typography>
+          <Typography family="text" variant="h4Bold" className="mr-4">
+            h4Bold Roboto
+          </Typography>
+          <Typography family="text" variant="h5" className="mr-4">
+            h5 Roboto
+          </Typography>
+          <Typography family="text" variant="h5Bold" className="mr-4">
+            h5Bold Roboto
           </Typography>
         </div>
 

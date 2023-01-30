@@ -52,7 +52,12 @@ export const CatalogItem = ({
           ))}
         </StatusContainer>
 
-        <Typography variant="h2" className="mt-4 text-center">
+        <Typography
+          variant="h4"
+          family="header"
+          as="h4"
+          className="mt-4 text-center"
+        >
           {title}
         </Typography>
 
@@ -66,14 +71,10 @@ export const CatalogItem = ({
 
         <PriceContainer>
           <PriceBox>
-            <Typography
-              color={theme.colors.base.text}
-              variant="h5"
-              className="mr-1 mt-1"
-            >
+            <Typography variant="h5" className="mr-1 mt-1">
               R$
             </Typography>
-            <Typography color={theme.colors.base.text} variant="h1">
+            <Typography variant="h3Bold" as="h3" family="header">
               {handleConvertPriceNumberToString(price)}
             </Typography>
           </PriceBox>

@@ -37,9 +37,7 @@ export const CartItem = ({
       <img src={imageUrl} alt={title} />
 
       <InfoContainer>
-        <Typography variant="h5" fontSize="16px">
-          {title}
-        </Typography>
+        <Typography variant="h4">{title}</Typography>
 
         <QuantityBox>
           <NumberInput
@@ -57,8 +55,7 @@ export const CartItem = ({
 
       <Typography
         color={theme.colors.base.text}
-        variant="h3"
-        fontSize="16px"
+        variant="h4Bold"
         className="ml-[50px]"
       >
         {handleConvertPriceToBRL(price)}
