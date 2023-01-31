@@ -40,7 +40,7 @@ function App() {
   const getData = async () => {
     setIsDataLoading(true)
     try {
-      const response = await api.get("/coffes")
+      const response = await api.get("/coffees")
       setData(response.data)
     } catch (err) {
       console.log(err.message)
@@ -53,22 +53,29 @@ function App() {
   }, [])
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div className="flex gap-4 m-8">
-        {!!data &&
-          data.map((item) => {
-            return (
-              <CatalogItem
-                key={item?.id}
-                imageSrc={item?.imageSrc}
-                title={item?.title}
-                tags={item?.tags}
-                description={item?.description}
-                price={item?.price}
-                onCartClick={(e) => console.log("Itens adicionados:", e)}
-              />
-            )
-          })}
-      </div>
+      {isDataLoading ? (
+        <TypographyV2 variant="h1" family="header">
+          CARREGANDO...
+        </TypographyV2>
+      ) : (
+        <div className="flex gap-4 m-8">
+          {!!data &&
+            data.map((item) => {
+              return (
+                <CatalogItem
+                  key={item?.id}
+                  imageSrc={item?.imageSrc}
+                  title={item?.title}
+                  tags={item?.tags}
+                  description={item?.description}
+                  price={item?.price}
+                  onCartClick={(e) => console.log("Itens adicionados:", e)}
+                />
+              )
+            })}
+        </div>
+      )}
+
       <div className="m-4">
         <TypographyV2
           family="header"
