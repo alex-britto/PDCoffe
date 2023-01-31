@@ -16,17 +16,16 @@ import {
 
 interface CardCoffeeProps {
   coffee: ICartItem;
-  onRemove: (id: number) => void;
+  onRemoveCartItem: (id: number) => void;
 }
 
 export function CartItem({
-  coffee: { title, price, imageUrl, quantity },
-  onRemove,
+  coffee: { id, title, price, imageUrl, quantity },
+  onRemoveCartItem,
 }: CardCoffeeProps) {
   const [quantityValue, setQuantityValue] = useState(quantity);
 
   const handleChangeQuantity = () => {};
-
   return (
     <>
       <CardContainer>
@@ -50,7 +49,7 @@ export function CartItem({
                 <Trash size={22} color={defaultTheme.colors.purple.default} />
               }
               label="Remover"
-              onClick={() => onRemove(1)}
+              onClick={() => onRemoveCartItem(id)}
             />
           </CardButtonsContainer>
         </CardContent>

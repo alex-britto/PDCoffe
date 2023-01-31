@@ -1,3 +1,4 @@
+import { HTMLAttributes } from "react";
 import { ICartItem } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
 import { calculateTotalPrice } from "../../utils";
@@ -5,7 +6,7 @@ import { CartItem } from "../CartItem";
 import { Typography } from "../Typography";
 import { Container } from "./styles";
 
-interface CartCatalogProps {
+interface CartCatalogProps extends HTMLAttributes<HTMLDivElement> {
   cartItems: ICartItem[];
   handleRemoveItemFromCart: (id: number) => void;
 }
@@ -30,7 +31,7 @@ export const CartCatalog = ({
           <CartItem
             key={item.id}
             coffee={item}
-            onRemove={() => handleRemoveItemFromCart(item.id)}
+            onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
           />
         ))
       )}
@@ -41,7 +42,7 @@ export const CartCatalog = ({
         color={defaultTheme.colors.base.title}
         family={defaultTheme.fonts.baloo}
       >
-        Total: {calculateTotalPrice(cartItems)}
+        Total: R$ {calculateTotalPrice(cartItems)}
       </Typography>
     </Container>
   );

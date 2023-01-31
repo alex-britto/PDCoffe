@@ -1,4 +1,3 @@
-import { ThemeProvider } from "styled-components";
 import { CartCatalog, Header, Menu } from "../../components";
 
 import { useEffect, useState } from "react";
@@ -6,7 +5,6 @@ import { useEffect, useState } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 
 import { api } from "../../services";
-import { defaultTheme } from "../../styles/themes";
 
 export function Home() {
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
@@ -24,12 +22,8 @@ export function Home() {
     });
     const data = response.data;
     setCartItems(data);
-  };
 
-  const handleGetCoffeesFromCart = async () => {
-    const response = await api.get("/cart");
-    const data = response.data;
-    setCartItems(data);
+    handleGetCoffeesFromCart();
   };
 
   const handleGetCoffeesFromApi = async () => {
@@ -40,14 +34,19 @@ export function Home() {
     setIsLoading(false);
   };
 
-  const showCartItems = () => {
+  const handleShowCartItens = () => {
     setIsCartItems(!isCartItems);
   };
 
-  const handleRemoveItemFromCart = async (id: number) => {
-    const response = await api.delete(`/cart/${id}`);
+  const handleGetCoffeesFromCart = async () => {
+    const response = await api.get("/cart");
     const data = response.data;
     setCartItems(data);
+  };
+
+  const handleRemoveItemFromCart = async (id: number) => {
+    await api.delete(`/cart/${id}`);
+    handleGetCoffeesFromCart();
   };
 
   useEffect(() => {
@@ -55,26 +54,22 @@ export function Home() {
     handleGetCoffeesFromCart();
   }, []);
 
-  useEffect(() => {
-    handleGetCoffeesFromCart();
-  }, [cartItems]);
-
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Header cartItems={cartItems} showCartItems={showCartItems} />
+    <>
+      <Header cartItems={cartItems} onShowCartItens={handleShowCartItens} />
 
-      {isCartItems ? (
+      {isCartItems && (
         <CartCatalog
           cartItems={cartItems}
           handleRemoveItemFromCart={handleRemoveItemFromCart}
         />
-      ) : null}
+      )}
 
       <Menu
         coffeeList={coffeeList}
         isLoading={isLoading}
-        handleAddToCart={handleAddToCart}
+        onAddToCart={handleAddToCart}
       />
-    </ThemeProvider>
+    </>
   );
 }

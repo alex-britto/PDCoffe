@@ -1,5 +1,4 @@
 export interface ICoffee {
-  quantity: number;
   id: number;
   description: string;
   imageUrl: string;

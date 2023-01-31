@@ -1,15 +1,16 @@
+import { HTMLAttributes } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 import { CatalogItem } from "../CatalogItem";
 import { Spinner } from "../Spinner";
 import { Container } from "./styles";
 
-interface MenuProps {
+interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   coffeeList: ICoffee[];
   isLoading: boolean;
-  handleAddToCart: (coffee: ICartItem) => void;
+  onAddToCart: (coffee: ICartItem) => void;
 }
 
-export const Menu = ({ coffeeList, isLoading, handleAddToCart }: MenuProps) => {
+export const Menu = ({ coffeeList, isLoading, onAddToCart }: MenuProps) => {
   return (
     <Container>
       {isLoading ? (
@@ -19,7 +20,7 @@ export const Menu = ({ coffeeList, isLoading, handleAddToCart }: MenuProps) => {
           <CatalogItem
             key={coffee.id}
             coffee={coffee}
-            onAddToCart={(coffee: ICartItem) => handleAddToCart(coffee)}
+            onAddToCart={(coffee: ICartItem) => onAddToCart(coffee)}
           />
         ))
       )}

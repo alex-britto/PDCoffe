@@ -151,34 +151,5 @@
       "price": 9.9
     }
   ],
-  "cart": [
-    {
-      "id": 3,
-      "title": "Café com Leite",
-      "price": 5.9,
-      "imageUrl": "./src/assets/CafécomLeite.png",
-      "quantity": 3
-    },
-    {
-      "id": 13,
-      "title": "Macchiato",
-      "price": 7.9,
-      "imageUrl": "./src/assets/Macchiato.png",
-      "quantity": 4
-    },
-    {
-      "id": 1,
-      "title": "Expresso Americano",
-      "price": 9.9,
-      "imageUrl": "./src/assets/Americano.png",
-      "quantity": 1
-    },
-    {
-      "id": 12,
-      "title": "Latte",
-      "price": 8.9,
-      "imageUrl": "./src/assets/Latte.png",
-      "quantity": 1
-    }
-  ]
+  "cart": []
 }

@@ -1,5 +1,5 @@
 import { ShoppingCart } from "phosphor-react";
-import { useState } from "react";
+import { HTMLAttributes, useState } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
 import { handleConvertPriceNumberToString } from "../../utils";
@@ -14,7 +14,7 @@ import {
   TagsContainer,
 } from "./styles";
 
-interface CardCoffeeProps {
+interface CardCoffeeProps extends HTMLAttributes<HTMLDivElement> {
   coffee: ICoffee;
   onAddToCart: (coffee: ICartItem) => void;
 }

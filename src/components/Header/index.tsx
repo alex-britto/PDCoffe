@@ -1,16 +1,17 @@
 import { ShoppingCart } from "phosphor-react";
+import { HTMLAttributes } from "react";
 import { ICartItem } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
 import { CartButton } from "../CartButton";
 import { Typography } from "../Typography";
 import { HeaderContainer } from "./styles";
 
-interface HeaderProps {
+interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   cartItems: ICartItem[];
-  showCartItems: () => void;
+  onShowCartItens: () => void;
 }
 
-export const Header = ({ cartItems, showCartItems }: HeaderProps) => {
+export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
   return (
     <HeaderContainer>
       <Typography
@@ -22,12 +23,9 @@ export const Header = ({ cartItems, showCartItems }: HeaderProps) => {
         PDCoffee
       </Typography>
       <CartButton
-        style={{
-          alignSelf: "flex-end",
-        }}
         variant="SECONDARY"
         quantity={cartItems.length}
-        onClick={showCartItems}
+        onClick={onShowCartItens}
         icon={<ShoppingCart size={22} />}
       />
     </HeaderContainer>
