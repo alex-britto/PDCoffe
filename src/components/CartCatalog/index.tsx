@@ -1,3 +1,4 @@
+import { ShoppingCart } from "phosphor-react";
 import { HTMLAttributes } from "react";
 import { ICartItem } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
@@ -18,32 +19,36 @@ export const CartCatalog = ({
   return (
     <Container>
       {cartItems.length === 0 ? (
-        <Typography
-          size={16}
-          weight={400}
-          color={defaultTheme.colors.base.title}
-          family={defaultTheme.fonts.baloo}
-        >
-          Nenhum item no carrinho
-        </Typography>
+        <>
+          <ShoppingCart size={64} color={defaultTheme.colors.base.subtitle} />
+          <Typography
+            size={16}
+            weight={400}
+            color={defaultTheme.colors.base.title}
+            family={defaultTheme.fonts.baloo}
+          >
+            Nenhum item no carrinho
+          </Typography>
+        </>
       ) : (
         cartItems.map((item) => (
-          <CartItem
-            key={item.id}
-            coffee={item}
-            onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
-          />
+          <>
+            <CartItem
+              key={item.id}
+              coffee={item}
+              onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
+            />
+            <Typography
+              size={16}
+              weight={400}
+              color={defaultTheme.colors.base.title}
+              family={defaultTheme.fonts.baloo}
+            >
+              Total: R$ {calculateTotalPrice(cartItems)}
+            </Typography>
+          </>
         ))
       )}
-
-      <Typography
-        size={16}
-        weight={400}
-        color={defaultTheme.colors.base.title}
-        family={defaultTheme.fonts.baloo}
-      >
-        Total: R$ {calculateTotalPrice(cartItems)}
-      </Typography>
     </Container>
   );
 };
