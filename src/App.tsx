@@ -1,5 +1,5 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ThemeProvider } from "styled-components"
 import {
   Button,
@@ -11,7 +11,7 @@ import {
   TypographyV2,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import * as coffes from "./images/coffes"
+import axios from "axios"
 
 function App() {
   const [numberInputValue, setNumberInputValue] = useState(0)
@@ -25,17 +25,39 @@ function App() {
       title: "cartão de débito",
     },
   ]
+  const [data, setData] = useState(null)
+  const [isDataLoading, setIsDataLoading] = useState<boolean>()
+  const getData = async () => {
+    setIsDataLoading(true)
+    try {
+      const response = await axios.get("http://localhost:3000/coffes")
+      setData(response.data)
+    } catch (err) {
+      console.log(err.message)
+    } finally {
+      setIsDataLoading(false)
+    }
+  }
+  useEffect(() => {
+    getData()
+  }, [])
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div className="m-8">
-        <CatalogItem
-          imageSrc={coffes["Arabe"]}
-          tags={["Tradicional", "outra tag"]}
-          title="Expresso Tradicional"
-          description="O tradicional café feito com água quente e grãos moídos"
-          price={10}
-          onCartClick={(e) => console.log("Itens adicionados:", e)}
-        />
+      <div className="flex gap-4 m-8">
+        {!!data &&
+          data.map((item) => {
+            return (
+              <CatalogItem
+                key={item?.id}
+                imageSrc={item?.imageSrc}
+                title={item?.title}
+                tags={item?.tags}
+                description={item?.description}
+                price={item?.price}
+                onCartClick={(e) => console.log("Itens adicionados:", e)}
+              />
+            )
+          })}
       </div>
       <div className="m-4">
         <TypographyV2
