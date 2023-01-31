@@ -11,6 +11,7 @@ import {
   Button,
   CartItem,
   CatalogItem,
+  CatalogList,
   NumberInput,
   SelectableCards,
   Status,
@@ -203,42 +204,19 @@ function App() {
           </div>
         )}
 
-        <CoffeesContainer>
-          {isLoading ? (
-            <p>Carregando...</p>
-          ) : (
-            coffeeList.map((coffee) => (
-              <CatalogItem
-                key={coffee.id}
-                coffee={coffee}
-                onAddToCart={handleAddToCart}
-                minQuantity={5}
-                maxQuantity={10}
-              />
-            ))
-          )}
-        </CoffeesContainer>
+        {isLoading ? (
+          <p>Carregando...</p>
+        ) : (
+          <CatalogList
+            list={coffeeList}
+            onAddToCart={handleAddToCart}
+            minQuantity={5}
+            maxQuantity={10}
+          />
+        )}
       </div>
     </ThemeProvider>
   )
 }
-
-const CoffeesContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 32px;
-  width: 100%;
-  max-width: 1180px;
-  padding: 30px;
-  margin: 0 auto;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 425px) {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 16px;
-  }
-`
 
 export default App
