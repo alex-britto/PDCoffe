@@ -11,7 +11,17 @@ import {
   TypographyV2,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import axios from "axios"
+import { api } from "./services"
+
+//QUAL O MELHOR LOCAL/ARQUIVO PARA COLAR AS INTERFACES?
+interface ICoffeeItem {
+  id: number
+  imageSrc: string
+  title: string
+  description: string
+  tags: string[]
+  price: number
+}
 
 function App() {
   const [numberInputValue, setNumberInputValue] = useState(0)
@@ -25,12 +35,12 @@ function App() {
       title: "cartão de débito",
     },
   ]
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<ICoffeeItem[]>()
   const [isDataLoading, setIsDataLoading] = useState<boolean>()
   const getData = async () => {
     setIsDataLoading(true)
     try {
-      const response = await axios.get("http://localhost:3000/coffes")
+      const response = await api.get("/coffes")
       setData(response.data)
     } catch (err) {
       console.log(err.message)
