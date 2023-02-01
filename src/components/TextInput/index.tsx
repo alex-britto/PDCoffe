@@ -1,7 +1,7 @@
 import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
 import { useForm } from "react-hook-form";
 import { defaultTheme } from "../../styles/themes";
-import { Typography } from "../Typography";
+import Typography2 from "../Typography2";
 import { Container, EndLabel, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -39,13 +39,13 @@ export const TextInput = ({
 
       {value.length === 0 && (
         <EndLabel>
-          <Typography
-            family={defaultTheme.fonts.roboto}
+          <Typography2
+            family="Roboto"
             size={12}
             color={defaultTheme.colors.base.label}
           >
             {endLabel}
-          </Typography>
+          </Typography2>
         </EndLabel>
       )}
     </Container>

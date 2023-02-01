@@ -5,7 +5,7 @@ import { defaultTheme } from "../../styles/themes";
 import { handleConvertPriceNumberToString } from "../../utils";
 import { CartButton } from "../CartButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
-import { Typography } from "../Typography";
+import Typography2 from "../Typography2";
 import {
   CardCoffeeImage,
   CardContainer,
@@ -35,43 +35,44 @@ export function CatalogItem({
         <TagsContainer>
           {tags?.map((tag, index) => (
             <span key={index}>
-              <Typography
+              <Typography2
                 size={12}
-                weight={700}
+                weight="bold"
                 color={defaultTheme.colors.yellow.dark}
               >
                 {tag}
-              </Typography>
+              </Typography2>
             </span>
           ))}
         </TagsContainer>
 
-        <Typography
+        <Typography2
           size={20}
-          weight={700}
+          weight="bold"
+          height="160%"
+          family="Baloo 2"
           color={defaultTheme.colors.base.subtitle}
-          family={defaultTheme.fonts.baloo}
         >
           {title}
-        </Typography>
+        </Typography2>
 
-        <Typography color={defaultTheme.colors.base.label}>
+        <Typography2 size={14} color={defaultTheme.colors.base.label}>
           {description}
-        </Typography>
+        </Typography2>
       </CardContent>
 
       <CardFooter>
         <div>
-          <Typography color={defaultTheme.colors.base.text}>R$</Typography>
+          <Typography2 color={defaultTheme.colors.base.text}>R$</Typography2>
 
-          <Typography
+          <Typography2
             size={24}
-            weight={800}
+            weight="extrabold"
             color={defaultTheme.colors.base.subtitle}
-            family={defaultTheme.fonts.baloo}
+            family="Baloo 2"
           >
             {handleConvertPriceNumberToString(price)}
-          </Typography>
+          </Typography2>
         </div>
 
         <SelectQuantityInput

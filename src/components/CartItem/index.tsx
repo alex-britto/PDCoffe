@@ -5,7 +5,7 @@ import { defaultTheme } from "../../styles/themes";
 import { handleConvertPriceToBRL } from "../../utils/";
 import { DeleteButton } from "../DeleteButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
-import { Typography } from "../Typography";
+import Typography2 from "../Typography2";
 import {
   CardButtonsContainer,
   CardCoffeeImage,
@@ -34,9 +34,9 @@ export function CartItem({
         </CardCoffeeImage>
 
         <CardContent>
-          <Typography size={16} color={defaultTheme.colors.base.subtitle}>
+          <Typography2 color={defaultTheme.colors.base.subtitle}>
             {title}
-          </Typography>
+          </Typography2>
 
           <CardButtonsContainer>
             <SelectQuantityInput
@@ -59,13 +59,9 @@ export function CartItem({
             alignSelf: "flex-start",
           }}
         >
-          <Typography
-            size={16}
-            weight={700}
-            color={defaultTheme.colors.base.text}
-          >
+          <Typography2 weight="bold" color={defaultTheme.colors.base.text}>
             {handleConvertPriceToBRL(price)}
-          </Typography>
+          </Typography2>
         </div>
       </CardContainer>
       <Separator />

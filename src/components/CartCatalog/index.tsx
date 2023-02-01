@@ -4,7 +4,7 @@ import { ICartItem } from "../../@types/coffee";
 import { defaultTheme } from "../../styles/themes";
 import { calculateTotalPrice } from "../../utils";
 import { CartItem } from "../CartItem";
-import { Typography } from "../Typography";
+import Typography2 from "../Typography2";
 import { Container } from "./styles";
 
 interface CartCatalogProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,14 +21,9 @@ export const CartCatalog = ({
       {cartItems.length === 0 ? (
         <>
           <ShoppingCart size={64} color={defaultTheme.colors.base.subtitle} />
-          <Typography
-            size={16}
-            weight={400}
-            color={defaultTheme.colors.base.title}
-            family={defaultTheme.fonts.baloo}
-          >
+          <Typography2 color={defaultTheme.colors.base.title} family="Baloo 2">
             Nenhum item no carrinho
-          </Typography>
+          </Typography2>
         </>
       ) : (
         cartItems.map((item) => (
@@ -38,14 +33,12 @@ export const CartCatalog = ({
               coffee={item}
               onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
             />
-            <Typography
-              size={16}
-              weight={400}
+            <Typography2
               color={defaultTheme.colors.base.title}
-              family={defaultTheme.fonts.baloo}
+              family="Baloo 2"
             >
               Total: R$ {calculateTotalPrice(cartItems)}
-            </Typography>
+            </Typography2>
           </>
         ))
       )}
