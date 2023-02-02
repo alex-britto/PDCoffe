@@ -1,54 +1,26 @@
-import {
-  Bank,
-  CreditCard,
-  Money,
-  ShoppingCartSimple,
-  Trash,
-} from "phosphor-react"
 import { useEffect, useState } from "react"
 import styled, { ThemeProvider } from "styled-components"
+
 import {
-  Button,
-  CartItem,
-  CartList,
-  CatalogItem,
-  CatalogList,
-  NumberInput,
-  SelectableCards,
-  Status,
-  TextField,
-  Typography,
-} from "./components"
-import { CoffeeProps } from "./components/CatalogItem/CatalogItem"
+  ButtonsExample,
+  CartListExample,
+  CatalogListExample,
+  NumberInputExample,
+  SelectableCardsExample,
+  StatusExample,
+  TextFieldExample,
+  TypographyExample,
+} from "./components/Examples"
 import { Test } from "./components/Test/Test"
+
+import { CoffeeProps } from "./components/CatalogItem/CatalogItem"
 import { api } from "./services/api"
+
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
 function App() {
-  const [value, setValue] = useState<string>("")
-  const [number, setNumber] = useState<number>(1)
-  const [selectedValue, setSelectedValue] = useState("Credito")
-
   const [coffeeList, setCoffeeList] = useState<CoffeeProps[]>([])
   const [isLoading, setIsLoading] = useState(false)
-
-  const selectableCardsItems = [
-    {
-      id: "Credito",
-      icon: <CreditCard size={16} />,
-      title: "Cartão de crédito",
-    },
-    {
-      id: "Debito",
-      icon: <Bank size={16} />,
-      title: "Cartão de débito",
-    },
-    {
-      id: "Boleto",
-      icon: <Money size={16} />,
-      title: "Boleto",
-    },
-  ]
 
   const handleGetCoffeesFromApi = async () => {
     try {
@@ -67,157 +39,43 @@ function App() {
     handleGetCoffeesFromApi()
   }, [])
 
-  function handleAddToCart(coffee: CoffeeProps, quantity: number) {
-    alert(
-      `Produto ${coffee.title} adicionado ao carrinho \nQuantidade: ${quantity}`
-    )
-  }
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className="m-4">
         <Test />
 
-        <div className="flex w-full gap-10 items-center">
-          <Button color="primary">Label</Button>
-          <Button color="secondary">
-            <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />
-          </Button>
+        <Container>
+          <ButtonsExample />
+        </Container>
 
-          <Button color="base">
-            <Trash
-              size={16}
-              color={defaultTheme.colors.purple.dark}
-              className="mr-1"
-            />
-            Remover
-          </Button>
+        <TextFieldExample />
 
-          <Button color="light" quantity={2}>
-            <ShoppingCartSimple
-              size={22}
-              color={defaultTheme.colors.yellow.dark}
-            />
-          </Button>
-        </div>
+        <Container>
+          <StatusExample />
+        </Container>
 
-        <TextField
-          placeholder="Label"
-          endLabel="Opcional"
-          width="100%"
-          maxWidth={500}
-          className="mt-6"
-          value={value}
-          onChange={({ target }) => setValue(target.value)}
-        />
-        <h1>Texto: {value}</h1>
+        <Container>
+          <SelectableCardsExample />
+        </Container>
 
-        <div className="w-auto flex gap-3">
-          <Status label="Tradicional" />
-          <Status label="Com leite" />
-          <Status label="Gelado" />
-        </div>
+        <NumberInputExample />
 
-        <div className="flex w-full gap-10 items-center mt-6">
-          <SelectableCards
-            items={selectableCardsItems}
-            selectedDefault={selectedValue}
-            onChange={setSelectedValue}
-          />
+        <TypographyExample />
 
-          <p>Opção selecionada: {selectedValue}</p>
-        </div>
+        <CartListExample coffeeList={coffeeList} />
 
-        <NumberInput className="mt-6" value={number} onChange={setNumber} />
-        <h1>Valor: {number}</h1>
-
-        <div className="flex w-full gap-10 items-center mt-6">
-          <Typography family="header" variant="h1" className="mr-4">
-            h1 Baloo
-          </Typography>
-          <Typography family="header" variant="h1Bold" className="mr-4">
-            h1Bold Baloo
-          </Typography>
-          <Typography family="header" variant="h2" className="mr-4">
-            h2 Baloo
-          </Typography>
-          <Typography family="header" variant="h2Bold" className="mr-4">
-            h2Bold Baloo
-          </Typography>
-          <Typography family="header" variant="h3" className="mr-4">
-            h3 Baloo
-          </Typography>
-          <Typography family="header" variant="h3Bold" className="mr-4">
-            h3Bold Baloo
-          </Typography>
-          <Typography family="header" variant="h4" className="mr-4">
-            h4 Baloo
-          </Typography>
-          <Typography family="header" variant="h4Bold" className="mr-4">
-            h4Bold Baloo
-          </Typography>
-          <Typography family="header" variant="h5" className="mr-4">
-            h5 Baloo
-          </Typography>
-          <Typography family="header" variant="h5Bold" className="mr-4">
-            h5Bold Baloo
-          </Typography>
-        </div>
-
-        <div className="flex w-full gap-10 items-center mt-6 mb-10">
-          <Typography family="text" variant="h1" className="mr-4">
-            h1 Roboto
-          </Typography>
-          <Typography family="text" variant="h1Bold" className="mr-4">
-            h1Bold Roboto
-          </Typography>
-          <Typography family="text" variant="h2" className="mr-4">
-            h2 Roboto
-          </Typography>
-          <Typography family="text" variant="h2Bold" className="mr-4">
-            h2Bold Roboto
-          </Typography>
-          <Typography family="text" variant="h3" className="mr-4">
-            h3 Roboto
-          </Typography>
-          <Typography family="text" variant="h3Bold" className="mr-4">
-            h3Bold Roboto
-          </Typography>
-          <Typography family="text" variant="h4" className="mr-4">
-            h4 Roboto
-          </Typography>
-          <Typography family="text" variant="h4Bold" className="mr-4">
-            h4Bold Roboto
-          </Typography>
-          <Typography family="text" variant="h5" className="mr-4">
-            h5 Roboto
-          </Typography>
-          <Typography family="text" variant="h5Bold" className="mr-4">
-            h5Bold Roboto
-          </Typography>
-        </div>
-
-        {coffeeList && (
-          <CartList
-            list={coffeeList.slice(0, 3)}
-            minQuantity={3}
-            maxQuantity={10}
-          />
-        )}
-
-        {isLoading ? (
-          <p>Carregando...</p>
-        ) : (
-          <CatalogList
-            list={coffeeList}
-            onAddToCart={handleAddToCart}
-            minQuantity={5}
-            maxQuantity={10}
-          />
-        )}
+        <CatalogListExample coffeeList={coffeeList} isLoading={isLoading} />
       </div>
     </ThemeProvider>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  width: 100%;
+`
 
 export default App
