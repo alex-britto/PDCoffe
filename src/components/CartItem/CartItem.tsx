@@ -33,38 +33,45 @@ export const CartItem = ({
   const { title, id, imageUrl, price } = coffee || []
 
   return (
-    <Container {...props}>
-      <img src={imageUrl} alt={title} />
+    <Container>
+      <Content {...props}>
+        <img src={imageUrl} alt={title} />
 
-      <InfoContainer>
-        <Typography variant="h4">{title}</Typography>
+        <InfoContainer>
+          <Typography variant="h4">{title}</Typography>
 
-        <QuantityBox>
-          <NumberInput
-            value={quantity}
-            onChange={setQuantity}
-            min={minQuantity}
-            max={maxQuantity}
-          />
-          <Button color="base">
-            <Trash size={16} color={theme.colors.purple.dark} />
-            Remover
-          </Button>
-        </QuantityBox>
-      </InfoContainer>
+          <QuantityBox>
+            <NumberInput
+              value={quantity}
+              onChange={setQuantity}
+              min={minQuantity}
+              max={maxQuantity}
+            />
+            <Button color="base">
+              <Trash size={16} color={theme.colors.purple.dark} />
+              Remover
+            </Button>
+          </QuantityBox>
+        </InfoContainer>
 
-      <Typography
-        color={theme.colors.base.text}
-        variant="h4Bold"
-        className="ml-[50px]"
-      >
-        {handleConvertPriceToBRL(price)}
-      </Typography>
+        <Typography
+          color={theme.colors.base.text}
+          variant="h4Bold"
+          className="ml-[50px]"
+        >
+          {handleConvertPriceToBRL(price)}
+        </Typography>
+      </Content>
     </Container>
   )
 }
 
 const Container = styled.div`
+  max-width: 368px;
+  width: 100%;
+`
+
+const Content = styled.div`
   ${({ theme }) => css`
     align-items: flex-start;
     background: ${theme.colors.base.card};

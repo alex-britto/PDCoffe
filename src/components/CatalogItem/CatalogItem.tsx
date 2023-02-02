@@ -17,7 +17,7 @@ export interface CoffeeProps {
   tags: string[]
 }
 
-interface CatalogItemProps {
+interface CatalogItemProps extends React.HTMLAttributes<HTMLDivElement> {
   coffee: CoffeeProps
   minQuantity?: number
   maxQuantity?: number

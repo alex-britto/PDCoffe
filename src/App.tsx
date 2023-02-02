@@ -10,6 +10,7 @@ import styled, { ThemeProvider } from "styled-components"
 import {
   Button,
   CartItem,
+  CartList,
   CatalogItem,
   CatalogList,
   NumberInput,
@@ -163,7 +164,7 @@ function App() {
           </Typography>
         </div>
 
-        <div className="flex w-full gap-10 items-center mt-6">
+        <div className="flex w-full gap-10 items-center mt-6 mb-10">
           <Typography family="text" variant="h1" className="mr-4">
             h1 Roboto
           </Typography>
@@ -197,11 +198,11 @@ function App() {
         </div>
 
         {coffeeList && (
-          <div className="flex flex-col items-start w-full gap-8 mt-6">
-            <CartItem coffee={coffeeList[0]} minQuantity={5} maxQuantity={10} />
-            <CartItem coffee={coffeeList[1]} minQuantity={5} maxQuantity={10} />
-            <CartItem coffee={coffeeList[2]} minQuantity={5} maxQuantity={10} />
-          </div>
+          <CartList
+            list={coffeeList.slice(0, 3)}
+            minQuantity={3}
+            maxQuantity={10}
+          />
         )}
 
         {isLoading ? (
