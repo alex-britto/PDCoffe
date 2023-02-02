@@ -2,13 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "./shared/components/Button";
 import CartButton from "./shared/components/CartButton";
-import CatalogItem, { CatalogItemInfo } from "./shared/components/CatalogItem";
-import { Loader } from "./shared/components/Loader";
+import CartItem from "./shared/components/CartItem";
+import { CatalogItemInfo } from "./shared/components/CatalogItem";
+import CatalogList from "./shared/components/CatalogList";
 import NumberInput from "./shared/components/NumberInput";
 import SelectInput, { SelectOptionType } from "./shared/components/SelectInput";
 import TextField from "./shared/components/TextField";
 
-interface CartProduct {
+export interface CartProduct {
 	id: string;
 	qty: number;
 }
@@ -18,8 +19,9 @@ function App() {
 	const [selectInputValue, setSelectInputValue] = useState<string>("0");
 	const [textFieldInputValue, setTextFieldInputValue] = useState<string>();
 	const [isLoading, setIsLoading] = useState(true);
-	const [products, setProducts] = useState<CatalogItemInfo[]>();
+	const [products, setProducts] = useState<CatalogItemInfo[]>([]);
 	const [cartProductsList, setCartProductsList] = useState<CartProduct[]>([]);
+	const [isCartOpened, setIsCartOpened] = useState(false);
 
 	const selectInputOptions: SelectOptionType[] = [
 		{
@@ -75,6 +77,41 @@ function App() {
 		}
 	};
 
+	const handleClearCart = () => {
+		setCartProductsList([]);
+		setIsCartOpened(false);
+	};
+
+	const onRemoveCartProduct = (productId: string) => {
+		const newCartProductsList = cartProductsList.filter(
+			(product) => product.id !== productId
+		);
+
+		setCartProductsList(newCartProductsList);
+
+		if (newCartProductsList.length === 0) setIsCartOpened(false);
+	};
+
+	const handleToggleOpenCart = () => {
+		cartProductsList.length > 0
+			? setIsCartOpened((prevState) => !prevState)
+			: window.alert("O Carrinho está vazio");
+	};
+
+	const handleChangeCartItemQty = (
+		productId: string,
+		newProductQty: number
+	) => {
+		const foundProductIndex = cartProductsList.findIndex(
+			(product) => product.id === productId
+		);
+
+		if (foundProductIndex !== -1) {
+			const newCartProductsList = cartProductsList;
+			newCartProductsList[foundProductIndex].qty = newProductQty;
+		}
+	};
+
 	return (
 		<div className="flex flex-col w-full p-10">
 			<div className="flex flex-col gap-5">
@@ -117,33 +154,34 @@ function App() {
 					<div>Valor: {textFieldInputValue}</div>
 				</div>
 				<div className="mt-5">
-					<div className="h-20 flex gap-5">
+					<div className="flex gap-5 mb-5">
 						<CartButton
 							cartItemsQty={cartProductsList.length}
-							onClick={() => console.log({ cartProductsList })}
+							onClick={handleToggleOpenCart}
 						/>
-						<Button onClick={() => setCartProductsList([])}>
-							Limpar Carrinho
-						</Button>
+						<Button onClick={handleClearCart}>Limpar Carrinho</Button>
 					</div>
-					{isLoading ? (
-						<div className="w-full flex justify-center items-center">
-							<Loader />
-						</div>
-					) : (
-						<ul className="flex flex-row w-full flex-wrap gap-10">
-							{products?.map((item) => {
-								return (
-									<li key={item.id}>
-										<CatalogItem
-											catalogItemInfo={item}
-											onAddCartProduct={handleAddCartProduct}
-										/>
-									</li>
-								);
-							})}
+					{isCartOpened && (
+						<ul className="flex flex-col gap-5 mb-16 w-full">
+							{cartProductsList.map((cartItem) => (
+								<CartItem
+									key={cartItem.id}
+									style={{ width: "368px" }}
+									cartProduct={cartItem}
+									productsList={products}
+									onRemoveCartProduct={onRemoveCartProduct}
+									onProductQtyChange={handleChangeCartItemQty}
+								/>
+							))}
 						</ul>
 					)}
+
+					<CatalogList
+						className="flex flex-row flex-wrap gap-8"
+						catalogItems={products}
+						handleAddCartProduct={handleAddCartProduct}
+						isLoading={isLoading}
+					/>
 				</div>
 			</div>
 		</div>

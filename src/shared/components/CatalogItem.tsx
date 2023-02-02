@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from "react";
+import { LiHTMLAttributes, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import CartButton from "./CartButton";
 import NumberInput from "./NumberInput";
@@ -14,7 +14,7 @@ export interface CatalogItemInfo {
 	price: number;
 }
 
-interface CatalogItemProps extends HTMLAttributes<HTMLDivElement> {
+interface CatalogItemProps extends LiHTMLAttributes<HTMLLIElement> {
 	catalogItemInfo: CatalogItemInfo;
 	onAddCartProduct: (qty: number, productId: string) => void;
 }
@@ -85,7 +85,7 @@ const CatalogItem = ({
 
 export default CatalogItem;
 
-const StyledCatalogItem = styled.div`
+const StyledCatalogItem = styled.li`
 	${({ theme }) => css`
 		background-color: ${theme.colors.base.card};
 		border-radius: 6px 36px;

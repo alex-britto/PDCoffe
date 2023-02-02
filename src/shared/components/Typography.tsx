@@ -24,6 +24,16 @@ const variants = {
 		fontSize: defaultTheme.font.size[20],
 		fontWeight: defaultTheme.font.weight.Bold,
 	},
+	textBoldMedium: {
+		fontFamily: `"${defaultTheme.font.family.Roboto}"`,
+		fontSize: defaultTheme.font.size[16],
+		fontWeight: defaultTheme.font.weight.Bold,
+	},
+	textMedium: {
+		fontFamily: `"${defaultTheme.font.family.Roboto}"`,
+		fontSize: defaultTheme.font.size[16],
+		fontWeight: defaultTheme.font.weight.Regular,
+	},
 	textSmall: {
 		fontFamily: `"${defaultTheme.font.family.Roboto}"`,
 		fontSize: defaultTheme.font.size[14],
