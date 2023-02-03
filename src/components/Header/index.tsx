@@ -13,6 +13,13 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   onShowCartItens: () => void;
 }
 
+interface AddressDataProps {
+  address: {
+    city: string;
+    state: string;
+  };
+}
+
 export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [latitude, setLatitude] = useState(0);
@@ -22,12 +29,14 @@ export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
 
   function getUserLocation() {
     setIsLoading(true);
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      setLatitude(latitude);
-      setLongitude(longitude);
-      setIsLoading(false);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position: GeolocationPosition) => {
+        const { latitude, longitude } = position.coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
+        setIsLoading(false);
+      }
+    );
   }
 
   function getUserAddress() {
@@ -35,7 +44,7 @@ export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
       `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
     )
       .then((response) => response.json())
-      .then((data) => {
+      .then((data: AddressDataProps) => {
         const { address } = data;
         const uf = convertUFTo2Letters(address.state);
         setUserUf(uf);

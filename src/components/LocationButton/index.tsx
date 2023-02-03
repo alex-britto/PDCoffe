@@ -27,7 +27,7 @@ export const LocationButton = ({
         <>
           <MapPin size={22} weight="fill" color={theme.colors.purple.default} />
           <Typography size={14} color={theme.colors.purple.dark}>
-            {userCity ? `${userCity}, ${userUf}` : "Sua localização"}
+            {userCity ? `${userCity}, ${userUf}` : "Enviar para"}
           </Typography>
         </>
       )}
