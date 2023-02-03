@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import styled from "styled-components"
 import { api } from "../../services"
 import { CatalogItem, TypographyV2 } from "../index"
 
@@ -52,10 +53,7 @@ export const CatalogList = ({
           CARREGANDO...
         </TypographyV2>
       ) : (
-        <div className="flex gap-4 m-8">
-          <TypographyV2 variant="h1" family="header">
-            {totalItems}
-          </TypographyV2>
+        <Container>
           {!!data &&
             data.map((item) => {
               return (
@@ -70,8 +68,27 @@ export const CatalogList = ({
                 />
               )
             })}
-        </div>
+        </Container>
       )}
     </>
   )
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 32px;
+  width: 100%;
+  padding: 30px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 425px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+`

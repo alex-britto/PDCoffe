@@ -43,7 +43,7 @@ function App() {
           className="m-4"
         />
       </div>
-      <div className="m-4">
+      <div>
         <CatalogList onTotalSelectedItemsChange={setTotalCartItems} />
       </div>
       <div className="m-4">
