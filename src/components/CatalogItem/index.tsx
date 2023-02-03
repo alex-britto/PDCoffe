@@ -1,11 +1,13 @@
 import { ShoppingCart } from "phosphor-react";
 import { HTMLAttributes, useState } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
-import { defaultTheme } from "../../styles/themes";
 import { handleConvertPriceNumberToString } from "../../utils";
+
+import { useTheme } from "styled-components";
+import { Badge } from "../Badge";
 import { CartButton } from "../CartButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
-import Typography2 from "../Typography2";
+import Typography from "../Typography";
 import {
   CardCoffeeImage,
   CardContainer,
@@ -24,6 +26,7 @@ export function CatalogItem({
   onAddToCart,
 }: CardCoffeeProps) {
   const [quantity, setQuantity] = useState(1);
+  const theme = useTheme();
 
   return (
     <CardContainer>
@@ -34,45 +37,37 @@ export function CatalogItem({
       <CardContent>
         <TagsContainer>
           {tags?.map((tag, index) => (
-            <span key={index}>
-              <Typography2
-                size={12}
-                weight="bold"
-                color={defaultTheme.colors.yellow.dark}
-              >
-                {tag}
-              </Typography2>
-            </span>
+            <Badge key={index} tag={tag} />
           ))}
         </TagsContainer>
 
-        <Typography2
+        <Typography
           size={20}
-          weight="bold"
+          weight={700}
           height="160%"
           family="Baloo 2"
-          color={defaultTheme.colors.base.subtitle}
+          color={theme.colors.base.subtitle}
         >
           {title}
-        </Typography2>
+        </Typography>
 
-        <Typography2 size={14} color={defaultTheme.colors.base.label}>
+        <Typography size={14} color={theme.colors.base.label}>
           {description}
-        </Typography2>
+        </Typography>
       </CardContent>
 
       <CardFooter>
         <div>
-          <Typography2 color={defaultTheme.colors.base.text}>R$</Typography2>
+          <Typography color={theme.colors.base.text}>R$</Typography>
 
-          <Typography2
+          <Typography
             size={24}
-            weight="extrabold"
-            color={defaultTheme.colors.base.subtitle}
+            weight={800}
+            color={theme.colors.base.subtitle}
             family="Baloo 2"
           >
             {handleConvertPriceNumberToString(price)}
-          </Typography2>
+          </Typography>
         </div>
 
         <SelectQuantityInput
@@ -81,7 +76,7 @@ export function CatalogItem({
         />
 
         <CartButton
-          onClick={() => onAddToCart({ title, price, quantity, imageUrl, id })}
+          onClick={() => onAddToCart({ id, title, price, quantity, imageUrl })}
           icon={<ShoppingCart size={22} weight="fill" />}
         />
       </CardFooter>

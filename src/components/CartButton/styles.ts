@@ -42,8 +42,5 @@ export const Badge = styled.div`
     color: ${({ theme }) => theme.colors.white};
     padding: 4px 9px;
     border-radius: 50%;
-    font-size: 12px;
-    font-weight: 700;
-    font-family: ${({ theme }) => theme.fonts.roboto};
   }
 `;

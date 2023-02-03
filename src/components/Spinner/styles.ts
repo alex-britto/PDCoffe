@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const SpinnerContainer = styled.div`
+interface SpinnerProps {
+  size?: number;
+  color: string;
+}
+
+export const SpinnerContainer = styled.div<SpinnerProps>`
   margin: 0 auto;
   align-self: center;
   justify-self: center;
@@ -9,8 +14,8 @@ export const SpinnerContainer = styled.div`
   align-items: center;
   justify-content: center;
   > div {
-    width: 2rem;
-    height: 2rem;
+    width: ${({ size }) => size || 40}px;
+    height: ${({ size }) => size || 40}px;
     position: relative;
     animation: sk-chase 2.5s infinite linear both;
     .sk-chase-dot {
@@ -26,7 +31,7 @@ export const SpinnerContainer = styled.div`
       display: block;
       width: 25%;
       height: 25%;
-      background-color: ${({ theme }) => theme.colors.purple.default};
+      background-color: ${({ color }) => color};
       border-radius: 100%;
       animation: sk-chase-dot-before 2s infinite ease-in-out both;
     }

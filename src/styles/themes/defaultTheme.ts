@@ -23,9 +23,4 @@ const colors = {
   white: "#FFFFFF",
 };
 
-const fonts = {
-  roboto: "Roboto",
-  baloo: "Baloo 2",
-};
-
-export const defaultTheme = { colors, fonts };
+export const defaultTheme = { colors };

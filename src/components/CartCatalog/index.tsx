@@ -1,10 +1,11 @@
 import { ShoppingCart } from "phosphor-react";
 import { HTMLAttributes } from "react";
 import { ICartItem } from "../../@types/coffee";
-import { defaultTheme } from "../../styles/themes";
+
+import { useTheme } from "styled-components";
 import { calculateTotalPrice } from "../../utils";
 import { CartItem } from "../CartItem";
-import Typography2 from "../Typography2";
+import Typography from "../Typography";
 import { Container } from "./styles";
 
 interface CartCatalogProps extends HTMLAttributes<HTMLDivElement> {
@@ -16,14 +17,16 @@ export const CartCatalog = ({
   cartItems,
   handleRemoveItemFromCart,
 }: CartCatalogProps) => {
+  const theme = useTheme();
+
   return (
     <Container>
       {cartItems.length === 0 ? (
         <>
-          <ShoppingCart size={64} color={defaultTheme.colors.base.subtitle} />
-          <Typography2 color={defaultTheme.colors.base.title} family="Baloo 2">
+          <ShoppingCart size={64} color={theme.colors.base.subtitle} />
+          <Typography color={theme.colors.base.title} family="Baloo 2">
             Nenhum item no carrinho
-          </Typography2>
+          </Typography>
         </>
       ) : (
         cartItems.map((item) => (
@@ -33,12 +36,9 @@ export const CartCatalog = ({
               coffee={item}
               onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
             />
-            <Typography2
-              color={defaultTheme.colors.base.title}
-              family="Baloo 2"
-            >
+            <Typography color={theme.colors.base.title} family="Baloo 2">
               Total: R$ {calculateTotalPrice(cartItems)}
-            </Typography2>
+            </Typography>
           </>
         ))
       )}

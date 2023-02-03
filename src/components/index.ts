@@ -1,3 +1,4 @@
+export { Badge } from "./Badge";
 export { Button } from "./Button";
 export { CartButton } from "./CartButton";
 export { CartCatalog } from "./CartCatalog";
@@ -5,9 +6,9 @@ export { CartItem } from "./CartItem";
 export { CatalogItem } from "./CatalogItem";
 export { DeleteButton } from "./DeleteButton";
 export { Header } from "./Header";
+export { LocationButton } from "./LocationButton";
 export { Menu } from "./Menu";
 export { SelectPaymentInput } from "./SelectPaymentInput";
 export { SelectQuantityInput } from "./SelectQuantityInput";
 export { Spinner } from "./Spinner";
 export { TextInput } from "./TextInput";
-export { Typography } from "./Typography";

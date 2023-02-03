@@ -6,9 +6,7 @@ export const Container = styled.button`
   justify-content: space-between;
   gap: 4px;
   background-color: ${({ theme }) => theme.colors.base.button};
-  font-family: ${({ theme }) => theme.fonts.roboto};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.base.text};
   padding: 8px;
   border: none;
   border-radius: 6px;
@@ -16,6 +14,6 @@ export const Container = styled.button`
 
   &:hover {
     transition: 0.2s;
-    background-color: ${({ theme }) => theme.fonts.roboto};
+    background-color: ${({ theme }) => theme.colors.base.hover};
   }
 `;

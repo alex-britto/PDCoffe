@@ -11,7 +11,6 @@ export const Container = styled.div`
   width: 72px;
   border: none;
   border-radius: 6px;
-  font-family: ${({ theme }) => theme.fonts.roboto};
   transition: 0.2s;
 
   button {

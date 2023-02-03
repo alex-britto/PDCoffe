@@ -1,8 +1,13 @@
 import { SpinnerContainer } from "./styles";
 
-export function Spinner() {
+interface SpinnerProps {
+  size: number;
+  color: string;
+}
+
+export function Spinner({ size, color }: SpinnerProps) {
   return (
-    <SpinnerContainer>
+    <SpinnerContainer size={size} color={color}>
       <div>
         <div className="sk-chase-dot"></div>
         <div className="sk-chase-dot"></div>

@@ -1,4 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
+
+import Typography from "../Typography";
 import { Container } from "./styles";
 
 interface SelectPaymentInputProps {
@@ -27,7 +29,8 @@ export function SelectPaymentInput({
   return (
     <Container isSelected={isCardSelected} onClick={handleSelectCard}>
       <div>{icon}</div>
-      <span>{label}</span>
+
+      <Typography>{label}</Typography>
     </Container>
   );
 }

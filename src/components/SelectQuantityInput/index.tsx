@@ -1,5 +1,7 @@
 import { Minus, Plus } from "phosphor-react";
 import { useEffect, useState } from "react";
+
+import Typography from "../Typography";
 import { Container } from "./styles";
 
 interface SelectQuantityInputProps {
@@ -30,7 +32,9 @@ export function SelectQuantityInput({
       <button onClick={handleDecrementQuantity} disabled={inputValue === 1}>
         <Minus size={14} weight="bold" />
       </button>
-      <span>{inputValue}</span>
+      <span>
+        <Typography>{inputValue}</Typography>
+      </span>
       <button onClick={handleIncrementQuantity}>
         <Plus size={14} weight="bold" />
       </button>

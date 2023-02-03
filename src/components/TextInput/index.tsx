@@ -1,11 +1,12 @@
 import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
 import { useForm } from "react-hook-form";
-import { defaultTheme } from "../../styles/themes";
-import Typography2 from "../Typography2";
+
+import { useTheme } from "styled-components";
+import Typography from "../Typography";
 import { Container, EndLabel, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  endLabel: string;
+  endLabel?: string;
   placeholder: string;
 }
 
@@ -19,6 +20,7 @@ export const TextInput = ({
   ...props
 }: TextFieldProps) => {
   const [value, setValue] = useState<string>("");
+  const theme = useTheme();
 
   const { register } = useForm<IFormInput>();
 
@@ -32,20 +34,13 @@ export const TextInput = ({
         placeholder={placeholder}
         {...register("value")}
         onChange={onChange}
-        style={{
-          fontFamily: defaultTheme.fonts.roboto,
-        }}
       />
 
       {value.length === 0 && (
         <EndLabel>
-          <Typography2
-            family="Roboto"
-            size={12}
-            color={defaultTheme.colors.base.label}
-          >
+          <Typography size={12} color={theme.colors.base.label}>
             {endLabel}
-          </Typography2>
+          </Typography>
         </EndLabel>
       )}
     </Container>

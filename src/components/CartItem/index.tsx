@@ -1,11 +1,12 @@
 import { Trash } from "phosphor-react";
 import { useState } from "react";
 import { ICartItem } from "../../@types/coffee";
-import { defaultTheme } from "../../styles/themes";
+
+import { useTheme } from "styled-components";
 import { handleConvertPriceToBRL } from "../../utils/";
 import { DeleteButton } from "../DeleteButton";
 import { SelectQuantityInput } from "../SelectQuantityInput";
-import Typography2 from "../Typography2";
+import Typography from "../Typography";
 import {
   CardButtonsContainer,
   CardCoffeeImage,
@@ -24,8 +25,11 @@ export function CartItem({
   onRemoveCartItem,
 }: CardCoffeeProps) {
   const [quantityValue, setQuantityValue] = useState(quantity);
+  const theme = useTheme();
 
-  const handleChangeQuantity = () => {};
+  const handleChangeQuantity = () => {
+    console.log(quantityValue);
+  };
   return (
     <>
       <CardContainer>
@@ -34,9 +38,7 @@ export function CartItem({
         </CardCoffeeImage>
 
         <CardContent>
-          <Typography2 color={defaultTheme.colors.base.subtitle}>
-            {title}
-          </Typography2>
+          <Typography color={theme.colors.base.subtitle}>{title}</Typography>
 
           <CardButtonsContainer>
             <SelectQuantityInput
@@ -45,9 +47,7 @@ export function CartItem({
             />
 
             <DeleteButton
-              icon={
-                <Trash size={22} color={defaultTheme.colors.purple.default} />
-              }
+              icon={<Trash size={22} color={theme.colors.purple.default} />}
               label="Remover"
               onClick={() => onRemoveCartItem(id)}
             />
@@ -59,9 +59,9 @@ export function CartItem({
             alignSelf: "flex-start",
           }}
         >
-          <Typography2 weight="bold" color={defaultTheme.colors.base.text}>
+          <Typography weight={700} color={theme.colors.base.text}>
             {handleConvertPriceToBRL(price)}
-          </Typography2>
+          </Typography>
         </div>
       </CardContainer>
       <Separator />

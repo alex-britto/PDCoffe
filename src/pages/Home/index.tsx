@@ -1,9 +1,6 @@
-import { CartCatalog, Header, Menu } from "../../components";
-
 import { useEffect, useState } from "react";
-
 import { ICartItem, ICoffee } from "../../@types/coffee";
-
+import { CartCatalog, Header, Menu } from "../../components";
 import { api } from "../../services";
 
 export function Home() {

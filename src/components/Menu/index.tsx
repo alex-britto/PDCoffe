@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react";
+import { useTheme } from "styled-components";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 import { CatalogItem } from "../CatalogItem";
 import { Spinner } from "../Spinner";
@@ -11,10 +12,12 @@ interface MenuProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Menu = ({ coffeeList, isLoading, onAddToCart }: MenuProps) => {
+  const theme = useTheme();
+
   return (
     <Container>
       {isLoading ? (
-        <Spinner />
+        <Spinner size={40} color={theme.colors.purple.default} />
       ) : (
         coffeeList.map((coffee) => (
           <CatalogItem
