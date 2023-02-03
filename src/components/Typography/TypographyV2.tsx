@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 
 //cria a InterfaceDefault, sem as props específicas
 interface TypographyProps {
-  children: string
+  children: string | number
   as?: any
   color?: string
   className?: string

@@ -1,9 +1,9 @@
 import { ShoppingCartSimple, Trash } from "phosphor-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ThemeProvider } from "styled-components"
 import {
   Button,
-  CatalogItem,
+  CatalogList,
   NumberInput,
   SelectInputList,
   Status,
@@ -11,19 +11,9 @@ import {
   TypographyV2,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
-import { api } from "./services"
-
-//QUAL O MELHOR LOCAL/ARQUIVO PARA COLAR AS INTERFACES?
-interface ICoffeeItem {
-  id: number
-  imageSrc: string
-  title: string
-  description: string
-  tags: string[]
-  price: number
-}
 
 function App() {
+  const [totalCartItems, setTotalCartItems] = useState<number>()
   const [numberInputValue, setNumberInputValue] = useState(0)
   const selectInputItems = [
     {
@@ -35,47 +25,27 @@ function App() {
       title: "cartão de débito",
     },
   ]
-  const [data, setData] = useState<ICoffeeItem[]>()
-  const [isDataLoading, setIsDataLoading] = useState<boolean>()
-  const getData = async () => {
-    setIsDataLoading(true)
-    try {
-      const response = await api.get("/coffees")
-      setData(response.data)
-    } catch (err) {
-      console.log(err.message)
-    } finally {
-      setIsDataLoading(false)
-    }
-  }
-  useEffect(() => {
-    getData()
-  }, [])
+
   return (
     <ThemeProvider theme={defaultTheme}>
-      {isDataLoading ? (
-        <TypographyV2 variant="h1" family="header">
-          CARREGANDO...
-        </TypographyV2>
-      ) : (
-        <div className="flex gap-4 m-8">
-          {!!data &&
-            data.map((item) => {
-              return (
-                <CatalogItem
-                  key={item?.id}
-                  imageSrc={item?.imageSrc}
-                  title={item?.title}
-                  tags={item?.tags}
-                  description={item?.description}
-                  price={item?.price}
-                  onCartClick={(e) => console.log("Itens adicionados:", e)}
-                />
-              )
-            })}
-        </div>
-      )}
-
+      <div className="m-4">
+        <Button
+          bgColor={defaultTheme.colors.yellow.light}
+          itemsQuantity={totalCartItems}
+          badgeColor={defaultTheme.colors.yellow.dark}
+          icon={
+            <ShoppingCartSimple
+              size={22}
+              color={defaultTheme.colors.yellow.dark}
+            />
+          }
+          onClick={() => console.log("test")}
+          className="m-4"
+        />
+      </div>
+      <div className="m-4">
+        <CatalogList onTotalSelectedItemsChange={setTotalCartItems} />
+      </div>
       <div className="m-4">
         <TypographyV2
           family="header"
@@ -136,19 +106,6 @@ function App() {
             bgColor={defaultTheme.colors.purple.dark}
             bgHoverColor={defaultTheme.colors.purple.default}
             icon={<ShoppingCartSimple size={22} color="white" />}
-            onClick={() => console.log("test")}
-            className="m-4"
-          />
-          <Button
-            bgColor={defaultTheme.colors.yellow.light}
-            itemsQuantity={3}
-            badgeColor={defaultTheme.colors.yellow.dark}
-            icon={
-              <ShoppingCartSimple
-                size={22}
-                color={defaultTheme.colors.yellow.dark}
-              />
-            }
             onClick={() => console.log("test")}
             className="m-4"
           />
