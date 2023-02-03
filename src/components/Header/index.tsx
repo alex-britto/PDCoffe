@@ -64,7 +64,7 @@ export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
           variant="SECONDARY"
           quantity={cartItems.length}
           onClick={onShowCartItens}
-          icon={<ShoppingCart size={22} />}
+          icon={<ShoppingCart size={22} weight="fill" />}
         />
       </div>
     </HeaderContainer>

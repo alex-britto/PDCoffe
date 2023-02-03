@@ -10,10 +10,9 @@ export const ButtonContainer = styled.button`
   justify-content: center;
   align-items: center;
   outline: none;
-  padding: 0 16px;
+  padding: 8px;
   width: 100%;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 140px;
 
   &:hover {
     border-bottom: 2px solid ${({ theme }) => theme.colors.purple.dark};
