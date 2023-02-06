@@ -27,16 +27,22 @@ export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
   const [userUf, setUserUf] = useState("");
   const [userCity, setUserCity] = useState("");
 
+  // TODO: Finalizar loading no hook
+  // const { userUf, userCity, isLoading } = useUserLocation();
+
+  function handleSuccess(position: GeolocationPosition) {
+    const { latitude, longitude } = position.coords;
+    setLatitude(latitude);
+    setLongitude(longitude);
+  }
+
+  function handleError(error: GeolocationPositionError) {
+    console.error(error);
+  }
+
   function getUserLocation() {
     setIsLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (position: GeolocationPosition) => {
-        const { latitude, longitude } = position.coords;
-        setLatitude(latitude);
-        setLongitude(longitude);
-        setIsLoading(false);
-      }
-    );
+    navigator.geolocation.watchPosition(handleSuccess, handleError);
   }
 
   function getUserAddress() {
@@ -49,6 +55,7 @@ export const Header = ({ cartItems, onShowCartItens }: HeaderProps) => {
         const uf = convertUFTo2Letters(address.state);
         setUserUf(uf);
         setUserCity(address.city);
+        setIsLoading(false);
       });
   }
 
