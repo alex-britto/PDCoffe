@@ -2,55 +2,65 @@ import { ShoppingCartSimple } from "phosphor-react";
 import { HTMLAttributes, useState } from "react"
 import styled, { css, useTheme } from "styled-components";
 import { NumberInput, Status, Typography, Button } from '../../components'
+import { TypographyProps } from "../Typography/Typography";
+
+export interface CoffeeProps {
+    id: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+    price: number;
+    typeTags: string[]
+}
 
 export interface CatalogItemProps extends HTMLAttributes<HTMLDivElement> {
-    imageSrc: string;
-    title: string;
-    subtitle: string;
-    priceTag: number; 
-    onCartAdd: (value: number) => void
-    typographyColor?: string;
-    tags: string[];
+    coffee: CoffeeProps;
+    onCartAdd: (coffee: CoffeeProps, quantity: number) => void
+    typographyProps?: TypographyProps;
 }
 
 const CatologItem = ({ 
-    imageSrc, 
-    title, 
-    subtitle, 
-    priceTag, 
+    coffee,
     onCartAdd, 
-    tags,
-    typographyColor, 
+    typographyProps,
     ...rest }: CatalogItemProps) => { 
         const theme = useTheme()
 
-        const [inputValue, setInputValue] = useState(0)
+        const [inputValue, setInputValue] = useState<number>(1)
+
+        const { title, id, description, imageUrl, price, typeTags } = coffee
+
+        const handleCartClick = () => {
+            onCartAdd(coffee, inputValue)
+        }
 
     return (
         <Container {...rest}>
             <Content>
-            {imageSrc && <img src={imageSrc} className="mr-3 -mt-10" />}
-                <ul className="flex gap-2 mt-3">
-                {tags.map((tag) => (
-                    <li key={tag}>
-                    <Status text={tag} containerProps={{ className: "mt-3" }} />
-                  </li>
-                ))}
-              </ul>
+            {coffee.imageUrl && <img src={imageUrl} className="mr-3 -mt-10" />}
+                <StatusContainer>
+                    <ul className="flex gap-2 mt-3">
+                        {typeTags.map((tag) => (
+                            <li key={tag}>
+                            <Status text={tag} containerProps={{ className: "mt-3" }} />
+                        </li>
+                        ))}
+                    </ul>
+                </StatusContainer>
             {title && <Typography family="baloo" variant="h3" className="mt-4">{title}</Typography>}
-            {subtitle && 
-            <Typography family="roboto" variant="caption" fontColor={typographyColor} className="text-center mt-3 mb-8 subtitle">
-                    {subtitle}
+            {description && 
+            <Typography family="roboto" variant="caption" {...typographyProps} fontColor={theme.colors.base.label} className="text-center mt-3 mb-8 subtitle">
+                    {description}
             </Typography>}
             <Fragment>
-            {priceTag && (
+            {price && (
                 <Fragment>
                     <Typography family="roboto" variant="caption" className="mt-1 mr-1">R$</Typography>
                     <Typography family="baloo" variant="h3" className="mr-6"> 
                         {new Intl.NumberFormat("pt-Br", {
                             minimumFractionDigits: 2,
                             currency: "BRL",
-                            }).format(priceTag)}
+                            }).format(price)}
                     </Typography>
                 </Fragment>
             )}
@@ -64,7 +74,7 @@ const CatologItem = ({
                 bgColor={theme.colors.purple.dark}
                 bgHoverColor={theme.colors.purple.default}
                 textColor={theme.colors.white}
-                onClick={() => onCartAdd(inputValue)}
+                onClick={handleCartClick}
                 className="ml-2"
         />
             </Fragment>
@@ -75,7 +85,18 @@ const CatologItem = ({
 
 const Container = styled.div`
     background: transparent;
-    overflow: hidden;
+    width: 256px;
+`
+
+const StatusContainer = styled.div`
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 4px;
+    width: 100%;
 `
 
 const Fragment = styled.div`
@@ -99,6 +120,8 @@ const Content = styled.div`
 
         margin-top: 20px;
         padding: 20px;
+
+        max-height: 342px;
 
         background: ${theme.colors.base.card};
         border-radius: 6px 32px;

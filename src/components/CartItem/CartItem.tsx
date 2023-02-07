@@ -29,7 +29,6 @@ const CartItem = ({ imageSrc, title, priceTag, onRemoveClick, ...rest }: CartIte
                     value={inputValue} 
                     onSubtraction={() => setInputValue((inputValue) => inputValue > 0 ? inputValue - 1 : inputValue)} 
                     onAddition={() => setInputValue((inputValue) => inputValue + 1)} 
-                    className="mr-2" 
                 />
                 <Button
                 variant="small"
@@ -41,6 +40,7 @@ const CartItem = ({ imageSrc, title, priceTag, onRemoveClick, ...rest }: CartIte
                     <Trash size={16} color={theme.colors.purple.default} />
                 }
                 onClick={() => onRemoveClick(inputValue)}
+                className="ml-2" 
                 />
                 </div>
                 </Fragment>
