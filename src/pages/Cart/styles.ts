@@ -10,6 +10,10 @@ export const ContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const FormContainer = styled.div`
