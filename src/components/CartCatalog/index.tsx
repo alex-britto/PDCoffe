@@ -29,18 +29,19 @@ export const CartCatalog = ({
           </Typography>
         </>
       ) : (
-        cartItems.map((item) => (
-          <>
+        <>
+          {cartItems.map((item) => (
             <CartItem
               key={item.id}
               coffee={item}
               onRemoveCartItem={() => handleRemoveItemFromCart(item.id)}
             />
-            <Typography color={theme.colors.base.title} family="Baloo 2">
-              Total: R$ {calculateTotalPrice(cartItems)}
-            </Typography>
-          </>
-        ))
+          ))}
+
+          <Typography color={theme.colors.base.title} family="Baloo 2">
+            Total: R$ {calculateTotalPrice(cartItems)}
+          </Typography>
+        </>
       )}
     </Container>
   );

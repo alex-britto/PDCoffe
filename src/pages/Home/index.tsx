@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 import { CartCatalog, Header, Menu } from "../../components";
 import { api } from "../../services";
+import { Container } from "./styles";
 
 export function Home() {
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
@@ -31,10 +32,6 @@ export function Home() {
     setIsLoading(false);
   };
 
-  const handleShowCartItens = () => {
-    setIsCartItems(!isCartItems);
-  };
-
   const handleGetCoffeesFromCart = async () => {
     const response = await api.get("/cart");
     const data = response.data;
@@ -52,8 +49,8 @@ export function Home() {
   }, []);
 
   return (
-    <>
-      <Header cartItems={cartItems} onShowCartItens={handleShowCartItens} />
+    <Container>
+      <Header cartItems={cartItems} />
 
       {isCartItems && (
         <CartCatalog
@@ -67,6 +64,6 @@ export function Home() {
         isLoading={isLoading}
         onAddToCart={handleAddToCart}
       />
-    </>
+    </Container>
   );
 }

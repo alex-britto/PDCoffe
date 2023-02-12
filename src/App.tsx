@@ -1,11 +1,12 @@
 import { ThemeProvider } from "styled-components";
-import { Home } from "./pages";
+
+import { AppRoutes } from "./routes/AppRoutes";
 import { defaultTheme } from "./styles/themes";
 
 function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Home />
+      <AppRoutes />
     </ThemeProvider>
   );
 }

@@ -27,9 +27,8 @@ export function CartItem({
   const [quantityValue, setQuantityValue] = useState(quantity);
   const theme = useTheme();
 
-  const handleChangeQuantity = () => {
-    console.log(quantityValue);
-  };
+  const handleChangeQuantity = () => {};
+
   return (
     <>
       <CardContainer>

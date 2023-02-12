@@ -5,6 +5,10 @@ export const CardContainer = styled.div`
   background: ${({ theme }) => theme.colors.base.card};
   border-radius: 6px 36px;
   padding: 4px;
+
+  @media (max-width: 1200px) {
+    margin-bottom: 16px;
+  }
 `;
 
 export const CardCoffeeImage = styled.div`

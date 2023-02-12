@@ -3,7 +3,7 @@ import { useTheme } from "styled-components";
 import { ICartItem, ICoffee } from "../../@types/coffee";
 import { CatalogItem } from "../CatalogItem";
 import { Spinner } from "../Spinner";
-import { Container } from "./styles";
+import { Container, ContentContainer } from "./styles";
 
 interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   coffeeList: ICoffee[];
@@ -16,17 +16,19 @@ export const Menu = ({ coffeeList, isLoading, onAddToCart }: MenuProps) => {
 
   return (
     <Container>
-      {isLoading ? (
-        <Spinner size={40} color={theme.colors.purple.default} />
-      ) : (
-        coffeeList.map((coffee) => (
-          <CatalogItem
-            key={coffee.id}
-            coffee={coffee}
-            onAddToCart={(coffee: ICartItem) => onAddToCart(coffee)}
-          />
-        ))
-      )}
+      <ContentContainer>
+        {isLoading ? (
+          <Spinner size={40} color={theme.colors.purple.default} />
+        ) : (
+          coffeeList.map((coffee) => (
+            <CatalogItem
+              key={coffee.id}
+              coffee={coffee}
+              onAddToCart={(coffee: ICartItem) => onAddToCart(coffee)}
+            />
+          ))
+        )}
+      </ContentContainer>
     </Container>
   );
 };
