@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ICartItem, ICoffee } from "../../@types/coffee";
-import { CartCatalog, Header, Menu } from "../../components";
+import { Header, Menu } from "../../components";
 import { api } from "../../services";
 import { Container } from "./styles";
 
@@ -8,7 +8,6 @@ export function Home() {
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCartItems, setIsCartItems] = useState(false);
 
   const handleAddToCart = async (coffee: ICartItem) => {
     const response = await api.post("/cart", {
@@ -38,11 +37,6 @@ export function Home() {
     setCartItems(data);
   };
 
-  const handleRemoveItemFromCart = async (id: number) => {
-    await api.delete(`/cart/${id}`);
-    handleGetCoffeesFromCart();
-  };
-
   useEffect(() => {
     handleGetCoffeesFromApi();
     handleGetCoffeesFromCart();
@@ -51,13 +45,6 @@ export function Home() {
   return (
     <Container>
       <Header cartItems={cartItems} />
-
-      {isCartItems && (
-        <CartCatalog
-          cartItems={cartItems}
-          handleRemoveItemFromCart={handleRemoveItemFromCart}
-        />
-      )}
 
       <Menu
         coffeeList={coffeeList}
