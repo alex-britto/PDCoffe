@@ -1,26 +1,100 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { ICoffee } from "../@types/coffee";
+import { ICartItem, ICoffee } from "../@types/coffee";
+import { api } from "../services";
 
-export const CoffeeContext = createContext<ICoffee[]>([]);
-
-interface CoffeeProviderProps {
-  children: ReactNode;
+interface CoffeeContextProps {
+  isLoading: boolean;
+  coffeeList: ICoffee[];
+  cartItems: ICartItem[];
+  handleAddToCart?: (coffee: ICartItem) => Promise<void>;
+  handleRemoveItemFromCart?: (id: number) => Promise<void>;
+  handleChangeQuantity?: (id: number, quantity: number) => Promise<void>;
 }
 
-export const CoffeeProvider = ({ children }: CoffeeProviderProps) => {
-  const [coffee, setCoffee] = useState([]);
+export const CoffeeContext = createContext({} as CoffeeContextProps);
+
+export const CoffeeProvider = ({ children }: { children: ReactNode }) => {
+  const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
+  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleGetCoffeesFromCart = async () => {
+    try {
+      const response = await api.get("/cart");
+      const data = response.data;
+      setCartItems(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCoffeeFromApi = async () => {
+    try {
+      const response = await api.get("/coffees");
+      const data = response.data;
+      setCoffeeList(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddToCart = async (coffee: ICartItem) => {
+    try {
+      const response = await api.post("/cart", {
+        id: coffee.id,
+        title: coffee.title,
+        price: coffee.price,
+        imageUrl: coffee.imageUrl,
+        quantity: coffee.quantity,
+      });
+      const data = response.data;
+      setCartItems(data);
+
+      handleGetCoffeesFromCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRemoveItemFromCart = async (id: number) => {
+    try {
+      await api.delete(`/cart/${id}`);
+      handleGetCoffeesFromCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeQuantity = async (id: number, quantity: number) => {
+    try {
+      await api.put(`/cart/${id}`, {
+        ...cartItems.find((item) => item.id === id),
+        quantity,
+      });
+      handleGetCoffeesFromCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const getCoffee = async () => {
-      const response = await fetch("/api/coffee");
-      const data = await response.json();
-      setCoffee(data);
-    };
-
-    getCoffee();
+    getCoffeeFromApi();
+    handleGetCoffeesFromCart();
   }, []);
 
   return (
-    <CoffeeContext.Provider value={coffee}>{children}</CoffeeContext.Provider>
+    <CoffeeContext.Provider
+      value={{
+        isLoading,
+        coffeeList,
+        cartItems,
+        handleAddToCart,
+        handleRemoveItemFromCart,
+        handleChangeQuantity,
+      }}
+    >
+      {children}
+    </CoffeeContext.Provider>
   );
 };

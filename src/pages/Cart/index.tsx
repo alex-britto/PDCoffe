@@ -1,26 +1,10 @@
-import { useEffect, useState } from "react";
-import { ICartItem } from "../../@types/coffee";
+import { useContext } from "react";
 import { CartCatalog, Header } from "../../components";
-import { api } from "../../services";
+import { CoffeeContext } from "../../contexts";
 import { ContentContainer, FormContainer } from "./styles";
 
 export function Cart() {
-  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
-
-  const handleGetCoffeesFromCart = async () => {
-    const response = await api.get("/cart");
-    const data = response.data;
-    setCartItems(data);
-  };
-
-  const handleRemoveItemFromCart = async (id: number) => {
-    await api.delete(`/cart/${id}`);
-    handleGetCoffeesFromCart();
-  };
-
-  useEffect(() => {
-    handleGetCoffeesFromCart();
-  }, []);
+  const { cartItems, handleRemoveItemFromCart } = useContext(CoffeeContext);
 
   return (
     <>
@@ -33,7 +17,7 @@ export function Cart() {
 
         <CartCatalog
           cartItems={cartItems}
-          handleRemoveItemFromCart={handleRemoveItemFromCart}
+          handleRemoveItemFromCart={handleRemoveItemFromCart!}
         />
       </ContentContainer>
     </>

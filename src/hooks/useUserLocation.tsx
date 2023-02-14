@@ -3,6 +3,7 @@ import { convertUFTo2Letters } from "../utils";
 
 interface AddressDataProps {
   address: {
+    country_code: string;
     state: string;
     city: string;
   };
@@ -11,10 +12,15 @@ interface AddressDataProps {
 export const useUserLocation = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+  const [userCountry, setUserCountry] = useState("");
   const [userUf, setUserUf] = useState("");
   const [userCity, setUserCity] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
+  function userClickToGetLocation() {
+    setIsLoading(true);
+    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+  }
   function handleSuccess(position: GeolocationPosition) {
     const { latitude, longitude } = position.coords;
     setLatitude(latitude);
@@ -25,8 +31,6 @@ export const useUserLocation = () => {
     console.error(error);
   }
 
-  navigator.geolocation.watchPosition(handleSuccess, handleError);
-
   function getUserAddress() {
     fetch(
       `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
@@ -35,6 +39,12 @@ export const useUserLocation = () => {
       .then((data: AddressDataProps) => {
         const { address } = data;
         const uf = convertUFTo2Letters(address.state);
+
+        localStorage.setItem("userCountry", address.country_code.toUpperCase());
+        localStorage.setItem("userUf", uf);
+        localStorage.setItem("userCity", address.city);
+
+        setUserCountry(address.country_code.toUpperCase());
         setUserUf(uf);
         setUserCity(address.city);
         setIsLoading(false);
@@ -42,10 +52,30 @@ export const useUserLocation = () => {
   }
 
   useEffect(() => {
+    const userCountry = localStorage.getItem("userCountry");
+    const userUf = localStorage.getItem("userUf");
+    const userCity = localStorage.getItem("userCity");
+
+    if (userUf && userCity && userCountry) {
+      setUserCountry(userCountry);
+      setUserUf(userUf);
+      setUserCity(userCity);
+      setIsLoading(false);
+    }
+
     if (latitude !== 0 && longitude !== 0) {
       getUserAddress();
+      setIsLoading(false);
     }
   }, [latitude, longitude]);
 
-  return { userUf, userCity, latitude, longitude, isLoading };
+  return {
+    userCountry,
+    userUf,
+    userCity,
+    latitude,
+    longitude,
+    isLoading,
+    userClickToGetLocation,
+  };
 };

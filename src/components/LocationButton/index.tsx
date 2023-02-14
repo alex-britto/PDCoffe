@@ -1,12 +1,13 @@
 import { MapPin } from "phosphor-react";
+import { ButtonHTMLAttributes } from "react";
 import { useTheme } from "styled-components";
 import { Spinner } from "../Spinner";
 import Typography from "../Typography";
 import { ButtonContainer } from "./styles";
 
-interface LocationButtonProps {
-  onClick: () => void;
+interface LocationButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
+  userCountry?: string;
   userUf?: string;
   userCity?: string;
 }
@@ -14,10 +15,23 @@ interface LocationButtonProps {
 export const LocationButton = ({
   onClick,
   isLoading,
+  userCountry,
   userUf,
   userCity,
 }: LocationButtonProps) => {
   const theme = useTheme();
+
+  const showUserLocation = () => {
+    if (userUf === "UF") {
+      return `${userCity}, ${userCountry}`;
+    }
+
+    if (userUf && userCity) {
+      return `${userCity}, ${userUf}`;
+    }
+
+    return "Enviar para";
+  };
 
   return (
     <ButtonContainer onClick={onClick}>
@@ -27,7 +41,7 @@ export const LocationButton = ({
         <>
           <MapPin size={22} weight="fill" color={theme.colors.purple.default} />
           <Typography size={14} color={theme.colors.purple.dark}>
-            {userCity ? `${userCity}, ${userUf}` : "Enviar para"}
+            {showUserLocation()}
           </Typography>
         </>
       )}
