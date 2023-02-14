@@ -1,10 +1,13 @@
 import { useContext } from "react";
+import { CoffeeContextProps } from "../../@types/coffee";
 import { CartCatalog, Header } from "../../components";
 import { CoffeeContext } from "../../contexts";
 import { ContentContainer, FormContainer } from "./styles";
 
 export function Cart() {
-  const { cartItems, handleRemoveItemFromCart } = useContext(CoffeeContext);
+  const { cartItems, handleRemoveItemFromCart } = useContext(
+    CoffeeContext
+  ) as CoffeeContextProps;
 
   return (
     <>
@@ -17,7 +20,7 @@ export function Cart() {
 
         <CartCatalog
           cartItems={cartItems}
-          handleRemoveItemFromCart={handleRemoveItemFromCart!}
+          handleRemoveItemFromCart={handleRemoveItemFromCart}
         />
       </ContentContainer>
     </>

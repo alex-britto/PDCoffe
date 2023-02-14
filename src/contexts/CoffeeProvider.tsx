@@ -1,15 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { ICartItem, ICoffee } from "../@types/coffee";
+import { CoffeeContextProps, ICartItem, ICoffee } from "../@types/coffee";
 import { api } from "../services";
-
-interface CoffeeContextProps {
-  isLoading: boolean;
-  coffeeList: ICoffee[];
-  cartItems: ICartItem[];
-  handleAddToCart?: (coffee: ICartItem) => Promise<void>;
-  handleRemoveItemFromCart?: (id: number) => Promise<void>;
-  handleChangeQuantity?: (id: number, quantity: number) => Promise<void>;
-}
 
 export const CoffeeContext = createContext({} as CoffeeContextProps);
 

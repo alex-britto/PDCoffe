@@ -1,11 +1,13 @@
 import { useContext } from "react";
+import { CoffeeContextProps } from "../../@types/coffee";
 import { Header, Menu } from "../../components";
 import { CoffeeContext } from "../../contexts";
 import { Container } from "./styles";
 
 export function Home() {
-  const { coffeeList, cartItems, isLoading, handleAddToCart } =
-    useContext(CoffeeContext);
+  const { coffeeList, cartItems, isLoading, handleAddToCart } = useContext(
+    CoffeeContext
+  ) as CoffeeContextProps;
 
   return (
     <Container>
@@ -13,7 +15,7 @@ export function Home() {
       <Menu
         coffeeList={coffeeList}
         isLoading={isLoading}
-        onAddToCart={handleAddToCart!}
+        onAddToCart={handleAddToCart}
       />
     </Container>
   );
