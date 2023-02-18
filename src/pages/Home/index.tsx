@@ -5,6 +5,7 @@ import { CoffeeContext } from "../../contexts";
 import { Container } from "./styles";
 
 export function Home() {
+  // CONTEXT
   const { coffeeList, cartItems, isLoading, handleAddToCart } = useContext(
     CoffeeContext
   ) as CoffeeContextProps;

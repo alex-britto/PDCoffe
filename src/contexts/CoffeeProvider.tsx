@@ -5,10 +5,12 @@ import { api } from "../services";
 export const CoffeeContext = createContext({} as CoffeeContextProps);
 
 export const CoffeeProvider = ({ children }: { children: ReactNode }) => {
+  // STATES
   const [coffeeList, setCoffeeList] = useState<ICoffee[]>([]);
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // FUNCTIONS
   const handleGetCoffeesFromCart = async () => {
     try {
       const response = await api.get("/cart");

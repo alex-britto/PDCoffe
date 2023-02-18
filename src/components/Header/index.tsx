@@ -14,8 +14,11 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Header = ({ cartItems }: HeaderProps) => {
+  // CONTEXT
   const { userClickToGetLocation, userCountry, userUf, userCity, isLoading } =
     useUserLocation();
+
+  // ROUTER
   const navigate = useNavigate();
 
   return (

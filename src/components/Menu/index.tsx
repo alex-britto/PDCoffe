@@ -12,6 +12,7 @@ interface MenuProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Menu = ({ coffeeList, isLoading, onAddToCart }: MenuProps) => {
+  // THEME HOOK
   const theme = useTheme();
 
   return (

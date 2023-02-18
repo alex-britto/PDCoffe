@@ -19,8 +19,10 @@ export const LocationButton = ({
   userUf,
   userCity,
 }: LocationButtonProps) => {
+  // THEME HOOK
   const theme = useTheme();
 
+  // FUNCTIONS
   const showUserLocation = () => {
     if (userUf === "UF") {
       return `${userCity}, ${userCountry}`;

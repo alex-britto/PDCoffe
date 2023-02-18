@@ -45,6 +45,7 @@ export default {
 export const Default = (args: ComponentProps<typeof Typography>) => (
   <Typography {...args} />
 );
+
 Default.args = {
   children: "PD Coffee",
   family: "Baloo 2",
@@ -52,5 +53,4 @@ Default.args = {
   weight: 400,
   height: "130%",
   color: "#000",
-
 };
