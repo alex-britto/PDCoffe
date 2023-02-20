@@ -1,39 +1,36 @@
-import { ChangeEventHandler, InputHTMLAttributes, useState } from "react";
-import { useForm } from "react-hook-form";
-
+import { InputHTMLAttributes } from "react";
 import { useTheme } from "styled-components";
+import { maskCep } from "../../utils";
 import Typography from "../Typography";
 import { Container, EndLabel, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   endLabel?: string;
   placeholder: string;
-}
 
-interface IFormInput {
   value: string;
+  isCep?: boolean;
 }
 
 export const TextInput = ({
   endLabel,
   placeholder,
+
+  value,
+  isCep = false,
   ...props
 }: TextFieldProps) => {
-  const [value, setValue] = useState<string>("");
   const theme = useTheme();
 
-  const { register } = useForm<IFormInput>();
-
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue(e.target.value);
-  };
-
   return (
-    <Container {...props}>
+    <Container>
       <Input
         placeholder={placeholder}
-        {...register("value")}
-        onChange={onChange}
+        maxLength={isCep ? 9 : 100}
+        value={
+          isCep ? (maskCep(value) === "00000-000" ? "" : maskCep(value)) : value
+        }
+        {...props}
       />
 
       {value.length === 0 && (

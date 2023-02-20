@@ -6,9 +6,8 @@ export const ContentContainer = styled.div`
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  gap: 32px;
+  align-items: flex-start;
   margin-top: 20px;
 
   @media (max-width: 768px) {
@@ -16,12 +15,66 @@ export const ContentContainer = styled.div`
   }
 `;
 
+export const InfoContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border-radius: 6px;
+`;
+
 export const FormContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  padding: 40px;
+  background-color: ${({ theme }) => theme.colors.base.card};
+  gap: 20px;
+
+  header {
+    width: 100%;
+    display: flex;
+    margin-bottom: 25px;
+    gap: 8px;
+  }
+`;
+
+export const PaymentFormContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  padding: 40px;
+  background-color: ${({ theme }) => theme.colors.base.card};
+
+  header {
+    width: 100%;
+    display: flex;
+    margin-bottom: 32px;
+    gap: 8px;
+  }
+`;
+
+export const PaymentButtonsContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 12px;
+
+  @media (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `;

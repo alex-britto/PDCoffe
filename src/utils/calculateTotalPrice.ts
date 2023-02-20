@@ -8,3 +8,11 @@ export const calculateTotalPrice = (cartItems: ICartItem[]) => {
   const totalPriceString = handleConvertPriceNumberToString(totalPrice);
   return totalPriceString;
 };
+
+export const calculateTotalToPay = (cartItems: ICartItem[]) => {
+  const prices = cartItems.map((item) => item.price * item.quantity);
+  const totalToPay = prices.reduce((acc, curr) => acc + curr, 0) + 3.5;
+
+  const totalToPayString = handleConvertPriceNumberToString(totalToPay);
+  return totalToPayString;
+};

@@ -2,15 +2,23 @@ import styled, { css } from "styled-components";
 
 export const Input = styled.input`
   ${({ theme }) => css`
+    font-family: "Roboto", sans-serif;
     background: ${theme.colors.base.input};
-    border: none;
+    width: 100%;
     color: ${theme.colors.base.text};
     font-size: 14px;
     padding: 12px;
-    padding-right: 63px;
-    width: 100%;
     &:focus-visible {
       outline: 0;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type="number"] {
+      -moz-appearance: textfield;
     }
   `}
 `;
