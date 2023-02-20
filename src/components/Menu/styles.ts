@@ -16,6 +16,11 @@ export const ContentContainer = styled.div`
   justify-items: center;
 
   @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
