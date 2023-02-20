@@ -61,6 +61,7 @@ export function Cart() {
                 </Typography>
               </div>
             </header>
+
             <TextInput
               placeholder="CEP"
               onChange={handleCepChange}
@@ -151,6 +152,7 @@ export function Cart() {
         </InfoContainer>
 
         <CartCatalog
+          address={address}
           cartItems={cartItems}
           handleRemoveItemFromCart={handleRemoveItemFromCart}
         />

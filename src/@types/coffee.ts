@@ -23,3 +23,12 @@ export interface CoffeeContextProps {
   handleRemoveItemFromCart: (id: number) => Promise<void>;
   handleChangeQuantity: (id: number, quantity: number) => Promise<void>;
 }
+
+export interface AddressData {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+}

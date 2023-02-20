@@ -7,4 +7,4 @@ export {
   handleConvertPriceNumberToString,
   handleConvertPriceToBRL,
 } from "./formatCurrency";
-export { maskCep } from "./maskCep";
+export { maskCEP, maskCNPJ, maskCPF, maskPhone } from "./inputMask";

@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 import { useTheme } from "styled-components";
-import { maskCep } from "../../utils";
+import { maskCEP } from "../../utils";
 import Typography from "../Typography";
 import { Container, EndLabel, Input } from "./styles";
 
@@ -28,7 +28,7 @@ export const TextInput = ({
         placeholder={placeholder}
         maxLength={isCep ? 9 : 100}
         value={
-          isCep ? (maskCep(value) === "00000-000" ? "" : maskCep(value)) : value
+          isCep ? (maskCEP(value) === "00000-000" ? "" : maskCEP(value)) : value
         }
         {...props}
       />

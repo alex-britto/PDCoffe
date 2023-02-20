@@ -6,6 +6,7 @@ interface ButtonProps {
   color?: string;
   width?: string;
   maxWidth?: string;
+  disabled?: boolean;
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -18,6 +19,11 @@ export const Container = styled.button<ButtonProps>`
   border: none;
   border-radius: 6px;
   transition: 0.2s;
+
+  &:disabled {
+    opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  }
 
   &:hover {
     transition: 0.2s;

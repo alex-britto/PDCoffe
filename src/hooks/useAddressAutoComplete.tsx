@@ -1,13 +1,5 @@
 import { useState } from "react";
-
-type AddressData = {
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-};
+import { AddressData } from "../@types/coffee";
 
 export const useAddressAutoComplete = () => {
   const [address, setAddress] = useState<AddressData>({

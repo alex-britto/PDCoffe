@@ -1,14 +1,15 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import Typography from "../Typography";
 import { Container } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
+  label: string | ReactNode;
   bgColor?: string;
   bgHoverColor?: string;
   color?: string;
   width?: string;
   maxWidth?: string;
+  disabled?: boolean;
 }
 
 export function Button({
@@ -18,6 +19,7 @@ export function Button({
   color,
   width,
   maxWidth,
+  disabled,
   onClick,
 }: ButtonProps) {
   return (
@@ -27,6 +29,7 @@ export function Button({
       bgHoverColor={bgHoverColor}
       width={width}
       maxWidth={maxWidth}
+      disabled={disabled}
     >
       <Typography size={14} color={color} weight={700}>
         {label}

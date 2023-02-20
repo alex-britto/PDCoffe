@@ -1,6 +1,6 @@
 import { ShoppingCart } from "phosphor-react";
-import { HTMLAttributes } from "react";
-import { ICartItem } from "../../@types/coffee";
+import { HTMLAttributes, useState } from "react";
+import { AddressData, ICartItem } from "../../@types/coffee";
 
 import { useTheme } from "styled-components";
 import {
@@ -9,23 +9,66 @@ import {
   handleConvertPriceNumberToString,
 } from "../../utils";
 
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { api } from "../../services";
 import { Button } from "../Button";
 import { CartItem } from "../CartItem";
+import { Spinner } from "../Spinner";
 import Typography from "../Typography";
 import { Container, InfoContainer } from "./styles";
 
 interface CartCatalogProps extends HTMLAttributes<HTMLDivElement> {
   cartItems: ICartItem[];
   handleRemoveItemFromCart: (id: number) => void;
+  address: AddressData;
 }
 
 export const CartCatalog = ({
   cartItems,
   handleRemoveItemFromCart,
+  address,
 }: CartCatalogProps) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const shippingPrice = 3.5;
+
+  function removeAllCartItems() {
+    cartItems.forEach((item) => {
+      handleRemoveItemFromCart(item.id);
+    });
+  }
+
+  async function handleCreateNewOrder() {
+    setIsLoading(true);
+    const totalToPay = calculateTotalToPay(cartItems);
+
+    const order = {
+      cartItems: cartItems.map((item) => ({
+        title: item.title,
+        quantity: item.quantity,
+      })),
+      address: {
+        rua: address.logradouro,
+        bairro: address.bairro,
+        cidade: address.localidade,
+        estado: address.uf,
+        cep: address.cep,
+      },
+      totalToPay,
+    };
+
+    await api.post("/orders", order);
+
+    setTimeout(() => {
+      removeAllCartItems();
+      setIsLoading(false);
+      toast.success("Pedido efetuado com sucesso!");
+      navigate("/");
+    }, 2000);
+  }
 
   return (
     <Container>
@@ -84,12 +127,19 @@ export const CartCatalog = ({
           </InfoContainer>
 
           <Button
-            label="Confirmar pedido"
+            label={
+              isLoading ? (
+                <Spinner color={theme.colors.white} size={22} />
+              ) : (
+                "Confirmar pedido"
+              )
+            }
             bgColor={theme.colors.yellow.default}
             bgHoverColor={theme.colors.yellow.dark}
             width="100%"
             color={theme.colors.white}
-            onClick={() => console.log("Confirmar pedido")}
+            onClick={handleCreateNewOrder}
+            disabled={isLoading}
           />
         </>
       )}
