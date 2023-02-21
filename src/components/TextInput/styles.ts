@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 
-export const Input = styled.input`
+interface InputProps {
+  disabled?: boolean;
+}
+
+export const Input = styled.input<InputProps>`
   ${({ theme }) => css`
     font-family: "Roboto", sans-serif;
     background: ${theme.colors.base.input};
@@ -10,6 +14,11 @@ export const Input = styled.input`
     padding: 12px;
     &:focus-visible {
       outline: 0;
+    }
+
+    &:disabled {
+      opacity: ${({ disabled }: InputProps) => (disabled ? 0.5 : 1)};
+      cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
     }
 
     &::-webkit-outer-spin-button,

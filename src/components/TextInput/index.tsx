@@ -1,35 +1,60 @@
 import { InputHTMLAttributes } from "react";
 import { useTheme } from "styled-components";
-import { maskCEP } from "../../utils";
+import { maskCEP, maskCNPJ, maskCPF, maskPhone } from "../../utils";
 import Typography from "../Typography";
 import { Container, EndLabel, Input } from "./styles";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   endLabel?: string;
   placeholder: string;
-
   value: string;
-  isCep?: boolean;
+  mask?: "cep" | "cnpj" | "cpf" | "phone";
+  maxLength?: number;
+  disabled?: boolean;
 }
 
 export const TextInput = ({
   endLabel,
   placeholder,
-
   value,
-  isCep = false,
+  mask,
+  maxLength = 100,
+  disabled = false,
   ...props
 }: TextFieldProps) => {
   const theme = useTheme();
+
+  const inputMask = (value: string) => {
+    if (mask === "cep") {
+      maxLength = 9;
+      return maskCEP(value);
+    }
+
+    if (mask === "cnpj") {
+      maxLength = 18;
+      return maskCNPJ(value);
+    }
+
+    if (mask === "cpf") {
+      maxLength = 14;
+      return maskCPF(value);
+    }
+
+    if (mask === "phone") {
+      maxLength = 15;
+      return maskPhone(value);
+    }
+
+    return value;
+  };
 
   return (
     <Container>
       <Input
         placeholder={placeholder}
-        maxLength={isCep ? 9 : 100}
-        value={
-          isCep ? (maskCEP(value) === "00000-000" ? "" : maskCEP(value)) : value
-        }
+        maxLength={maxLength}
+        value={value.length > 0 ? inputMask(value) : value}
+        disabled={disabled}
         {...props}
       />
 

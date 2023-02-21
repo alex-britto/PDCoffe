@@ -30,6 +30,10 @@ export function Cart() {
   const [cep, setCep] = useState("");
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [cnpj, setCnpj] = useState("");
   const { address, isLoading, handleAddressAutoComplete } =
     useAddressAutoComplete();
 
@@ -59,13 +63,51 @@ export function Cart() {
                 <Typography color={theme.colors.base.text} size={14}>
                   Informe o endereço onde deseja receber seu pedido
                 </Typography>
+                <Typography
+                  color={theme.colors.yellow.dark}
+                  size={12}
+                  style={{ marginTop: "10px", fontStyle: "italic" }}
+                >
+                  Para os campos Telefone, CPF e CNPJ, você pode digitar apenas
+                  os números.
+                </Typography>
               </div>
             </header>
 
             <TextInput
+              placeholder="Nome"
+              onChange={(event) => setNome(event.target.value)}
+              value={nome}
+            />
+
+            <TextInput
+              placeholder="Telefone"
+              onChange={(event) => setTelefone(event.target.value)}
+              value={telefone}
+              mask="phone"
+            />
+
+            <div className="flex gap-4 items-stretch w-full">
+              <TextInput
+                placeholder="CPF"
+                value={cpf}
+                mask="cpf"
+                onChange={(event) => setCpf(event.target.value)}
+              />
+
+              <TextInput
+                placeholder="CNPJ"
+                endLabel="Opcional"
+                value={cnpj}
+                mask="cnpj"
+                onChange={(event) => setCnpj(event.target.value)}
+              />
+            </div>
+
+            <TextInput
               placeholder="CEP"
               onChange={handleCepChange}
-              isCep
+              mask="cep"
               value={cep}
             />
 
@@ -73,6 +115,7 @@ export function Cart() {
               placeholder="Rua"
               value={address.logradouro}
               onChange={() => {}}
+              disabled
             />
 
             <div className="flex gap-4 items-stretch w-full">
@@ -80,7 +123,6 @@ export function Cart() {
                 placeholder="Número"
                 value={numero}
                 onChange={(event) => setNumero(event.target.value)}
-                type="number"
               />
 
               <TextInput
@@ -96,18 +138,21 @@ export function Cart() {
                 placeholder="Bairro"
                 value={address.bairro}
                 onChange={() => {}}
+                disabled
               />
 
               <TextInput
                 placeholder="Cidade"
                 value={address.localidade}
                 onChange={() => {}}
+                disabled
               />
 
               <TextInput
                 placeholder="UF"
                 value={address.uf}
                 onChange={() => {}}
+                disabled
               />
             </div>
           </FormContainer>

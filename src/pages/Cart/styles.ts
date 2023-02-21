@@ -56,6 +56,7 @@ export const PaymentFormContainer = styled.div`
   border-radius: 6px;
   padding: 40px;
   background-color: ${({ theme }) => theme.colors.base.card};
+  margin-bottom: 20px;
 
   header {
     width: 100%;
