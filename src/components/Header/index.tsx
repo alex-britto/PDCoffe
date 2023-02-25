@@ -1,13 +1,12 @@
-import { ShoppingCart } from "phosphor-react";
-import { HTMLAttributes } from "react";
-import { ICartItem } from "../../@types/coffee";
-import { CartButton } from "../CartButton";
+import { CartButton, LocationButton } from "../../components";
 import { ContentContainer, HeaderContainer } from "./styles";
 
-import { useNavigate } from "react-router-dom";
+import { HTMLAttributes } from "react";
+import { ICartItem } from "../../@types/coffee";
 import Logo from "../../assets/logo.svg";
+import { ShoppingCart } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 import { useUserLocation } from "../../hooks";
-import { LocationButton } from "../LocationButton";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   cartItems: ICartItem[];

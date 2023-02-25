@@ -1,8 +1,9 @@
-import { useContext } from "react";
-import { CoffeeContextProps } from "../../@types/coffee";
 import { Header, Menu } from "../../components";
+
 import { CoffeeContext } from "../../contexts";
+import { CoffeeContextProps } from "../../@types/coffee";
 import { Container } from "./styles";
+import { useContext } from "react";
 
 export function Home() {
   // CONTEXT

@@ -32,3 +32,16 @@ export interface AddressData {
   localidade: string;
   uf: string;
 }
+
+export interface UserData {
+  nome: string;
+  cpf: string;
+  telefone: string;
+  cnpj?: string;
+}
+
+export enum PaymentOptions {
+  CREDIT_CARD = "creditCard",
+  DEBIT_CARD = "debitCard",
+  MONEY = "money",
+}

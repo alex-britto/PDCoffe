@@ -17,7 +17,7 @@ export const Input = styled.input<InputProps>`
     }
 
     &:disabled {
-      opacity: ${({ disabled }: InputProps) => (disabled ? 0.5 : 1)};
+      opacity: ${({ disabled }: InputProps) => (disabled ? 0.4 : 1)};
       cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
     }
 

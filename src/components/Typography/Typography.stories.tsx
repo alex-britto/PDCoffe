@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import Typography from ".";
+import { Typography } from "../../components";
 
 export default {
   title: "Components/Typography",

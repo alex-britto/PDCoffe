@@ -1,6 +1,7 @@
+import { HTMLAttributes } from "react";
 import styled from "styled-components";
 
-interface TypographyProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface TypographyProps extends HTMLAttributes<HTMLParagraphElement> {
   family?: "Baloo 2" | "Roboto";
   weight?: 400 | 700 | 800;
   height?: "130%" | "160%";
@@ -17,7 +18,7 @@ const TypographyStyled = styled.p<TypographyProps>`
   color: ${({ color }) => color};
 `;
 
-const Typography = ({ children, ...props }: TypographyProps) => (
+export const Typography = ({ children, ...props }: TypographyProps) => (
   <TypographyStyled {...props}>{children}</TypographyStyled>
 );
 
@@ -28,5 +29,3 @@ Typography.defaultProps = {
   size: 16,
   color: "#000",
 };
-
-export default Typography;

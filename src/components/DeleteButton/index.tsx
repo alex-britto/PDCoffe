@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { useTheme } from "styled-components";
-import Typography from "../Typography";
+
 import { Container } from "./styles";
+import { Typography } from "../../components";
+import { useTheme } from "styled-components";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;

@@ -1,13 +1,9 @@
-import { ShoppingCart } from "phosphor-react";
-import { HTMLAttributes, useState } from "react";
-import { ICartItem, ICoffee } from "../../@types/coffee";
-import { handleConvertPriceNumberToString } from "../../utils";
-
-import { useTheme } from "styled-components";
-import { Badge } from "../Badge";
-import { CartButton } from "../CartButton";
-import { SelectQuantityInput } from "../SelectQuantityInput";
-import Typography from "../Typography";
+import {
+  Badge,
+  CartButton,
+  SelectQuantityInput,
+  Typography,
+} from "../../components";
 import {
   CardCoffeeImage,
   CardContainer,
@@ -15,6 +11,12 @@ import {
   CardFooter,
   TagsContainer,
 } from "./styles";
+import { HTMLAttributes, useState } from "react";
+import { ICartItem, ICoffee } from "../../@types/coffee";
+
+import { ShoppingCart } from "phosphor-react";
+import { handleConvertPriceNumberToString } from "../../utils";
+import { useTheme } from "styled-components";
 
 interface CardCoffeeProps extends HTMLAttributes<HTMLDivElement> {
   coffee: ICoffee;

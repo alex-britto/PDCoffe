@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { Spinner } from ".";
+import { Spinner } from "../../components";
 import { defaultTheme } from "../../styles/themes";
 
 export default {

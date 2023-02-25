@@ -1,6 +1,6 @@
-import { useTheme } from "styled-components";
-import Typography from "../Typography";
 import { BadgeContainer } from "./styles";
+import { Typography } from "../../components";
+import { useTheme } from "styled-components";
 
 interface BadgeProps {
   tag: string;

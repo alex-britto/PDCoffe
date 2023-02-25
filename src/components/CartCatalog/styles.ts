@@ -12,6 +12,10 @@ export const Container = styled.div`
   border-radius: 6px 44px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   gap: 16px;
+
+  @media (max-width: 1024px) {
+    margin: 0 auto;
+  }
 `;
 
 export const InfoContainer = styled.div`

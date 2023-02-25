@@ -1,40 +1,52 @@
-import { ShoppingCart } from "phosphor-react";
+import {
+  AddressData,
+  ICartItem,
+  PaymentOptions,
+  UserData,
+} from "../../@types/coffee";
+import { Button, CartItem, Typography } from "../../components";
+import { Container, InfoContainer } from "./styles";
 import { HTMLAttributes, useState } from "react";
-import { AddressData, ICartItem } from "../../@types/coffee";
-
-import { useTheme } from "styled-components";
 import {
   calculateTotalPrice,
   calculateTotalToPay,
   handleConvertPriceNumberToString,
 } from "../../utils";
 
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ShoppingCart } from "phosphor-react";
 import { api } from "../../services";
-import { Button } from "../Button";
-import { CartItem } from "../CartItem";
-import { Spinner } from "../Spinner";
-import Typography from "../Typography";
-import { Container, InfoContainer } from "./styles";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 interface CartCatalogProps extends HTMLAttributes<HTMLDivElement> {
   cartItems: ICartItem[];
   handleRemoveItemFromCart: (id: number) => void;
   address: AddressData;
+  userData: UserData;
+  payment: PaymentOptions;
+  numero: string;
+  complemento?: string;
 }
 
 export const CartCatalog = ({
   cartItems,
   handleRemoveItemFromCart,
   address,
+  userData,
+  payment: paymentMethod,
+  numero: number,
+  complemento: complement,
 }: CartCatalogProps) => {
+  // CONTEXTS
   const theme = useTheme();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  // CONSTANTS
   const shippingPrice = 3.5;
 
+  // FUNCTIONS
   function removeAllCartItems() {
     cartItems.forEach((item) => {
       handleRemoveItemFromCart(item.id);
@@ -49,18 +61,29 @@ export const CartCatalog = ({
       cartItems: cartItems.map((item) => ({
         title: item.title,
         quantity: item.quantity,
+        price: item.price,
       })),
+      user: {
+        name: userData.nome,
+        phone: userData.telefone,
+        cpf: userData.cpf,
+        cnpj: userData.cnpj,
+      },
       address: {
-        rua: address.logradouro,
-        bairro: address.bairro,
-        cidade: address.localidade,
-        estado: address.uf,
+        street: address.logradouro,
+        neighborhood: address.bairro,
+        city: address.localidade,
+        uf: address.uf,
         cep: address.cep,
+        number,
+        complement,
       },
       totalToPay,
+      paymentMethod,
     };
 
     await api.post("/orders", order);
+    console.log(order);
 
     setTimeout(() => {
       removeAllCartItems();
@@ -127,13 +150,7 @@ export const CartCatalog = ({
           </InfoContainer>
 
           <Button
-            label={
-              isLoading ? (
-                <Spinner color={theme.colors.white} size={22} />
-              ) : (
-                "Confirmar pedido"
-              )
-            }
+            label={isLoading ? "Fazendo pedido..." : "Confirmar pedido"}
             bgColor={theme.colors.yellow.default}
             bgHoverColor={theme.colors.yellow.dark}
             width="100%"

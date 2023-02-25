@@ -1,16 +1,17 @@
 import { CreditCard, CurrencyDollar, MapPin, Money } from "phosphor-react";
-import { useContext, useEffect, useState } from "react";
-import { useTheme } from "styled-components";
-import { CoffeeContextProps } from "../../@types/coffee";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import {
+  CoffeeContextProps,
+  PaymentOptions,
+  UserData,
+} from "../../@types/coffee";
 import {
   CartCatalog,
   Header,
   SelectPaymentInput,
   TextInput,
+  Typography,
 } from "../../components";
-import Typography from "../../components/Typography";
-import { CoffeeContext } from "../../contexts";
-import { useAddressAutoComplete } from "../../hooks";
 import {
   ContentContainer,
   FormContainer,
@@ -19,28 +20,39 @@ import {
   PaymentFormContainer,
 } from "./styles";
 
+import { useTheme } from "styled-components";
+import { CoffeeContext } from "../../contexts";
+import { useAddressAutoComplete } from "../../hooks";
+
 export function Cart() {
   // CONTEXTS
   const { cartItems, handleRemoveItemFromCart } = useContext(
     CoffeeContext
   ) as CoffeeContextProps;
+  const { address, handleAddressAutoComplete } = useAddressAutoComplete();
   const theme = useTheme();
 
   // STATES
   const [cep, setCep] = useState("");
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
-  const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [cnpj, setCnpj] = useState("");
-  const { address, isLoading, handleAddressAutoComplete } =
-    useAddressAutoComplete();
+  const [userData, setUserData] = useState<UserData>({
+    nome: "",
+    cpf: "",
+    telefone: "",
+    cnpj: "",
+  } as UserData);
 
-  const handleCepChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [selectedPayment, setSelectedPayment] = useState<PaymentOptions>(
+    PaymentOptions.MONEY
+  );
+
+  // FUNCTIONS
+  const handleCepChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCep(event.target.value);
   };
 
+  // EFFECTS
   useEffect(() => {
     if (cep.length === 8) {
       handleAddressAutoComplete(cep);
@@ -76,31 +88,51 @@ export function Cart() {
 
             <TextInput
               placeholder="Nome"
-              onChange={(event) => setNome(event.target.value)}
-              value={nome}
+              onChange={(event) => {
+                setUserData({
+                  ...userData,
+                  nome: event.target.value,
+                });
+              }}
+              value={userData.nome}
             />
 
             <TextInput
               placeholder="Telefone"
-              onChange={(event) => setTelefone(event.target.value)}
-              value={telefone}
+              onChange={(event) => {
+                setUserData({
+                  ...userData,
+                  telefone: event.target.value,
+                });
+              }}
+              value={userData.telefone}
               mask="phone"
             />
 
             <div className="flex gap-4 items-stretch w-full">
               <TextInput
                 placeholder="CPF"
-                value={cpf}
+                value={userData.cpf}
                 mask="cpf"
-                onChange={(event) => setCpf(event.target.value)}
+                onChange={(event) => {
+                  setUserData({
+                    ...userData,
+                    cpf: event.target.value,
+                  });
+                }}
               />
 
               <TextInput
                 placeholder="CNPJ"
                 endLabel="Opcional"
-                value={cnpj}
+                value={userData.cnpj || ""}
                 mask="cnpj"
-                onChange={(event) => setCnpj(event.target.value)}
+                onChange={(event) => {
+                  setUserData({
+                    ...userData,
+                    cnpj: event.target.value,
+                  });
+                }}
               />
             </div>
 
@@ -131,16 +163,16 @@ export function Cart() {
                 value={complemento}
                 onChange={(event) => setComplemento(event.target.value)}
               />
-            </div>
 
-            <div className="grid grid-cols-3 gap-4 items-stretch w-full">
               <TextInput
                 placeholder="Bairro"
                 value={address.bairro}
                 onChange={() => {}}
                 disabled
               />
+            </div>
 
+            <div className="flex gap-4 items-stretch w-full">
               <TextInput
                 placeholder="Cidade"
                 value={address.localidade}
@@ -178,6 +210,9 @@ export function Cart() {
                 icon={
                   <CreditCard size={16} color={theme.colors.purple.default} />
                 }
+                onChange={() => {
+                  setSelectedPayment(PaymentOptions.CREDIT_CARD);
+                }}
               />
               <SelectPaymentInput
                 id="2"
@@ -185,12 +220,18 @@ export function Cart() {
                 icon={
                   <CreditCard size={16} color={theme.colors.purple.default} />
                 }
+                onChange={() => {
+                  setSelectedPayment(PaymentOptions.DEBIT_CARD);
+                }}
               />
 
               <SelectPaymentInput
                 id="3"
                 label="Dinheiro"
                 icon={<Money size={16} color={theme.colors.purple.default} />}
+                onChange={() => {
+                  setSelectedPayment(PaymentOptions.MONEY);
+                }}
               />
             </PaymentButtonsContainer>
           </PaymentFormContainer>
@@ -198,7 +239,11 @@ export function Cart() {
 
         <CartCatalog
           address={address}
+          userData={userData}
+          payment={selectedPayment}
           cartItems={cartItems}
+          numero={numero}
+          complemento={complemento}
           handleRemoveItemFromCart={handleRemoveItemFromCart}
         />
       </ContentContainer>

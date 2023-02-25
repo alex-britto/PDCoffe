@@ -1,8 +1,9 @@
-import { InputHTMLAttributes } from "react";
-import { useTheme } from "styled-components";
-import { maskCEP, maskCNPJ, maskCPF, maskPhone } from "../../utils";
-import Typography from "../Typography";
 import { Container, EndLabel, Input } from "./styles";
+import { maskCEP, maskCNPJ, maskCPF, maskPhone } from "../../utils";
+
+import { InputHTMLAttributes } from "react";
+import { Typography } from "../../components";
+import { useTheme } from "styled-components";
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   endLabel?: string;

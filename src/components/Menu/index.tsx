@@ -1,9 +1,9 @@
+import { CatalogItem, Spinner } from "../../components";
+import { Container, ContentContainer } from "./styles";
+import { ICartItem, ICoffee } from "../../@types/coffee";
+
 import { HTMLAttributes } from "react";
 import { useTheme } from "styled-components";
-import { ICartItem, ICoffee } from "../../@types/coffee";
-import { CatalogItem } from "../CatalogItem";
-import { Spinner } from "../Spinner";
-import { Container, ContentContainer } from "./styles";
 
 interface MenuProps extends HTMLAttributes<HTMLDivElement> {
   coffeeList: ICoffee[];

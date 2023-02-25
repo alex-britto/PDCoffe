@@ -1,8 +1,9 @@
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ThemeProvider } from "styled-components";
+
+import { AppRoutes } from "./routes";
 import { CoffeeProvider } from "./contexts";
-import { AppRoutes } from "./routes/AppRoutes";
+import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-toastify";
 import { defaultTheme } from "./styles/themes";
 
 function App() {

@@ -10,7 +10,7 @@ export const ContentContainer = styled.div`
   align-items: flex-start;
   margin-top: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
   }
 `;
@@ -22,7 +22,6 @@ export const InfoContainer = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
   border-radius: 6px;
 `;
 

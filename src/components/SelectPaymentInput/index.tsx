@@ -1,8 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
 
-import { useTheme } from "styled-components";
-import Typography from "../Typography";
 import { Container } from "./styles";
+import { Typography } from "../../components";
+import { useTheme } from "styled-components";
 
 interface SelectPaymentInputProps {
   id: string;

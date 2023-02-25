@@ -13,8 +13,9 @@ export const ButtonContainer = styled.button`
   padding: 8px;
   width: 100%;
   min-width: 140px;
+  transition: transform 0.2s;
 
   &:hover {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.purple.dark};
+    transform: scale(1.05);
   }
 `;

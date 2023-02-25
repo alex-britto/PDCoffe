@@ -1,9 +1,9 @@
-import { MapPin } from "phosphor-react";
-import { ButtonHTMLAttributes } from "react";
-import { useTheme } from "styled-components";
-import { Spinner } from "../Spinner";
-import Typography from "../Typography";
+import { Spinner, Typography } from "../../components";
+
 import { ButtonContainer } from "./styles";
+import { ButtonHTMLAttributes } from "react";
+import { MapPin } from "phosphor-react";
+import { useTheme } from "styled-components";
 
 interface LocationButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
@@ -42,6 +42,7 @@ export const LocationButton = ({
       ) : (
         <>
           <MapPin size={22} weight="fill" color={theme.colors.purple.default} />
+
           <Typography size={14} color={theme.colors.purple.dark}>
             {showUserLocation()}
           </Typography>

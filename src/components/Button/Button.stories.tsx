@@ -1,5 +1,5 @@
+import { Button } from "../../components";
 import { ComponentProps } from "react";
-import { Button } from ".";
 import { defaultTheme } from "../../styles/themes";
 
 export default {

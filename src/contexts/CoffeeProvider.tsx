@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
 import { CoffeeContextProps, ICartItem, ICoffee } from "../@types/coffee";
+import { ReactNode, createContext, useEffect, useState } from "react";
+
 import { api } from "../services";
 
 export const CoffeeContext = createContext({} as CoffeeContextProps);

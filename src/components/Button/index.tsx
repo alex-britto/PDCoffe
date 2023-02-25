@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import Typography from "../Typography";
+
 import { Container } from "./styles";
+import { Typography } from "../../components";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string | ReactNode;

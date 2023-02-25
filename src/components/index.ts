@@ -12,3 +12,4 @@ export { SelectPaymentInput } from "./SelectPaymentInput";
 export { SelectQuantityInput } from "./SelectQuantityInput";
 export { Spinner } from "./Spinner";
 export { TextInput } from "./TextInput";
+export { Typography } from "./Typography";

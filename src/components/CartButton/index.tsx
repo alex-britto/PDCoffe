@@ -1,7 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
-import { useTheme } from "styled-components";
-import Typography from "../Typography";
 import { Badge, Container } from "./styles";
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+import { Typography } from "../../components";
+import { useTheme } from "styled-components";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "PRIMARY" | "SECONDARY";
