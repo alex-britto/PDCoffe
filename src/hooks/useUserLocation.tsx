@@ -10,18 +10,27 @@ interface AddressDataProps {
   };
 }
 
+export interface UserLocationProps {
+  country: string;
+  uf: string;
+  city: string;
+}
+
 export const useUserLocation = () => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  const [userCountry, setUserCountry] = useState("");
-  const [userUf, setUserUf] = useState("");
-  const [userCity, setUserCity] = useState("");
+  const [userLocation, setUserLocation] = useState<UserLocationProps>(
+    {} as UserLocationProps
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   function userClickToGetLocation() {
     setIsLoading(true);
-    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+    navigator.geolocation.watchPosition(handleSuccess, handleError);
+    // watchPosition() é usado para pegar a localização do usuário em tempo real
+    // getCurrentPosition() é usado para pegar a localização do usuário apenas uma vez
   }
+
   function handleSuccess(position: GeolocationPosition) {
     const { latitude, longitude } = position.coords;
     setLatitude(latitude);
@@ -33,23 +42,33 @@ export const useUserLocation = () => {
   }
 
   function getUserAddress() {
-    fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
-    )
-      .then((response) => response.json())
-      .then((data: AddressDataProps) => {
-        const { address } = data;
-        const uf = convertUFTo2Letters(address.state);
+    try {
+      fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+      )
+        .then((response) => response.json())
+        .then((data: AddressDataProps) => {
+          const { address } = data;
+          const uf = convertUFTo2Letters(address.state);
 
-        localStorage.setItem("userCountry", address.country_code.toUpperCase());
-        localStorage.setItem("userUf", uf);
-        localStorage.setItem("userCity", address.city);
+          localStorage.setItem(
+            "userCountry",
+            address.country_code.toUpperCase()
+          );
+          localStorage.setItem("userUf", uf);
+          localStorage.setItem("userCity", address.city);
 
-        setUserCountry(address.country_code.toUpperCase());
-        setUserUf(uf);
-        setUserCity(address.city);
-        setIsLoading(false);
-      });
+          setUserLocation({
+            country: address.country_code.toUpperCase(),
+            uf,
+            city: address.city,
+          });
+
+          setIsLoading(false);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   useEffect(() => {
@@ -58,9 +77,12 @@ export const useUserLocation = () => {
     const userCity = localStorage.getItem("userCity");
 
     if (userUf && userCity && userCountry) {
-      setUserCountry(userCountry);
-      setUserUf(userUf);
-      setUserCity(userCity);
+      setUserLocation({
+        country: userCountry,
+        uf: userUf,
+        city: userCity,
+      });
+
       setIsLoading(false);
     }
 
@@ -71,9 +93,7 @@ export const useUserLocation = () => {
   }, [latitude, longitude]);
 
   return {
-    userCountry,
-    userUf,
-    userCity,
+    userLocation,
     latitude,
     longitude,
     isLoading,

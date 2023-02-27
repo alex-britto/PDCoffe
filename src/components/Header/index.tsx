@@ -1,11 +1,11 @@
 import { CartButton, LocationButton } from "../../components";
 import { ContentContainer, HeaderContainer } from "./styles";
 
+import { ShoppingCart } from "phosphor-react";
 import { HTMLAttributes } from "react";
+import { useNavigate } from "react-router-dom";
 import { ICartItem } from "../../@types/coffee";
 import Logo from "../../assets/logo.svg";
-import { ShoppingCart } from "phosphor-react";
-import { useNavigate } from "react-router-dom";
 import { useUserLocation } from "../../hooks";
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
@@ -13,9 +13,8 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Header = ({ cartItems }: HeaderProps) => {
-  // CONTEXT
-  const { userClickToGetLocation, userCountry, userUf, userCity, isLoading } =
-    useUserLocation();
+  // HOOKS
+  const { userClickToGetLocation, userLocation, isLoading } = useUserLocation();
 
   // ROUTER
   const navigate = useNavigate();
@@ -28,9 +27,7 @@ export const Header = ({ cartItems }: HeaderProps) => {
         <div className="flex gap-3">
           <LocationButton
             onClick={userClickToGetLocation}
-            userCountry={userCountry}
-            userUf={userUf}
-            userCity={userCity}
+            userLocation={userLocation}
             isLoading={isLoading}
           />
           <CartButton
