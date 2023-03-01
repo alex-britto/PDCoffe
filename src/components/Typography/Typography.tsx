@@ -179,9 +179,6 @@ export const Typography = (props: VariantTypes) => {
 
 const TypographyStyled = styled.p<VariantTypes>`
   ${({ theme, family, variant, color, fontSize }) => css`
-    color: ${color ?? theme.colors.base.text};
-    line-height: 130%;
-
     ${family === "header"
       ? css`
           font-family: "Baloo 2", cursive;
@@ -193,5 +190,7 @@ const TypographyStyled = styled.p<VariantTypes>`
           font-size: ${fontSize ?? TEXT_STYLES[variant].fontSize};
           font-weight: ${TEXT_STYLES[variant].fontWeight};
         `};
+    color: ${color ?? theme.colors.base.text};
+    line-height: 130%;
   `}
 `

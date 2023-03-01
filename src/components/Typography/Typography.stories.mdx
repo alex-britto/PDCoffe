@@ -1,4 +1,4 @@
-<!-- Typography.stories.mdx -->
+<!-- Button.stories.mdx -->
 
 import { Meta, Story } from "@storybook/addon-docs"
 import { defaultTheme } from "../../styles/themes/defaultTheme"
@@ -9,8 +9,12 @@ import { Typography } from "./Typography"
 
 # Typography
 
-<Story name="Typography">
-  <Typography family="header" variant="h1Bold" className="mr-4">
-    h1Bold Baloo
+<Story name="Primary">
+  <Typography
+    family="header"
+    variant="h1"
+    color={defaultTheme.colors.yellow.default}
+  >
+    Testando
   </Typography>
 </Story>
