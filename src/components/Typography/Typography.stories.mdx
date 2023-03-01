@@ -1,0 +1,20 @@
+<!-- Button.stories.mdx -->
+
+import { Meta, Story } from "@storybook/addon-docs"
+import { defaultTheme } from "../../styles/themes/defaultTheme"
+
+import { TypographyV2 } from "./TypographyV2"
+
+<Meta title="Typography" />
+
+# Typography
+
+<Story name="Primary">
+  <TypographyV2
+    family="header"
+    variant="h1"
+    color={defaultTheme.colors.yellow.default}
+  >
+    Teste Header
+  </TypographyV2>
+</Story>
