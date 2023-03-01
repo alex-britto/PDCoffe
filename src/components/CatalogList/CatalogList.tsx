@@ -65,6 +65,7 @@ export const CatalogList = ({
                   description={item?.description}
                   price={item?.price}
                   onCartClick={(e) => setTotalItems((prev) => prev + e)}
+                  className="mt-8"
                 />
               )
             })}

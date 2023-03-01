@@ -9,6 +9,7 @@ import {
   Status,
   TextField,
   TypographyV2,
+  CartItem,
 } from "./components"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
@@ -29,6 +30,13 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <div className="m-4">
+        <CartItem
+          title="Title"
+          price={9.9}
+          imageSrc="https://source.unsplash.com/random/100x100"
+        />
+      </div>
+      <div className="m-4">
         <Button
           bgColor={defaultTheme.colors.yellow.light}
           itemsQuantity={totalCartItems}
@@ -44,7 +52,11 @@ function App() {
         />
       </div>
       <div>
-        <CatalogList onTotalSelectedItemsChange={setTotalCartItems} />
+        {/* remover lógica da requisição interna */}
+        <CatalogList
+          routePath="/coffees"
+          onTotalSelectedItemsChange={setTotalCartItems}
+        />
       </div>
       <div className="m-4">
         <TypographyV2

@@ -29,7 +29,7 @@ export const CatalogItem = ({
     onCartClick(numberInputValue)
   }
   return (
-    <Container {...rest}>
+    <Container className={`${rest?.className} `} {...rest}>
       <img src={imageSrc} alt={title} />
       <ul className="flex gap-2 mt-3">
         {tags.map((tag) => (
@@ -101,7 +101,6 @@ const Container = styled.div`
     margin-top: 20px;
     padding: 20px;
 
-    background-color: ${theme.colors.base.card};
     border-radius: 6px 36px;
 
     img {
