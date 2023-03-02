@@ -1,0 +1,30 @@
+import { Meta, Story } from "@storybook/addon-docs";
+import { defaultTheme } from "../../styles/themes/";
+
+import { Button } from "./";
+
+<Meta title="Components" />
+
+# Button
+
+<Story name="Button">
+  <Button
+    label="Confirmar pedido"
+    bgColor={defaultTheme.colors.yellow.default}
+    bgHoverColor={defaultTheme.colors.yellow.dark}
+    width="100%"
+    color={defaultTheme.colors.white}
+    onClick={() => alert("Clicou")}
+  />
+</Story>
+
+<Story name="Button2">
+  <Button
+    label="Pedido confirmado"
+    bgColor={defaultTheme.colors.purple.default}
+    bgHoverColor={defaultTheme.colors.yellow.dark}
+    width="100%"
+    color={defaultTheme.colors.white}
+    onClick={() => alert("Clicou")}
+  />
+</Story>
