@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import styled, { css } from "styled-components"
+import { defaultTheme } from "../../styles/themes/defaultTheme"
 
 interface TypographyProps {
   children: string
@@ -7,42 +8,19 @@ interface TypographyProps {
   color?: string
   className?: string
   fontSize?: string
+  fontWeight?: string
 }
 
 //cria interface A
 interface HeaderProps {
   family?: "header"
-  variant:
-    | "h1"
-    | "h1Bold"
-    | "h2"
-    | "h2Bold"
-    | "h3"
-    | "h3Bold"
-    | "h4"
-    | "h4Bold"
-    | "h5"
-    | "h5Bold"
+  variant: "h1" | "h2" | "h3" | "h4" | "h5"
 }
 
 //cria interface B
 interface TextProps {
   family?: "text"
-  variant:
-    | "h1"
-    | "h1Bold"
-    | "h2"
-    | "h2Bold"
-    | "h3"
-    | "h3Bold"
-    | "h4"
-    | "h4Bold"
-    | "h5"
-    | "h5Bold"
-    | "p"
-    | "pBold"
-    | "span"
-    | "spanBold"
+  variant: "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span"
 }
 
 //cria type que é igual a InterfaceDefault + A + B
@@ -54,40 +32,20 @@ const HEADER_STYLES = {
     fontWeight: "700",
     fontSize: "48px",
   },
-  h1Bold: {
-    fontWeight: "800",
-    fontSize: "48px",
-  },
   h2: {
     fontWeight: "700",
-    fontSize: "32px",
-  },
-  h2Bold: {
-    fontWeight: "800",
     fontSize: "32px",
   },
   h3: {
     fontWeight: "700",
     fontSize: "24px",
   },
-  h3Bold: {
-    fontWeight: "800",
-    fontSize: "24px",
-  },
   h4: {
     fontWeight: "700",
     fontSize: "20px",
   },
-  h4Bold: {
-    fontWeight: "800",
-    fontSize: "20px",
-  },
   h5: {
     fontWeight: "700",
-    fontSize: "18px",
-  },
-  h5Bold: {
-    fontWeight: "800",
     fontSize: "18px",
   },
 }
@@ -98,56 +56,28 @@ const TEXT_STYLES = {
     fontWeight: "400",
     fontSize: "24px",
   },
-  h1Bold: {
-    fontWeight: "700",
-    fontSize: "24px",
-  },
   h2: {
     fontWeight: "400",
-    fontSize: "20px",
-  },
-  h2Bold: {
-    fontWeight: "700",
     fontSize: "20px",
   },
   h3: {
     fontWeight: "400",
     fontSize: "18px",
   },
-  h3Bold: {
-    fontWeight: "700",
-    fontSize: "18px",
-  },
   h4: {
     fontWeight: "400",
-    fontSize: "16px",
-  },
-  h4Bold: {
-    fontWeight: "700",
     fontSize: "16px",
   },
   h5: {
     fontWeight: "400",
     fontSize: "14px",
   },
-  h5Bold: {
-    fontWeight: "700",
-    fontSize: "14px",
-  },
   p: {
     fontWeight: "400",
     fontSize: "12px",
   },
-  pBold: {
-    fontWeight: "700",
-    fontSize: "12px",
-  },
   span: {
     fontWeight: "400",
-    fontSize: "10px",
-  },
-  spanBold: {
-    fontWeight: "700",
     fontSize: "10px",
   },
 }
@@ -161,6 +91,7 @@ export const Typography = (props: VariantTypes) => {
     color,
     className,
     fontSize,
+    fontWeight,
   } = props
 
   return (
@@ -170,6 +101,7 @@ export const Typography = (props: VariantTypes) => {
       as={as ?? variant}
       color={color}
       fontSize={fontSize}
+      fontWeight={fontWeight}
       className={className}
     >
       {children}
@@ -178,19 +110,19 @@ export const Typography = (props: VariantTypes) => {
 }
 
 const TypographyStyled = styled.p<VariantTypes>`
-  ${({ theme, family, variant, color, fontSize }) => css`
+  ${({ family, variant, color, fontSize, fontWeight }) => css`
     ${family === "header"
       ? css`
           font-family: "Baloo 2", cursive;
           font-size: ${fontSize ?? HEADER_STYLES[variant].fontSize};
-          font-weight: ${HEADER_STYLES[variant].fontWeight};
+          font-weight: ${fontWeight ?? HEADER_STYLES[variant].fontWeight};
         `
       : css`
           font-family: Roboto, sans-serif;
           font-size: ${fontSize ?? TEXT_STYLES[variant].fontSize};
-          font-weight: ${TEXT_STYLES[variant].fontWeight};
+          font-weight: ${fontWeight ?? TEXT_STYLES[variant].fontWeight};
         `};
-    color: ${color ?? theme.colors.base.text};
+    color: ${color ?? defaultTheme.colors.base.text};
     line-height: 130%;
   `}
 `

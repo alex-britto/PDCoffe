@@ -56,7 +56,8 @@ export const CartItem = ({
 
         <Typography
           color={theme.colors.base.text}
-          variant="h4Bold"
+          variant="h4"
+          fontWeight="700"
           className="ml-[50px]"
         >
           {handleConvertPriceToBRL(price)}

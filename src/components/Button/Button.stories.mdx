@@ -4,11 +4,37 @@ import { Meta, Story } from "@storybook/addon-docs"
 import { defaultTheme } from "../../styles/themes/defaultTheme"
 
 import { Button } from "./Button"
+import { ShoppingCartSimple, Trash } from "phosphor-react"
 
 <Meta title="Button" />
 
 # Button
 
 <Story name="Primary">
-  <Button color="primary">Testando</Button>
+  <Button color="primary">Label</Button>
+</Story>
+
+<Story name="Secondary">
+  <Button color="secondary">
+    <ShoppingCartSimple size={22} color={defaultTheme.colors.white} />
+  </Button>
+</Story>
+
+<Story name="Base">
+  <Button color="base">
+    <Trash size={16} color={defaultTheme.colors.purple.dark} className="mr-1" />
+    Remover
+  </Button>
+</Story>
+
+<Story name="Light">
+  <Button color="light">
+    <ShoppingCartSimple size={22} color={defaultTheme.colors.yellow.dark} />
+  </Button>
+</Story>
+
+<Story name="Badge button">
+  <Button color="light" quantity={2}>
+    <ShoppingCartSimple size={22} color={defaultTheme.colors.yellow.dark} />
+  </Button>
 </Story>

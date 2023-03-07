@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from "react"
 import styled, { css } from "styled-components"
+import { defaultTheme } from "../../styles/themes/defaultTheme"
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode
@@ -31,12 +32,13 @@ export const Button = ({
 const StyledButton = styled.button<{
   color?: string
 }>`
-  ${({ theme, color }) => css`
+  ${({ color }) => css`
     align-items: center;
-    background-color: ${theme.colors.base.button};
+    background-color: ${defaultTheme.colors.base.button};
     border: none;
     border-radius: 6px;
     color: white;
+    cursor: pointer;
     display: flex;
     font-size: 14px;
     font-weight: 700;
@@ -47,38 +49,38 @@ const StyledButton = styled.button<{
     width: auto;
 
     ${color === "primary" && {
-      backgroundColor: theme.colors.yellow.default,
+      backgroundColor: defaultTheme.colors.yellow.default,
       minHeight: "46px",
       minWidth: "132px",
 
       "&:hover": {
-        backgroundColor: theme.colors.yellow.dark,
+        backgroundColor: defaultTheme.colors.yellow.dark,
       },
     }}
     ${color === "secondary" && {
-      backgroundColor: theme.colors.purple.dark,
+      backgroundColor: defaultTheme.colors.purple.dark,
       fontSize: "12px",
       height: "38px",
       width: "38px",
 
       "&:hover": {
-        backgroundColor: theme.colors.purple.default,
+        backgroundColor: defaultTheme.colors.purple.default,
       },
     }}
     ${color === "base" && {
-      backgroundColor: theme.colors.base.button,
-      color: theme.colors.base.text,
+      backgroundColor: defaultTheme.colors.base.button,
+      color: defaultTheme.colors.base.text,
       fontSize: "12px",
       fontWeight: 400,
       minHeight: "32px",
 
       "&:hover": {
-        backgroundColor: theme.colors.base.hover,
+        backgroundColor: defaultTheme.colors.base.hover,
       },
     }}
     ${color === "light" && {
-      backgroundColor: theme.colors.yellow.light,
-      color: theme.colors.yellow.dark,
+      backgroundColor: defaultTheme.colors.yellow.light,
+      color: defaultTheme.colors.yellow.dark,
       fontSize: "12px",
       height: "38px",
       width: "38px",
@@ -87,9 +89,9 @@ const StyledButton = styled.button<{
 `
 
 const Badge = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     align-items: center;
-    background-color: ${theme.colors.yellow.dark};
+    background-color: ${defaultTheme.colors.yellow.dark};
     border-radius: 50%;
     color: white;
     display: flex;

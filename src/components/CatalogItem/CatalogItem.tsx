@@ -74,7 +74,7 @@ export const CatalogItem = ({
             <Typography variant="h5" className="mr-1 mt-1">
               R$
             </Typography>
-            <Typography variant="h3Bold" as="h3" family="header">
+            <Typography variant="h3" fontWeight="800" family="header">
               {handleConvertPriceNumberToString(price)}
             </Typography>
           </PriceBox>
