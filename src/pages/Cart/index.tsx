@@ -1,10 +1,3 @@
-import { CreditCard, CurrencyDollar, MapPin, Money } from "phosphor-react";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import {
-  CoffeeContextProps,
-  PaymentOptions,
-  UserData,
-} from "../../@types/coffee";
 import {
   CartCatalog,
   Header,
@@ -12,6 +5,12 @@ import {
   TextInput,
   Typography,
 } from "../../components";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import {
+  CoffeeContextProps,
+  PaymentOptions,
+  UserData,
+} from "../../@types/coffee";
 import {
   ContentContainer,
   FormContainer,
@@ -19,10 +18,11 @@ import {
   PaymentButtonsContainer,
   PaymentFormContainer,
 } from "./styles";
+import { CreditCard, CurrencyDollar, MapPin, Money } from "phosphor-react";
 
-import { useTheme } from "styled-components";
 import { CoffeeContext } from "../../contexts";
 import { useAddressAutoComplete } from "../../hooks";
+import { useTheme } from "styled-components";
 
 export function Cart() {
   // CONTEXTS

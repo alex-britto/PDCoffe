@@ -6,3 +6,53 @@ body {
   font-family: "Baloo 2", cursive;
   background-color: #fafafa;
 }
+
+/* @layer base = Significa que aqui eu quero editar as tags do proprio html por exemplo: body, h1, div */
+/* @layer base {
+  body {
+    @apply bg-gray-100 w-screen h-screen;
+  }
+} */
+
+/* @layer = Aqui significa que eu quero criar minha propria classe para reutilizar em varios lugar ou arquivos distintos. */
+
+@layer utilities {
+  .container {
+    @apply h-screen  w-screen flex items-center justify-center;
+  }
+
+  .box {
+    @apply h-2/3 w-2/6 shadow-xl rounded-md flex justify-center items-center flex-col bg-white;
+  }
+
+  .header {
+    @apply text-xl text-center my-2;
+  }
+
+  .btn {
+    @apply bg-violet-600 text-white font-normal px-4 py-1 flex gap-1 items-center rounded-md hover:bg-violet-700;
+  }
+
+  .btn-icon {
+    @apply h-5 w-5;
+  }
+
+  .btn-text {
+    @apply text-lg font-bold;
+  }
+}
+
+/*
+  h-screen - Pega o tamanho total dá tela do dispositivo
+  bg-gray-100 - Aqui significa que eu quero que a cor de fundo fique cinza com 100 de intensidade
+  flex - Aqui eu quero que os elemento fiquem em linha um ao lado do outro
+  flex-col - Aqui eu quero que os elementos fiquem em forma de coluna um abaixo do outro
+  justify-center - Quero que os elementos centralizem horizontalmente
+  items-center - Quero que os elementos centralizem verticalmente
+  text-white - Cor do texto branco - serve para várias cores
+  rounded-md - Aqui eu quero que os cantos fiquem arrendodados com o tamanho pré definido. Pode sm ou números também
+  **shadow-xl - **Quer que fique um sombra em volta do elemento dando a sensação do elemento flutuando
+  h-5 - Quero que o tamanho do elemento fique com o tamanho 5 que no tailwindcss signica que ele terá 20px
+  w-5 - Quero que a largura do elemento fique com o tamanho 5 que no tailwindcss signica que ele terá 20px
+  my-2 - Quero que a margem no eixo y ou vertical tenha o espaçamento de 2 que significa margin-top 8px margin-bottom 8px
+*/
